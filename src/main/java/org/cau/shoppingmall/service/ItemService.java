@@ -1,5 +1,6 @@
 package org.cau.shoppingmall.service;
 
+import org.cau.shoppingmall.dto.ItemForm;
 import org.cau.shoppingmall.entity.item.Item;
 
 import java.util.List;
@@ -15,8 +16,7 @@ public interface ItemService {
      * */
     Item get(Long itemId);
 
-
-    void
+    Item update(ItemForm form, Long itemId);
 
 
 
