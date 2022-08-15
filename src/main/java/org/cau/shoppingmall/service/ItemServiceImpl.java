@@ -24,7 +24,8 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<Item> getHotItems() {
-        return null;
+
+        return itemRepository.findTop8ByOrderBySalesDesc();
     }
 
     @Override
@@ -66,7 +67,7 @@ public class ItemServiceImpl implements ItemService {
         }
 
 
-        Pageable pageable = PageRequest.of(page,BASIC_ITEM_VIEWS_IN_PAGE);
+
 
         Sort sort = null;
 
@@ -80,7 +81,9 @@ public class ItemServiceImpl implements ItemService {
             sort = Sort.by(Sort.Direction.DESC,"reviews");
         }
 
-        Page<Item> result = itemRepository.findAll(spec, pageable, sort);
+        Pageable pageable = PageRequest.of(page,BASIC_ITEM_VIEWS_IN_PAGE,sort);
+
+        Page<Item> result = itemRepository.findAll(spec, pageable);
 
         return result;
     }

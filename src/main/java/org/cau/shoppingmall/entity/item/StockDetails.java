@@ -1,29 +1,53 @@
 package org.cau.shoppingmall.entity.item;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Builder
 @Entity
 @Getter
+@AllArgsConstructor
 public class StockDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name="item_id")
+    private Item item;
+
+    public void setItem(Item item) {
+        if(this.item != null) {
+            this.item.getStockDetailsList().remove(this);
+        }
+        this.item = item;
+        item.getStockDetailsList().add(this);
+    }
+
     /*
     * TODO: Size Entity와 연관관계 매핑
     * */
-    private Long size_id;
+
+    @ManyToOne
+    @JoinColumn(name = "size_id")
+    private Size size;
 
     /*
      * TODO: Color Entity와 연관관계 매핑
      * */
-    private Long color_id;
+
+    @ManyToOne
+    @JoinColumn(name = "color_id")
+    private Color color;
 
     private int quantity;
+
+    public StockDetails() {
+
+    }
 }

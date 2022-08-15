@@ -1,7 +1,7 @@
 package org.cau.shoppingmall.service;
 
 import org.cau.shoppingmall.dto.OrderForm;
-import org.cau.shoppingmall.entity.order.Order;
+import org.cau.shoppingmall.entity.order.Orders;
 
 /*
  * OrderService Interface
@@ -30,5 +30,5 @@ public interface OrderService {
      - item -> stockDetails의 재고량 감소
 
      */
-    Order createOrder(OrderForm form, Long userId);
+    Orders createOrder(OrderForm form, Long userId);
 }

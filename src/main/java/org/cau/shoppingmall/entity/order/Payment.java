@@ -2,10 +2,7 @@ package org.cau.shoppingmall.entity.order;
 
 import lombok.Getter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -18,26 +15,37 @@ public class Payment {
     /*
      * 결제 여부
      * */
+    @Column(name = "payment_flag")
     private boolean paymentFlag;
 
     /*
      * 결제 수단
      * TODO: PaymentMethod Entity와 연관관계 매핑
      * */
-    private Long paymentMethodId;
 
+    @ManyToOne
+    @JoinColumn(name = "payment_method")
+    private PaymentMethod paymentMethod;
+
+    @Column(name = "payment_price")
     private int paymentPrice;
 
+    @Column(name = "point_used")
     private int pointUsed;
 
     /*
      * 현금영수증 여부
      * */
+
+    @Column(name = "cash_receipt_flag")
     private boolean cashReceiptFlag;
 
     /*
     * Todo: CashReceipt Entity와 연관관계 매핑핑
     * */
-    private Long cashReceiptId;
+
+    @OneToOne
+    @JoinColumn(name = "cash_receipt_id")
+    private CashReceipt cashReceipt;
 
 }

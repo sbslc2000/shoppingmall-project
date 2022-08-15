@@ -1,64 +1,82 @@
 package org.cau.shoppingmall.entity.item;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import springfox.documentation.spring.web.json.Json;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.*;
 
 
+@Builder
 @Entity
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Item {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
     /*
-    * todo: seller entity와 연관관계 매핑
-    * */
-    private Long sellerId;
+     * todo: seller entity와 연관관계 매핑
+     * */
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private Seller seller;
 
     private int price;
 
     /*
-    * todo: StockDetails entity와 연관관계 매핑
-    * */
-    private Long stockDetailsId;
+     * todo: StockDetails entity와 연관관계 매핑
+     *  양방향으로 진행
+     * */
+
+    @Builder.Default
+    @OneToMany(mappedBy = "item",fetch = FetchType.EAGER)
+    private List<StockDetails> stockDetailsList = new ArrayList<>();
 
     /*
-    * 해당 상품의 전체 재고량
-    * */
+     * 해당 상품의 전체 재고량
+     * */
     private int quantity;
 
     /*
-    * 상품의 누적 판매량
-    * */
+     * 상품의 누적 판매량
+     * */
     private int sales;
 
     /*
-    * TODO: Category Entity와 연관관계 매핑
-    * */
-    private Long categoryId;
+     * TODO: Category Entity와 연관관계 매핑
+     *  단방향으로 진행
+     * */
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     /*
-     * Json 형식으로 이미지의 주소를 담고 있음
+     * String 형식으로 이미지의 주소를 담고 있음
      * */
+    @Column(length = 3600)
     private String img;
 
 
     /*
-    * 해당 상품에 달린 리뷰의 개수
-    * */
+     * 해당 상품에 달린 리뷰의 개수
+     * */
     private int reviews;
 
     /*
-    * 해당 상품의 리뷰 점수의 평균값
-    * todo : db와 컬럼명 동일하게 해야함
-    * */
+     * 해당 상품의 리뷰 점수의 평균값
+     * todo : db와 컬럼명 동일하게 해야함
+     * */
     private float averageStars;
 
     /*
@@ -67,7 +85,7 @@ public class Item {
     private int likes;
 
     /*
-    * 해당 상품을 장바구니 담은 수
-    * */
+     * 해당 상품을 장바구니 담은 수
+     * */
     private int baskets;
 }
