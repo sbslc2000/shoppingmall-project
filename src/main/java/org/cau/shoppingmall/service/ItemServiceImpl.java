@@ -39,13 +39,13 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Page<Item> getItemsByConditions(int page, List<Long> categoryIds, Integer minPrice, Integer maxPrice, List<Long> sellerIds, String sortedBy) {
+    public Page<Item> getItemsByConditions(int page, List<Long> category, Integer minPrice, Integer maxPrice, List<Long> seller, String sortBy) {
 
         Specification<Item> spec = (root, query, criteriaBuilder) -> null;
 
-        if (categoryIds != null) {
+        if (category != null) {
             Specification<Item> categorySpec = (root, query, criteriaBuilder) -> null;
-            for (Long categoryId : categoryIds) {
+            for (Long categoryId : category) {
                 categorySpec.or(ItemSpecification.categoryIs(categoryId));
             }
             spec.and(categorySpec);
@@ -58,9 +58,9 @@ public class ItemServiceImpl implements ItemService {
             spec.and(priceSpec);
         }
 
-        if (sellerIds != null) {
+        if (seller != null) {
             Specification<Item> sellerSpec = (root, query, criteriaBuilder) -> null;
-            for (Long sellerId : sellerIds) {
+            for (Long sellerId : seller) {
                 sellerSpec.or(ItemSpecification.sellerIs(sellerId));
             }
             spec.and(sellerSpec);
@@ -69,15 +69,15 @@ public class ItemServiceImpl implements ItemService {
 
 
 
-        Sort sort = null;
+        Sort sort = Sort.by(Sort.Direction.ASC,"id");
 
-        if(sortedBy.equals("인기 순")) {
+        if(sortBy.equals("인기 순")) {
             sort = Sort.by(Sort.Direction.DESC, "sales");
-        } else if(sortedBy.equals("낮은 가격순")) {
+        } else if(sortBy.equals("낮은 가격순")) {
             sort = Sort.by(Sort.Direction.ASC,"price");
-        } else if (sortedBy.equals("높은 가격순")) {
+        } else if (sortBy.equals("높은 가격순")) {
             sort = Sort.by(Sort.Direction.DESC,"price");
-        } else if (sortedBy.equals("리뷰 순")) {
+        } else if (sortBy.equals("리뷰 순")) {
             sort = Sort.by(Sort.Direction.DESC,"reviews");
         }
 

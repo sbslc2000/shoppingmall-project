@@ -200,15 +200,21 @@ class ItemRepositoryTest {
         setStockDetails();
     }
 
-    private void setStockDetails() {
+    @Transactional
+    public void setStockDetails() {
         List<List<String>> lists = readCSVFile("C:\\Users\\SeoBeomseok\\Desktop\\쇼핑몰\\stockDetails_justCsv.csv");
         Long itemId = 0L;
         for (List<String> line : lists) {
             itemId++;
             Item item = itemRepository.findById(itemId).get();
             int iterator = 0;
+            int sumOfQuantity = 0;
             while (true) {
                 if (line.get(iterator).replace("\uFEFF","").equals("END")) {
+                    item = itemRepository.findById(itemId).get();
+                    System.out.println("sumOfQuantity = " + sumOfQuantity);
+                    item.changeQuantity(sumOfQuantity);
+                    itemRepository.save(item);
                     break;
                 } else if (line.get(iterator).replace("\uFEFF","").equals("AND")) {
                     iterator++;
@@ -227,6 +233,7 @@ class ItemRepositoryTest {
 
                         int quantity = Integer.parseInt(line.get(iterator + 1).replace("\uFEFF",""));
 
+                        sumOfQuantity += quantity;
                         StockDetails buildStockDetails = new StockDetails().builder()
                                 .color(findColor)
                                 .size(findSize)

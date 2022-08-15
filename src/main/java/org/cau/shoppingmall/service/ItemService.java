@@ -29,5 +29,5 @@ public interface ItemService {
     *
     * 모든 인자는 null이 들어올 수 있으며, null 인 경우 해당 조건을 제외 한 나머지로 필터링한 결과를 반환한다.
     * */
-    Page<Item> getItemsByConditions(int page, List<Long> categoryIds, Integer minPrice, Integer maxPrice, List<Long> sellerIds, String sortedBy);
+    Page<Item> getItemsByConditions(int page, List<Long> category, Integer minPrice, Integer maxPrice, List<Long> seller, String sortBy);
 }

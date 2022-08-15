@@ -88,4 +88,27 @@ public class Item {
      * 해당 상품을 장바구니 담은 수
      * */
     private int baskets;
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", seller=" + seller +
+                ", price=" + price +
+                ", stockDetailsList=" + stockDetailsList +
+                ", quantity=" + quantity +
+                ", sales=" + sales +
+                ", category=" + category +
+                ", img='" + img + '\'' +
+                ", reviews=" + reviews +
+                ", averageStars=" + averageStars +
+                ", likes=" + likes +
+                ", baskets=" + baskets +
+                '}';
+    }
+
+    public void changeQuantity(int quantity) {
+        this.quantity=quantity;
+    }
 }

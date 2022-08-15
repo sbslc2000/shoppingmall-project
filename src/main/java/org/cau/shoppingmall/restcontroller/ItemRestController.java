@@ -4,13 +4,19 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
+import org.cau.shoppingmall.entity.item.Item;
+import org.cau.shoppingmall.service.ItemService;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/items")
 @Api(tags = {"상품 관련 API"})
 @RequiredArgsConstructor
 public class ItemRestController {
+
+    private final ItemService itemService;
 
     @GetMapping("/{itemId}")
     @ApiOperation(value = "id에 해당하는 상품 정보 가져오기", notes="id에 해당하는 상품 정보를 얻을 수 있습니다.")
@@ -20,13 +26,22 @@ public class ItemRestController {
 
     @GetMapping
     @ApiOperation(value = "조건에 해당하는 상품 정보 가져오기", notes = "query parameter로 아래와 같은 내용들과 값을 넣어주면 json 형태로 아이템에 대한 정보를 얻을 수 있습니다.")
-    public Object getItemBy(
-            @ApiParam(value="카테고리 id", example = "1")
-            @RequestParam(required = false) Long category,
-            @ApiParam(value = "브랜드/회사 id",example = "1")
-            @RequestParam(required = false) Long brand
+    public Page<Item> getItemBy(
+            @ApiParam(value = "페이지, 생략 불가",example="0")
+            @RequestParam int page,
+            @ApiParam(value="카테고리 id, 생략 가능, 여러개 가능", example = "1,3")
+            @RequestParam(required = false) List<Long> category,
+            @ApiParam(value = "브랜드/회사 id, 생략 가능, 여러개 가능",example = "2,4")
+            @RequestParam(required = false) List<Long> seller,
+            @ApiParam(value = "최소 가격, 생략 가능",example="10000")
+            @RequestParam(required = false) Integer minPrice,
+            @ApiParam(value = "최대 가격, 생략 가능",example="100000")
+            @RequestParam(required = false) Integer maxPrice,
+            @ApiParam(value = "정렬 순 : '인기순','낮은 가격순','높은 가격순', '리뷰순' 중 1개 가능, 생략 가능", example = "인기순")
+            @RequestParam(required = false) String sortBy
     ){
-        return null;
+        Page<Item> result = itemService.getItemsByConditions(page, category, minPrice, maxPrice, seller, sortBy);
+        return result;
     }
 
     @GetMapping("/likes")

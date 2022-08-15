@@ -50,4 +50,14 @@ public class StockDetails {
     public StockDetails() {
 
     }
+
+    @Override
+    public String toString() {
+        return "StockDetails{" +
+                "id=" + id +
+                ", size=" + size +
+                ", color=" + color +
+                ", quantity=" + quantity +
+                '}';
+    }
 }
