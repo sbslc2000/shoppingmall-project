@@ -12,12 +12,18 @@ public interface ItemService {
     /*
         List<Item> getHotItems : 누적 판매량이 높은 순서대로 8개의 상품을 반환한다.
     */
-    List<Item> getHotItems();
+    List<ItemDto> getHot8Items();
+
+    /*
+      List<Item> getHotItems : 누적 판매량이 높은 순서대로 4개의 상품을 반환한다.
+  */
+    List<ItemDto> getHot4Items();
+
 
     /*
      *  Item get : 아이디에 해당하는 상품을 반환한다.
      * */
-    Item get(Long itemId);
+    ItemDto get(Long itemId);
 
     Item update(ItemForm form, Long itemId);
 

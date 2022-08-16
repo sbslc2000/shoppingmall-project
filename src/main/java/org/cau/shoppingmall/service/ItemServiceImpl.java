@@ -16,6 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.*;
 import java.util.List;
 
 @Service
@@ -27,14 +28,38 @@ public class ItemServiceImpl implements ItemService {
     private final int BASIC_ITEM_VIEWS_IN_PAGE = 16;
 
     @Override
-    public List<Item> getHotItems() {
+    public List<ItemDto> getHot8Items() {
+        List<Item> items = itemRepository.findTop8ByOrderBySalesDesc();
+        List<ItemDto> result = new ArrayList<>();
+        for(Item i : items) {
+            result.add(ItemDto.of(i));
+        }
 
-        return itemRepository.findTop8ByOrderBySalesDesc();
+        return result;
     }
 
     @Override
-    public Item get(Long itemId) {
-        return null;
+    public List<ItemDto> getHot4Items() {
+        List<Item> items = itemRepository.findTop4ByOrderBySalesDesc();
+        List<ItemDto> result = new ArrayList<>();
+        for(Item i : items) {
+            result.add(ItemDto.of(i));
+        }
+
+        return result;
+    }
+
+    @Override
+    public ItemDto get(Long itemId){
+        Optional<Item> findItem = itemRepository.findById(itemId);
+
+        if(findItem.isPresent()) {
+            ItemDto itemDto = ItemDto.of(findItem.get());
+            return itemDto;
+        } else {
+            throw new NoSuchElementException("해당하는 상품이 없습니다.");
+        }
+
     }
 
     @Override

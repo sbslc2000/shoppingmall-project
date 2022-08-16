@@ -104,7 +104,7 @@ class ItemRepositoryTest {
         return color;
     }
 
-    @Test
+   //@Test
     void setItemsByCSVFile() {
 
         ObjectMapper mapper = new ObjectMapper();

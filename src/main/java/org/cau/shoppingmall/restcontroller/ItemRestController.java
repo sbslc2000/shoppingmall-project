@@ -11,6 +11,7 @@ import org.cau.shoppingmall.service.ItemService;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("api/items")
@@ -22,16 +23,29 @@ public class ItemRestController {
 
     @GetMapping("/{itemId}")
     @ApiOperation(value = "id에 해당하는 상품 정보 가져오기", notes="id에 해당하는 상품 정보를 얻을 수 있습니다.")
-    public Object getItem(@PathVariable("itemId") Long itemId) {
-        return null;
+    public ItemDto getItem(@PathVariable("itemId") Long itemId) {
+        try {
+            ItemDto item = itemService.get(itemId);
+            return item;
+        } catch (NoSuchElementException e) {
+            return new ItemDto().builder()
+                    .name("정보 없음")
+                    .id(0L)
+                    .build();
+        }
     }
 
+
+    /*
+        TODO: 검색어를 검색어 순위 시스템에 저장
+     */
     @GetMapping
     @ApiOperation(value = "조건에 해당하는 상품 정보 가져오기", notes = "query parameter로 아래와 같은 내용들과 값을 넣어주면 json 형태로 아이템에 대한 정보를 얻을 수 있습니다.")
     public Page<ItemDto> getItemBy(
             @ApiParam(value = "",example="0")
             @ModelAttribute ItemRequest itemRequest
             ){
+
 
         System.out.println("itemRequest = " + itemRequest);
         Page<ItemDto> result = itemService.getItemsByConditions(itemRequest);

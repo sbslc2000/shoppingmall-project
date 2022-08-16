@@ -8,6 +8,7 @@ import org.cau.shoppingmall.entity.item.Category;
 import org.cau.shoppingmall.entity.item.Item;
 import org.cau.shoppingmall.entity.item.Seller;
 import org.cau.shoppingmall.entity.item.StockDetails;
+import org.cau.shoppingmall.util.ListUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public class ItemDto {
 
     private int sales;
 
-    private String img;
+    private List<String> img;
 
     private int likes;
 
@@ -69,6 +70,8 @@ public class ItemDto {
             stockDetailsDtoList.add(StockDetailsDto.of(stockDetails));
         }
 
+        List<String> imgList = ListUtil.parse(item.getImg());
+
         return new ItemDto().builder()
                 .id(item.getId())
                 .name(item.getName())
@@ -77,7 +80,7 @@ public class ItemDto {
                 .category(item.getCategory())
                 .quantity(item.getQuantity())
                 .sales(item.getSales())
-                .img(item.getImg())
+                .img(imgList)
                 .likes(item.getLikes())
                 .reviews(item.getReviews())
                 .averageStars(item.getAverageStars())

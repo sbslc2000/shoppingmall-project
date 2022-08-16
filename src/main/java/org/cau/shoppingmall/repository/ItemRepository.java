@@ -18,4 +18,6 @@ public interface ItemRepository extends JpaRepository<Item,Long>, JpaSpecificati
 
 
     List<Item> findTop8ByOrderBySalesDesc();
+
+    List<Item> findTop4ByOrderBySalesDesc();
 }

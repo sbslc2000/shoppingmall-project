@@ -20,10 +20,11 @@ class ItemServiceImplTest {
     private ItemService itemService;
 
 
+    /*
     @Test
     @DisplayName("인기상품 8개 가져오기")
     void get8HotItems() {
-        List<Item> hotItems = itemService.getHotItems();
+        List<Item> hotItems = itemService.getHot8Items();
 
         System.out.println(hotItems);
         for(Item item: hotItems) {
@@ -36,6 +37,7 @@ class ItemServiceImplTest {
             System.out.println("item.iamge"+item.getImg());
         }
     }
+*/
 
     /*
 
