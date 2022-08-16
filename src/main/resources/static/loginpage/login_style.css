@@ -1,0 +1,53 @@
+h1 {
+    display: block;
+    text-align: center;
+    border: 5px solid gray;
+    margin-left: 200px;
+    margin-right: 200px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#all {
+    display: grid;
+    grid-template-columns: 4fr 2fr 1fr 4fr;
+    margin-top: 250px;
+}
+
+input {
+    display: grid;
+    grid-template-columns: 200px;
+    height: 25px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 250px;
+    margin-left: 60px;
+}
+
+button {
+    width: 120px;
+    height: 55px;
+    font-size: 25px;
+    margin: 5px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.col1 {
+    border-right: 1px solid gray;
+    text-align: center;
+}
+
+.col {
+    text-align: center;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 7.5fr 110px 130px 90px 6fr;
+    margin-top: 10px;
+    font-size: 15px;
+}
