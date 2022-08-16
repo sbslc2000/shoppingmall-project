@@ -1,4 +1,4 @@
-package org.cau.shoppingmall.entity.order;
+package org.cau.shoppingmall.entity.orderItem;
 
 import lombok.Getter;
 

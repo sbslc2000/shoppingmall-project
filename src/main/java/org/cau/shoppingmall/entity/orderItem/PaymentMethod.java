@@ -1,7 +1,6 @@
-package org.cau.shoppingmall.entity.order;
+package org.cau.shoppingmall.entity.orderItem;
 
 import lombok.Getter;
-import org.yaml.snakeyaml.events.Event;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,13 +9,11 @@ import javax.persistence.Id;
 
 @Entity
 @Getter
-public class CashReceipt {
+public class PaymentMethod {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String type;
-
-    private String number;
+    private String name;
 }

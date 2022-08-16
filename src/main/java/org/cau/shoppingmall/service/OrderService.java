@@ -1,7 +1,7 @@
 package org.cau.shoppingmall.service;
 
 import org.cau.shoppingmall.dto.OrderForm;
-import org.cau.shoppingmall.entity.order.Orders;
+import org.cau.shoppingmall.entity.orderItem.Orders;
 
 /*
  * OrderService Interface
