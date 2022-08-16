@@ -60,6 +60,12 @@ public class ItemServiceImpl implements ItemService {
         if (request.getMinPrice() != null && request.getMaxPrice() != null) {
             priceSpec.and(ItemSpecification.priceBetween(request.getMinPrice(), request.getMaxPrice()));
             spec.and(priceSpec);
+        } else if (request.getMinPrice() != null) {
+            priceSpec.and(ItemSpecification.priceBetween(request.getMinPrice(),987654321));
+            spec.and(priceSpec);
+        } else if (request.getMaxPrice() != null) {
+            priceSpec.and(ItemSpecification.priceBetween(0, request.getMaxPrice()));
+            spec.and(priceSpec);
         }
 
         if (request.getSeller() != null) {
@@ -77,15 +83,19 @@ public class ItemServiceImpl implements ItemService {
 
         String sortBy = request.getSortBy();
 
-        if(sortBy.equals("인기 순")) {
-            sort = Sort.by(Sort.Direction.DESC, "sales");
-        } else if(sortBy.equals("낮은 가격순")) {
-            sort = Sort.by(Sort.Direction.ASC,"price");
-        } else if (sortBy.equals("높은 가격순")) {
-            sort = Sort.by(Sort.Direction.DESC,"price");
-        } else if (sortBy.equals("리뷰 순")) {
-            sort = Sort.by(Sort.Direction.DESC,"reviews");
+        if(sortBy != null) {
+            if(sortBy.equals("인기 순")) {
+                sort = Sort.by(Sort.Direction.DESC, "sales");
+            } else if(sortBy.equals("낮은 가격순")) {
+                sort = Sort.by(Sort.Direction.ASC,"price");
+            } else if (sortBy.equals("높은 가격순")) {
+                sort = Sort.by(Sort.Direction.DESC,"price");
+            } else if (sortBy.equals("리뷰 순")) {
+                sort = Sort.by(Sort.Direction.DESC,"reviews");
+            }
         }
+
+
 
         Pageable pageable = PageRequest.of(request.getPage(),BASIC_ITEM_VIEWS_IN_PAGE,sort);
 

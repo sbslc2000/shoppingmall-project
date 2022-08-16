@@ -9,6 +9,8 @@ import java.util.List;
 @ToString
 public class ItemRequest {
 
+    private String name;
+
     private Integer minPrice;
 
     private Integer maxPrice;

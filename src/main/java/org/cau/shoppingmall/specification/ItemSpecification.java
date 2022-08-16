@@ -3,6 +3,8 @@ package org.cau.shoppingmall.specification;
 import org.cau.shoppingmall.entity.item.Item;
 import org.springframework.data.jpa.domain.Specification;
 
+import javax.persistence.criteria.Predicate;
+
 public class ItemSpecification {
 
     public static Specification<Item> nameLike(String searchWord){
@@ -14,11 +16,14 @@ public class ItemSpecification {
     }
 
     public static Specification<Item> categoryIs(Long categoryId) {
-        return (root,query,criteriaBuilder) -> criteriaBuilder.equal(root.get("category_id"),categoryId);
+        return (root,query,criteriaBuilder) -> criteriaBuilder.equal(root.get("category.id"),categoryId);
     }
 
     public static Specification<Item> sellerIs(Long sellerId) {
-        return (root,query,criteriaBuilder) -> criteriaBuilder.equal(root.get("seller_id"),sellerId);
+        return (root,query,criteriaBuilder) -> criteriaBuilder.equal(root.get("seller.id"),sellerId);
     }
+
+
+
 
 }
