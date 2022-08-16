@@ -7,6 +7,8 @@ import org.cau.shoppingmall.dto.item.ItemRequest;
 import org.cau.shoppingmall.entity.item.Item;
 import org.cau.shoppingmall.repository.ItemRepository;
 import org.cau.shoppingmall.specification.ItemSpecification;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +21,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
-
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final ItemRepository itemRepository;
 
     private final int BASIC_ITEM_VIEWS_IN_PAGE = 16;
@@ -45,51 +47,47 @@ public class ItemServiceImpl implements ItemService {
 
         Specification<Item> spec = (root, query, criteriaBuilder) -> null;
 
-        if (request.getCategory() != null) {
-            Specification<Item> categorySpec = (root, query, criteriaBuilder) -> null;
-            for (Long categoryId : request.getCategory()) {
-                categorySpec.or(ItemSpecification.categoryIs(categoryId));
-            }
-
-            spec.and(categorySpec);
-            System.out.println(spec);
+        if(request.getName() != null) {
+            log.info("name filtering name:"+request.getName());
+            spec = spec.and(ItemSpecification.nameLike(request.getName()));
         }
 
-        Specification<Item> priceSpec = (root, query, criteriaBuilder) -> null;
 
         if (request.getMinPrice() != null && request.getMaxPrice() != null) {
-            priceSpec.and(ItemSpecification.priceBetween(request.getMinPrice(), request.getMaxPrice()));
-            spec.and(priceSpec);
+            spec = spec.and(ItemSpecification.priceBetween(request.getMinPrice(), request.getMaxPrice()));
+            log.info("min and max");
         } else if (request.getMinPrice() != null) {
-            priceSpec.and(ItemSpecification.priceBetween(request.getMinPrice(),987654321));
-            spec.and(priceSpec);
+            spec = spec.and(ItemSpecification.priceBetween(request.getMinPrice(),987654321));
+            log.info("min");
         } else if (request.getMaxPrice() != null) {
-            priceSpec.and(ItemSpecification.priceBetween(0, request.getMaxPrice()));
-            spec.and(priceSpec);
+            spec = spec.and(ItemSpecification.priceBetween(0, request.getMaxPrice()));
+            log.info("max");
         }
 
-        if (request.getSeller() != null) {
-            Specification<Item> sellerSpec = (root, query, criteriaBuilder) -> null;
-            for (Long sellerId : request.getSeller()) {
-                sellerSpec.or(ItemSpecification.sellerIs(sellerId));
-            }
-            spec.and(sellerSpec);
+        if(request.getCategory() != null) {
+            spec = spec.and(ItemSpecification.categoryIs(request.getCategory()));
         }
 
-
+        if(request.getSeller() != null) {
+            spec = spec.and(ItemSpecification.sellerIs(request.getSeller()));
+        }
 
 
         Sort sort = Sort.by(Sort.Direction.ASC,"id");
 
         String sortBy = request.getSortBy();
 
+
         if(sortBy != null) {
+
             if(sortBy.equals("인기 순")) {
                 sort = Sort.by(Sort.Direction.DESC, "sales");
             } else if(sortBy.equals("낮은 가격순")) {
                 sort = Sort.by(Sort.Direction.ASC,"price");
+                log.info("낮은 가격순으로 정렬");
             } else if (sortBy.equals("높은 가격순")) {
                 sort = Sort.by(Sort.Direction.DESC,"price");
+                log.info("높은 가격순으로 정렬");
             } else if (sortBy.equals("리뷰 순")) {
                 sort = Sort.by(Sort.Direction.DESC,"reviews");
             }
