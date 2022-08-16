@@ -1,0 +1,119 @@
+*{
+    font-family: 'Noto Sans KR', sans-serif;
+    list-style: none;
+    text-decoration: none;
+    border-collapse: none;
+    margin: 0px;
+    padding: 0px;
+    color:black;
+}
+
+.header{
+
+    width: 1280px;
+    margin: 0 auto;
+    text-align: center;
+    
+}
+
+.searchArea{
+    width:300px;
+    height:40px;
+    background: rgba(0,0,0,0,5);
+    border-radius: 40px 40px 40px 40px;
+    margin-top: 10px;
+    text-align: center;
+    margin-left: 500px;
+}
+
+.searchArea > form > input{
+    border: none;
+    width:250px;
+    height:40px;
+    background: white;
+    color: #000;
+    padding-left:10px;
+}
+
+.searchArea > form > span{
+    width:50px;
+    color:#000;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.nav{
+    margin-left: 300px;
+    width: auto;
+    height:40px;
+    display: flex;
+    margin-top: 24px;
+    background: #fff;
+    text-align: center;
+}
+
+.nav > li{
+    margin-left: 84px;
+    text-align: center;
+}
+
+.section input[id=slide]{
+    display: none;
+    margin-bottom: 200px;
+}
+
+.section .slidewrap{
+    max-width: 1200px;
+    margin:0 auto;
+    margin-top: 50px;
+    overflow:hidden;
+}
+
+.section .slidelist{
+    white-space: nowrap;
+    font-size: 0;
+}
+
+.section .slidelist > li{
+    display:inline-block;
+    vertical-align: middle;
+    width:100%;
+    transition: all .5s;
+}
+
+.section .slidelist > li > a{
+    display: block;
+    position: relative;
+}
+
+.section .slidelist > li > a img{
+    width:100%
+}
+
+.section .slidelist label{
+    position:absolute;
+    z-index: 10;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 50%;
+    cursor:pointer;
+}
+
+.section .slidelist .left{
+    right: 500px;
+    background: url(images/left-arrow.png) center center / 10% no-repeat;
+}
+
+.section .slidelist .right{
+    left: 500px;
+    background: url(images/right-arrow.png) center center / 10% no-repeat;
+}
+
+.section [id="slide01"]:checked ~ .slidewrap .slidelist > li {transform: translateX(0%);}
+.section [id="slide02"]:checked ~ .slidewrap .slidelist > li {transform: translateX(-100%);}
+.section [id="slide03"]:checked ~ .slidewrap .slidelist > li {transform: translateX(-200%);}
+
+.content_box h3{
+    float: left;
+    margin-top: 100px;
+}
