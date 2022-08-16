@@ -37,6 +37,8 @@ class ItemServiceImplTest {
         }
     }
 
+    /*
+
     @Test
     @DisplayName("조건에 따른 상품 출력")
     void byCondition() {
@@ -59,5 +61,5 @@ class ItemServiceImplTest {
 
             System.out.println("item.iamge"+item.getImg());
         }
-    }
+    }*/
 }

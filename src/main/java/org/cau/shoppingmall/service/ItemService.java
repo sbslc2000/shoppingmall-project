@@ -1,6 +1,8 @@
 package org.cau.shoppingmall.service;
 
 import org.cau.shoppingmall.dto.ItemForm;
+import org.cau.shoppingmall.dto.item.ItemDto;
+import org.cau.shoppingmall.dto.item.ItemRequest;
 import org.cau.shoppingmall.entity.item.Item;
 import org.springframework.data.domain.Page;
 
@@ -29,5 +31,5 @@ public interface ItemService {
     *
     * 모든 인자는 null이 들어올 수 있으며, null 인 경우 해당 조건을 제외 한 나머지로 필터링한 결과를 반환한다.
     * */
-    Page<Item> getItemsByConditions(int page, List<Long> category, Integer minPrice, Integer maxPrice, List<Long> seller, String sortBy);
+    Page<ItemDto> getItemsByConditions(ItemRequest request);
 }

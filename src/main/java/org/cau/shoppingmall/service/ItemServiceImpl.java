@@ -2,6 +2,8 @@ package org.cau.shoppingmall.service;
 
 import lombok.RequiredArgsConstructor;
 import org.cau.shoppingmall.dto.ItemForm;
+import org.cau.shoppingmall.dto.item.ItemDto;
+import org.cau.shoppingmall.dto.item.ItemRequest;
 import org.cau.shoppingmall.entity.item.Item;
 import org.cau.shoppingmall.repository.ItemRepository;
 import org.cau.shoppingmall.specification.ItemSpecification;
@@ -39,28 +41,30 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Page<Item> getItemsByConditions(int page, List<Long> category, Integer minPrice, Integer maxPrice, List<Long> seller, String sortBy) {
+    public Page<ItemDto> getItemsByConditions(ItemRequest request) {
 
         Specification<Item> spec = (root, query, criteriaBuilder) -> null;
 
-        if (category != null) {
+        if (request.getCategory() != null) {
             Specification<Item> categorySpec = (root, query, criteriaBuilder) -> null;
-            for (Long categoryId : category) {
+            for (Long categoryId : request.getCategory()) {
                 categorySpec.or(ItemSpecification.categoryIs(categoryId));
             }
+
             spec.and(categorySpec);
+            System.out.println(spec);
         }
 
         Specification<Item> priceSpec = (root, query, criteriaBuilder) -> null;
 
-        if (minPrice != null && maxPrice != null) {
-            priceSpec.and(ItemSpecification.priceBetween(minPrice, maxPrice));
+        if (request.getMinPrice() != null && request.getMaxPrice() != null) {
+            priceSpec.and(ItemSpecification.priceBetween(request.getMinPrice(), request.getMaxPrice()));
             spec.and(priceSpec);
         }
 
-        if (seller != null) {
+        if (request.getSeller() != null) {
             Specification<Item> sellerSpec = (root, query, criteriaBuilder) -> null;
-            for (Long sellerId : seller) {
+            for (Long sellerId : request.getSeller()) {
                 sellerSpec.or(ItemSpecification.sellerIs(sellerId));
             }
             spec.and(sellerSpec);
@@ -70,6 +74,8 @@ public class ItemServiceImpl implements ItemService {
 
 
         Sort sort = Sort.by(Sort.Direction.ASC,"id");
+
+        String sortBy = request.getSortBy();
 
         if(sortBy.equals("인기 순")) {
             sort = Sort.by(Sort.Direction.DESC, "sales");
@@ -81,10 +87,15 @@ public class ItemServiceImpl implements ItemService {
             sort = Sort.by(Sort.Direction.DESC,"reviews");
         }
 
-        Pageable pageable = PageRequest.of(page,BASIC_ITEM_VIEWS_IN_PAGE,sort);
+        Pageable pageable = PageRequest.of(request.getPage(),BASIC_ITEM_VIEWS_IN_PAGE,sort);
 
         Page<Item> result = itemRepository.findAll(spec, pageable);
 
-        return result;
+
+        Page<ItemDto> itemDtoList = result.map(m ->
+                ItemDto.of(m));
+
+
+        return itemDtoList;
     }
 }
