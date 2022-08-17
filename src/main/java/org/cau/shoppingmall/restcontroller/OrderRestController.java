@@ -4,8 +4,13 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
+import org.cau.shoppingmall.dto.orders.OrderDto;
+import org.cau.shoppingmall.dto.orders.OrderForm;
+import org.cau.shoppingmall.entity.order.Orders;
+import org.cau.shoppingmall.service.OrderService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 @RestController
@@ -14,6 +19,26 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class OrderRestController {
 
+
+    private final OrderService orderService;
+
+    @PostMapping
+    @ApiOperation(value = "새로운 주문 생성", notes = "OrderForm 양식에 맞춰 요청을 전송하면 새로운 주문이 생성됩니다.")
+    public OrderDto newOrder(
+            @ApiParam(value = "OrderForm")
+            @ModelAttribute OrderForm orderForm,
+            HttpSession session
+            ) {
+
+        //session 에서 id 를 가져오는 코드
+        Long id = 0L;
+
+        Orders orders = orderService.create(orderForm, id);
+
+        OrderDto result = OrderDto.of(orders);
+
+        return result;
+    }
     @GetMapping("/{orderId}")
     @ApiOperation(value = "id에 해당하는 주문 정보 가져오기", notes="id에 해당하는 주문 정보를 얻을 수 있습니다.")
     public Object getOrder(

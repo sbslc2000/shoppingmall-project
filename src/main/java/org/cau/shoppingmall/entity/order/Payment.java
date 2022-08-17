@@ -1,11 +1,17 @@
 package org.cau.shoppingmall.entity.order;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@Builder
 @Entity
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Payment {
 
     @Id

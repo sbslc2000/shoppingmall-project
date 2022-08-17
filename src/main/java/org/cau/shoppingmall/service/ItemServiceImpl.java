@@ -1,7 +1,7 @@
 package org.cau.shoppingmall.service;
 
 import lombok.RequiredArgsConstructor;
-import org.cau.shoppingmall.dto.ItemForm;
+import org.cau.shoppingmall.dto.item.ItemForm;
 import org.cau.shoppingmall.dto.item.ItemDto;
 import org.cau.shoppingmall.dto.item.ItemRequest;
 import org.cau.shoppingmall.entity.item.Item;

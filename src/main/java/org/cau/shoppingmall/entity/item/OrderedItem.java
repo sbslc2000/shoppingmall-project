@@ -1,14 +1,20 @@
 package org.cau.shoppingmall.entity.item;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Builder
 @Entity
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderedItem {
 
     @Id
@@ -16,13 +22,13 @@ public class OrderedItem {
     private Long id;
 
     /*
-    * TODO: Item과 연관관계 매핑
-    * */
+     * TODO: Item과 연관관계 매핑
+     * */
     private Long itemId;
 
     /*
-    * TODO: Order Entity와 연관관계 매핑
-    * */
+     * TODO: Order Entity와 연관관계 매핑
+     * */
     private Long orderId;
 
     private Long sizeId;
@@ -32,8 +38,8 @@ public class OrderedItem {
     private int quantity;
 
     /*
-    * 리뷰 작성 여부
-    * */
+     * 리뷰 작성 여부
+     * */
     private boolean reviewFlag;
 
     /*
@@ -42,7 +48,7 @@ public class OrderedItem {
     private boolean returnFlag;
 
     /*
-    * 교환 신청 여부
-    * */
+     * 교환 신청 여부
+     * */
     private boolean exchangeFlag;
 }

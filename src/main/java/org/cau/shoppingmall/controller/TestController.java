@@ -1,11 +1,9 @@
 package org.cau.shoppingmall.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.cau.shoppingmall.dto.OrderForm;
 import org.cau.shoppingmall.service.RedisTestService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
