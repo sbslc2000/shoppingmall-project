@@ -1,99 +1,96 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://thymeleaf.org">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{home_style.css}">
+</head>
+<body>
+<div class="header">
 
-    <head>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
-    </head>
-    <body>
-        <div class="header">
-            
-            <img src="images/banner.png"><br><br/>
-            <div class="searchArea">
-                <form>
-                    <input type="search" placeholder="원하는 상품을 검색해주세요">
-                    <span>검색</span>
-            </form>
-            </div>
+    <img th:src="@{/images/banner.png}"><br><br/>
+    <div class="searchArea">
+        <form>
+            <input type="search" placeholder="원하는 상품을 검색해주세요">
+            <span>검색</span>
+        </form>
+    </div>
 
-            <ul class="nav">
-                <li><a href="#">의류</a></li>
-                <li><a href="#">뷰티</a></li>
-                <li><a href="#">가방/지갑</a></li>
-                <li><a href="#">액세사리</a></li>
-                <li><a href="#">신발</a></li>
+    <ul class="nav">
+        <li><a href="#">의류</a></li>
+        <li><a href="#">뷰티</a></li>
+        <li><a href="#">가방/지갑</a></li>
+        <li><a href="#">액세사리</a></li>
+        <li><a href="#">신발</a></li>
+    </ul>
+
+    <div class="section">
+        <div class="slidewrap">
+            <ul class="slidelist">
+                <li>
+                    <a>
+                        <label for="slide03" class="left"></label>
+                        <img src="images/slide01.jpg">
+                        <label for="slide02" class="right"></label>
+
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <label for="slide01" class="left"></label>
+                        <img src="images/slide02.jpg">
+                        <label for="slide03" class="right"></label>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <label for="slide02" class="left"></label>
+                        <img src="images/slide03.jpg">
+                        <label for="slide01" class="right"></label>
+
+                    </a>
+                </li>
             </ul>
 
-            <div class="section">
-
-                <div class="slidewrap">
-                    <ul class="slidelist">
-                            <a>
-                                <label for="slide03" class="left"></label>
-                                <img src="images/slide01.jpg">
-                                <label for="slide02" class="right"></label>
-                            
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <label for="slide01" class="left"></label>
-                                <img src="images/slide02.jpg">
-                                <label for="slide03" class="right"></label>
-                            
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <label for="slide02" class="left"></label>
-                                <img src="images/slide03.jpg">
-                                <label for="slide01" class="right"></label>
-                            
-                            </a>
-                        </li>
-                    </ul>
-
-                </div>
-
-                <input type="radio" name="slide" id="slide01" checked>
-                <input type="radio" name="slide" id="slide02">
-                <input type="radio" name="slide" id="slide03">
-                
-                <section id="content_box">
-                    <div class="box">
-                        <h3>인기 상품</h3>
-                        <div class="clear"></div>
-                        <div th:each="item : ${hotItems}" class="items">
-                            <li><img th:src="@{/img/item/}+${item.img[0]}+'.jpg'"></li>
-                            <li class="a" th:text="${item.name}"></li>
-                        </div>
-                    </div>
-                </section>
-
-	<section id="content_box">
-                    <div class="box">
-                        <h3>추천 상품</h3>
-                        <div class="clear"></div>
-                        
-                        <ul class="items">
-                            <li><img src="images/item.png"></li>
-                            <li class="a"> 여기는 상품 이름이 들어갈 텍스트 공간입니다.</li>
-                        </ul>
-                        <ul class="items">
-                            <li><img src="images/item.png"></li>
-                            <li class="a"> 여기는 상품 이름이 들어갈 텍스트 공간입니다.</li>
-                        </ul>
-                        <ul class="items">
-                            <li><img src="images/item.png"></li>
-                            <li class="a"> 여기는 상품 이름이 들어갈 텍스트 공간입니다.</li>
-                        </ul>
-                        <ul class="items">
-                            <li><img src="images/item.png"></li>
-                            <li class="a"> 여기는 상품 이름이 들어갈 텍스트 공간입니다.</li>
-                        </ul>
-                    </div>
-                </section>
-            </div>
         </div>
-    </body>
-</html>
+
+        <input type="radio" name="slide" id="slide01" checked>
+        <input type="radio" name="slide" id="slide02">
+        <input type="radio" name="slide" id="slide03">
+
+        <section id="content_box">
+            <div class="box">
+                <h3>인기 상품</h3>
+                <div class="clear"></div>
+                <ul th:each="item : ${hotItems}">
+                    <li><img th:src="@{/img/item/}+${item.img[0]+'.jpg'}" alt=""></li>
+                    <li class="a" th:text="${item.name}"></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="content_box">
+            <div class="box">
+                <h3>추천 상품</h3>
+                <div class="clear"></div>
+
+                <ul class="items">
+                    <li><img src="images/item.png"></li>
+                    <li class="a"> 여기는 상품 이름이 들어갈 텍스트 공간입니다.</li>
+                </ul>
+                <ul class="items">
+                    <li><img src="images/item.png"></li>
+                    <li class="a"> 여기는 상품 이름이 들어갈 텍스트 공간입니다.</li>
+                </ul>
+                <ul class="items">
+                    <li><img src="images/item.png"></li>
+                    <li class="a"> 여기는 상품 이름이 들어갈 텍스트 공간입니다.</li>
+                </ul>
+                <ul class="items">
+                    <li><img src="images/item.png"></li>
+                    <li class="a"> 여기는 상품 이름이 들어갈 텍스트 공간입니다.</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</div>
+</body>

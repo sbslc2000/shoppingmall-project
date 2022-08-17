@@ -1,6 +1,7 @@
 package org.cau.shoppingmall.service;
 
 import org.cau.shoppingmall.dto.OrderForm;
+import org.cau.shoppingmall.dto.orders.OrderDto;
 import org.cau.shoppingmall.entity.order.Orders;
 
 /*
@@ -30,5 +31,16 @@ public interface OrderService {
      - item -> stockDetails의 재고량 감소
 
      */
-    Orders createOrder(OrderForm form, Long userId);
+    Orders create(OrderForm form, Long userId);
+
+
+    /*
+    * OrderDto get : Id 에 해당하는 주문정보를 반환한다.
+    *
+    * 프로세스 로직:
+    * session에서 사용자 아이디를 확인한 후,
+    * - 사용자가 manager 라면 : 무조건 반환
+    * - 사용자가 일반사용자라면 : Order 의 userId 와 비교해서 같은 경우만 반환
+    * */
+    OrderDto get(Long orderId,Long userId);
 }
