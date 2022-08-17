@@ -1,7 +1,6 @@
 package org.cau.shoppingmall.entity.order;
 
 import lombok.Getter;
-import org.yaml.snakeyaml.events.Event;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
