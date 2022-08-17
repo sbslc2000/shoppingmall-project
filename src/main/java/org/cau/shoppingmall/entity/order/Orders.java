@@ -1,17 +1,27 @@
 package org.cau.shoppingmall.entity.order;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Builder
 @Entity
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Orders {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     /*
      * TODO: OrderProcess Entity와 연관관계 매핑
