@@ -3,15 +3,19 @@ package org.cau.shoppingmall.service;
 import lombok.RequiredArgsConstructor;
 import org.cau.shoppingmall.dto.orders.OrderForm;
 import org.cau.shoppingmall.dto.orders.OrderDto;
+import org.cau.shoppingmall.dto.orders.OrderedItemForm;
+import org.cau.shoppingmall.entity.item.Item;
+import org.cau.shoppingmall.entity.item.OrderedItem;
+import org.cau.shoppingmall.entity.item.StockDetails;
 import org.cau.shoppingmall.entity.order.*;
-import org.cau.shoppingmall.repository.ItemRepository;
-import org.cau.shoppingmall.repository.OrderProcessRepository;
-import org.cau.shoppingmall.repository.OrdersRepository;
-import org.cau.shoppingmall.repository.PaymentMethodRepository;
+import org.cau.shoppingmall.repository.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +26,9 @@ public class OrderServiceImpl implements OrderService{
     private final OrdersRepository orderRepository;
     private final OrderProcessRepository orderProcessRepository;
     private final PaymentMethodRepository paymentMethodRepository;
+    private final UserRepository userRepository;
+    private final OrderedItemRepository orderedItemRepository;
+    private final StockDetailsRepository stockDetailsRepository;
 
     /*
         Order createOrder : 사용자에게 입력받은 정보를 토대로 주문을 등록한다.
@@ -44,19 +51,67 @@ public class OrderServiceImpl implements OrderService{
          - item -> stockDetails의 재고량 감소
  */
     @Override
+    @Transactional
     public Orders create(OrderForm form, Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+
+        if(user.isEmpty()) {
+            throw new NoSuchElementException("사용자를 찾을 수 없습니다.");
+        }
+
+
         OrderProcess orderProcess = orderProcessRepository.findById(1L).get();
         PaymentMethod paymentMethod = paymentMethodRepository.findById(form.getPaymentMethod()).get();
 
 
+
+
+        int sumOfPrice = 0;
+        //user 의 point를 확인한 후 sum of orderedItem.price - point 한 가격 주입하기
+        if(user.getPoint() < form.getPointUsed()) {
+            throw new IllegalArgumentException("유저의 포인트가 사용된 포인트보다 낮습니다.");
+        }
+
+        List<OrderedItem> orderedItemList;
+        for (OrderedItemForm itemForm : form.getOrderedItemList()) {
+            //상품 정보를 가져옴
+            Item item = itemRepository.findById(itemForm.getItemId()).orElseThrow(() ->
+                    new NoSuchElementException("해당 상품을 찾을 수 없습니다."));
+
+            //상품 세부 재고 정보를 가져와 실재 재고가 있는지 확인한다.
+            StockDetails findStockDetails = stockDetailsRepository.findByItem_IdAndSize_IdAndColor_Id(itemForm.getItemId(), itemForm.getSizeId(), itemForm.getColorId())
+                    .orElseThrow( () ->
+                            new NoSuchElementException("해당하는 재고 정보가 존재하지 않습니다."));
+
+            if(findStockDetails.getQuantity() < itemForm.getQuantity()) {
+                throw new IllegalArgumentException("재고보다 구매량이 많습니다.");
+            }
+
+
+            sumOfPrice += item.getPrice();
+            OrderedItem buildedOrderedItem = new OrderedItem().builder()
+                    .colorId(itemForm.getColorId())
+                    .itemId(itemForm.getItemId())
+                    .sizeId(itemForm.getSizeId())
+                    .exchangeFlag(false)
+                    .returnFlag(false)
+                    .reviewFlag(false)
+                    .quantity(itemForm.getQuantity())
+                    .build();
+
+            orderedItemRepository.save(buildedOrderedItem);
+        }
+
         CashReceipt cashReceipt = form.isCashReceiptFlag() ? form.createCashReceipt() : null;
+        Payment payment = form.createPayment(paymentMethod, sumOfPrice - form.getPointUsed(), cashReceipt);
+        Orders order = form.toEntity(user, orderProcess, payment);
 
-        int price;
-        //user 의 point를 확인한 후 sum of orderedItem.price - point 한 가격 주입하기기
+        Orders result = orderRepository.save(order);
 
-
-       form.createPayment(paymentMethod,price,cashReceipt);
-
+        //db update
+        user.getShoppingmallData().changePointAmount(result.getPayment().getPointUsed());
+        user.getShoppingmallData().raiseSalesCount();
+        user.getShoppingmallData().changePointAmount(result.getPayment().getPaymentPrice()*0.05);
     }
 
     @Override

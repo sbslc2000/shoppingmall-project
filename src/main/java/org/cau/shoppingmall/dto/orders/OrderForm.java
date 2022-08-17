@@ -7,13 +7,14 @@ import org.cau.shoppingmall.entity.order.*;
 import springfox.documentation.spring.web.json.Json;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
 @ToString
 public class OrderForm {
 
-    private 
+    private List<OrderedItemForm> orderedItemList;
 
     private String ordererName;
 
