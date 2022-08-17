@@ -1,6 +1,6 @@
 package org.cau.shoppingmall.service;
 
-import org.cau.shoppingmall.dto.OrderForm;
+import org.cau.shoppingmall.dto.orders.OrderForm;
 import org.cau.shoppingmall.dto.orders.OrderDto;
 import org.cau.shoppingmall.entity.order.Orders;
 
