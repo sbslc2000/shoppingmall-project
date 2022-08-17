@@ -1,9 +1,11 @@
 package org.cau.shoppingmall.entity.user;
 
+import lombok.Getter;
 import org.cau.shoppingmall.entity.item.Category;
 
 import javax.persistence.*;
-
+@Entity
+@Getter
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
