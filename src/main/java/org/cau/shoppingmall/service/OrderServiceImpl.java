@@ -8,11 +8,13 @@ import org.cau.shoppingmall.entity.item.Item;
 import org.cau.shoppingmall.entity.item.OrderedItem;
 import org.cau.shoppingmall.entity.item.StockDetails;
 import org.cau.shoppingmall.entity.order.*;
+import org.cau.shoppingmall.entity.user.User;
 import org.cau.shoppingmall.repository.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.List;
@@ -72,7 +74,7 @@ public class OrderServiceImpl implements OrderService{
             throw new IllegalArgumentException("유저의 포인트가 사용된 포인트보다 낮습니다.");
         }
 
-        List<OrderedItem> orderedItemList;
+        List<OrderedItem> orderedItemList = new ArrayList<>();
         for (OrderedItemForm itemForm : form.getOrderedItemList()) {
             //상품 정보를 가져옴
             Item item = itemRepository.findById(itemForm.getItemId()).orElseThrow(() ->
@@ -112,10 +114,20 @@ public class OrderServiceImpl implements OrderService{
         user.getShoppingmallData().changePointAmount(result.getPayment().getPointUsed());
         user.getShoppingmallData().raiseSalesCount();
         user.getShoppingmallData().changePointAmount(result.getPayment().getPaymentPrice()*0.05);
+
+        for(OrderedItem oItem : orderedItemList) {
+            Item item = itemRepository.findById(oItem.getItemId()).get();
+            item.raiseSales(oItem.getQuantity());
+            item.changeQuantity(-oItem.getQuantity());
+            StockDetails stockDetails = stockDetailsRepository.findByItem_IdAndSize_IdAndColor_Id(oItem.getItemId(), oItem.getSizeId(), oItem.getColorId()).get();
+            stockDetails.changeQuantity(-oItem.getQuantity());
+        }
+
+        return result;
     }
 
     @Override
-    public OrderDto get(Long orderId,Long userId) {
+    public OrderDto get(Long orderId,Long userId) throws Exception {
         //userRepository 에서 userId를 통해 user을 가져온 후 manager 이면 진행, findOrder 와 userId가 동일하면 진행, 아니라면 exception 발생
 
         Optional<Orders> findOrder = orderRepository.findById(orderId);
@@ -124,9 +136,17 @@ public class OrderServiceImpl implements OrderService{
             Orders orders = findOrder.get();
 
             //if not userId same: exception
+            User user = userRepository.findById(userId).orElse( () ->
+                    new NoSuchElementException("해당하는 사용자가 없습니다."));
 
-            OrderDto result = OrderDto.of(orders);
-            return result;
+            if(user.getId().equals(userId) || user.getAuthority().getName().equals("관리자")) {
+                OrderDto result = OrderDto.of(orders);
+                return result;
+            } else {
+                throw new Exception("주문 정보를 확인할 권한이 없습니다.");
+            }
+
+
         } else {
             throw new NoSuchElementException("해당하는 주문정보가 없습니다.");
         }

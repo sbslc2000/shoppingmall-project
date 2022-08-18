@@ -60,4 +60,8 @@ public class StockDetails {
                 ", quantity=" + quantity +
                 '}';
     }
+
+    public void changeQuantity(int amount) {
+        this.quantity += amount;
+    }
 }

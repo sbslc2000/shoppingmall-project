@@ -44,5 +44,5 @@ public interface OrderService {
     * - 사용자가 manager 라면 : 무조건 반환
     * - 사용자가 일반사용자라면 : Order 의 userId 와 비교해서 같은 경우만 반환
     * */
-    OrderDto get(Long orderId,Long userId);
+    OrderDto get(Long orderId,Long userId) throws Exception;
 }

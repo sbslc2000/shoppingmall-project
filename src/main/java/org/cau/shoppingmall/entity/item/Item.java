@@ -108,7 +108,14 @@ public class Item {
                 '}';
     }
 
-    public void changeQuantity(int quantity) {
-        this.quantity=quantity;
+    /*
+    * amount 로 넘긴 숫자 만큼 quantity 를 변경한다.
+    * */
+    public void changeQuantity(int amount) {
+        this.quantity += amount;
+    }
+
+    public void raiseSales(int amount) {
+        this.sales += amount;
     }
 }
