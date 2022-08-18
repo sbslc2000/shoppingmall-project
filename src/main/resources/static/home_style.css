@@ -3,27 +3,34 @@
     list-style: none;
     text-decoration: none;
     border-collapse: none;
-    margin: 0px;
-    padding: 0px;
     color:black;
+    margin: auto;
+    align-items: center;
+
 }
 
-.header{
-
-    width: 1280px;
+header{
     margin: 0 auto;
-    text-align: center;
+    align-items: center;
+    background: yellow;
+    margin-bottom: 50px;
     
 }
 
+header img{
+    width:100%;
+}
+
+
 .searchArea{
-    width:300px;
+    width:500px;
     height:40px;
-    background: rgba(0,0,0,0,5);
+    background: orange;
     border-radius: 40px 40px 40px 40px;
     margin-top: 10px;
+    margin-bottom: 10px;
     text-align: center;
-    margin-left: 500px;
+
 }
 
 .searchArea > form > input{
@@ -35,85 +42,58 @@
     padding-left:10px;
 }
 
-.searchArea > form > span{
-    width:50px;
-    color:#000;
-    font-weight:bold;
-    cursor:pointer;
-}
 
-.nav{
-    margin-left: 300px;
-    width: auto;
-    height:40px;
-    display: flex;
-    margin-top: 24px;
-    background: #fff;
+nav{
+    width: 1100px;
+    height:50px;
+    background: green;
     text-align: center;
 }
 
-.nav > li{
-    margin-left: 84px;
+
+nav ul li{
+    display: inline-block;
+    margin-right: 50px;
+    margin-left: 50px;
+    padding: 12px;
+}
+
+.slidewrap {
+    width: 1100px;
+    height: auto;
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+    background: orange;
+    margin-bottom: 50px;
+}
+
+.homeItems{
+    width:1100px;
+    height:auto;
+    background: orange;
+    margin-bottom: 10px;
     text-align: center;
 }
 
-.section input[id=slide]{
-    display: none;
-    margin-bottom: 200px;
+.homeItems h3{
+    text-align: center;
+    margin-bottom: 50px;
 }
 
-.section .slidewrap{
-    max-width: 1200px;
-    margin:0 auto;
-    margin-top: 50px;
-    overflow:hidden;
+.homeItems h4{
+    text-align: left;
 }
 
-.section .slidelist{
-    white-space: nowrap;
-    font-size: 0;
+.homeItems p{
+    text-align: left;
 }
 
-.section .slidelist > li{
-    display:inline-block;
-    vertical-align: middle;
-    width:100%;
-    transition: all .5s;
+.item{
+    display: inline-block;
+    padding-bottom: 100px;
 }
 
-.section .slidelist > li > a{
-    display: block;
-    position: relative;
-}
-
-.section .slidelist > li > a img{
-    width:100%
-}
-
-.section .slidelist label{
-    position:absolute;
-    z-index: 10;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 50%;
-    cursor:pointer;
-}
-
-.section .slidelist .left{
-    right: 500px;
-    background: url(images/left-arrow.png) center center / 10% no-repeat;
-}
-
-.section .slidelist .right{
-    left: 500px;
-    background: url(images/right-arrow.png) center center / 10% no-repeat;
-}
-
-.section [id="slide01"]:checked ~ .slidewrap .slidelist > li {transform: translateX(0%);}
-.section [id="slide02"]:checked ~ .slidewrap .slidelist > li {transform: translateX(-100%);}
-.section [id="slide03"]:checked ~ .slidewrap .slidelist > li {transform: translateX(-200%);}
-
-.content_box h3{
-    float: left;
-    margin-top: 100px;
+.hotItems{
+    margin-bottom: 50px;
 }
