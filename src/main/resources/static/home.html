@@ -3,110 +3,121 @@
 
     <head>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="home_style.css">
     </head>
     <body>
-        <div class="header">
-            
+        <header>
             <img src="images/banner.png"><br><br/>
             <div class="searchArea">
                 <form>
                     <input type="search" placeholder="원하는 상품을 검색해주세요">
-                    <span>검색</span>
                 </form>
             </div>
 
-            <ul class="nav">
-                <li><a href="#">의류</a></li>
-                <li><a href="#">뷰티</a></li>
-                <li><a href="#">가방/지갑</a></li>
-                <li><a href="#">액세사리</a></li>
-                <li><a href="#">신발</a></li>
+
+            <nav>
+                <ul>
+                    <li><a href="">의류</a></li>
+                    <li><a href="">뷰티</a></li>
+                    <li><a href="">가방/지갑</a></li>
+                    <li><a href="">액세사리</a></li>
+                    <li><a href="">신발</a></li>
+                </ul>
+        </header>
+            <!--이벤트/광고 배너 슬라이드-->
+            <div class="slidewrap">
+                <ul class="slidelist">
+                    <li><img src="images/item.png"></li>
             </ul>
+        </div>
 
-            <div class="section">
-
-                <div class="slidewrap">
-                    <ul class="slidelist">
-                        <li>
-                            <a>
-                                <label for="slide03" class="left"></label>
-                                <img src="images/slide01.jpg">
-                                <label for="slide02" class="right"></label>
-                            
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <label for="slide01" class="left"></label>
-                                <img src="images/slide02.jpg">
-                                <label for="slide03" class="right"></label>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <label for="slide02" class="left"></label>
-                                <img src="images/slide03.jpg">
-                                <label for="slide01" class="right"></label>
-                            
-                            </a>
-                        </li>
-                    </ul>
-
+        <div class="homeItems">
+            <!--인기상품-->
+            <div class="hotItems">
+                <h3>인기상품</h3>
+                <div class="item">
+                    <img src="images/item.png">
+                    <h4>#쇼핑몰 이름입니다#</h4>
+                    <h4>#상품 이름입니다#</h4>
+                    <h4>#상품 가격입니다#</h4>
+                    <p>#좋아요 n개 리뷰m개</p>
                 </div>
-
-                <input type="radio" name="slide" id="slide01" checked>
-                <input type="radio" name="slide" id="slide02">
-                <input type="radio" name="slide" id="slide03">
-                
-                <section id="content_box">
-                    <div class="box">
-                        <h3>인기 상품</h3>
-                        <div class="clear"></div>
-                        
-                        <ul class="items">
-                            <li><img src="images/item.png"></li>
-                            <li class="a"> 여기는 상품 이름이 들어갈 텍스트 공간입니다.</li>
-                        </ul>
-                        <ul class="items">
-                            <li><img src="images/item.png"></li>
-                            <li class="a"> 여기는 상품 이름이 들어갈 텍스트 공간입니다.</li>
-                        </ul>
-                        <ul class="items">
-                            <li><img src="images/item.png"></li>
-                            <li class="a"> 여기는 상품 이름이 들어갈 텍스트 공간입니다.</li>
-                        </ul>
-                        <ul class="items">
-                            <li><img src="images/item.png"></li>
-                            <li class="a"> 여기는 상품 이름이 들어갈 텍스트 공간입니다.</li>
-                        </ul>
-                    </div>
-                </section>
-
-	<section id="content_box">
-                    <div class="box">
-                        <h3>추천 상품</h3>
-                        <div class="clear"></div>
-                        
-                        <ul class="items">
-                            <li><img src="images/item.png"></li>
-                            <li class="a"> 여기는 상품 이름이 들어갈 텍스트 공간입니다.</li>
-                        </ul>
-                        <ul class="items">
-                            <li><img src="images/item.png"></li>
-                            <li class="a"> 여기는 상품 이름이 들어갈 텍스트 공간입니다.</li>
-                        </ul>
-                        <ul class="items">
-                            <li><img src="images/item.png"></li>
-                            <li class="a"> 여기는 상품 이름이 들어갈 텍스트 공간입니다.</li>
-                        </ul>
-                        <ul class="items">
-                            <li><img src="images/item.png"></li>
-                            <li class="a"> 여기는 상품 이름이 들어갈 텍스트 공간입니다.</li>
-                        </ul>
-                    </div>
-                </section>
+                <div class="item">
+                    <img src="images/item.png">
+                    <h4>#쇼핑몰 이름입니다#</h4>
+                    <h4>#상품 이름입니다#</h4>
+                    <h4>#상품 가격입니다#</h4>
+                    <p>#좋아요 n개 리뷰m개</p>
+                </div>
+                <div class="item">
+                    <img src="images/item.png">
+                    <h4>#쇼핑몰 이름입니다#</h4>
+                    <h4>#상품 이름입니다#</h4>
+                    <h4>#상품 가격입니다#</h4>
+                    <p>#좋아요 n개 리뷰m개</p>
+                </div>
+                <div class="item">
+                    <img src="images/item.png">
+                    <h4>#쇼핑몰 이름입니다#</h4>
+                    <h4>#상품 이름입니다#</h4>
+                    <h4>#상품 가격입니다#</h4>
+                    <p>#좋아요 n개 리뷰m개</p>
+                </div>
+            </div>
+            <!--추천상품-->
+            <div class="recomItems">
+                <h3>추천상품</h3>
+                <div class="item">
+                    <img src="images/item.png">
+                    <h4>#쇼핑몰 이름입니다#</h4>
+                    <h4>#상품 이름입니다#</h4>
+                    <h4>#상품 가격입니다#</h4>
+                    <p>#좋아요 n개 리뷰m개</p>
+                </div>
+                <div class="item">
+                    <img src="images/item.png">
+                    <h4>#쇼핑몰 이름입니다#</h4>
+                    <h4>#상품 이름입니다#</h4>
+                    <h4>#상품 가격입니다#</h4>
+                    <p>#좋아요 n개 리뷰m개</p>
+                </div>
+                <div class="item">
+                    <img src="images/item.png">
+                    <h4>#쇼핑몰 이름입니다#</h4>
+                    <h4>#상품 이름입니다#</h4>
+                    <h4>#상품 가격입니다#</h4>
+                    <p>#좋아요 n개 리뷰m개</p>
+                </div>
+                <div class="item">
+                    <img src="images/item.png">
+                    <h4>#쇼핑몰 이름입니다#</h4>
+                    <h4>#상품 이름입니다#</h4>
+                    <h4>#상품 가격입니다#</h4>
+                    <p>#좋아요 n개 리뷰m개</p>
+                </div>
             </div>
         </div>
+        <footer>
+            <div class="footerBox">
+                <div class="inquiry">
+                    <h3>문의</h3>
+                    <ul>
+                        <li><a href="">공지사항</a></li>
+                        <li><a href="">1:1문의</a></li>
+                    </ul>
+                </div>
+                <div class="cs">
+                    <h3>고객센터</h3>
+                    <ul>
+                        <li>전화: 0000-0000</li>
+                        <li>메일: 0000@gmail.com</li>
+                        <li>평일 10:00 ~ 17:00</li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
     </body>
+
 </html>
+
+        
