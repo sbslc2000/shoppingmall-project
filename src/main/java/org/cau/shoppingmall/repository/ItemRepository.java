@@ -17,7 +17,7 @@ public interface ItemRepository extends JpaRepository<Item,Long>, JpaSpecificati
     Page<Item> findAll(Specification<Item> specification, Pageable pageable);
 
 
-    List<Item> findTop8ByOrderBySalesDesc();
+    List<Item> findTop8ByCategory_IdOrderBySalesDesc(Long categoryId);
 
     List<Item> findTop4ByOrderBySalesDesc();
 }

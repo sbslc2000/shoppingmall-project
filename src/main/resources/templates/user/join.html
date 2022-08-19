@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>joinpage</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <style>
+        h2 {
+            border: 5px solid gray;
+            display: inline;
+            margin-top: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        
+        h1 {
+            border-bottom: 5px solid gray;
+        }
+        
+        .container {
+            margin-top: 20px;
+        }
+        
+        #doublecheck {
+            padding-top: 8px;
+        }
+    </style>
+    <script>
+        var warn = {
+
+        }
+    </script>
+</head>
+
+<body class="container">
+    <h2>SHOPPING MALL</h2>
+    <form action="" accept-charset="utf-8" name="join" method="get">
+        <div class="container text-center">
+            <div class="row align-items-start">
+                <div class="col-4">
+                </div>
+                <div class="col-md-3">
+                    <h1>회원가입</h1>
+                </div>
+
+            </div>
+        </div>
+
+        <br><br>
+        <div class="cols">
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-3">
+                    <label for="idinput" class="form-label">아이디</label>
+                    <input type="text" class="form-control" id="idinput" placeholder="영문 소문자, 숫자만 사용 가능">
+
+                </div>
+                <div class="col-2" id="doublecheck">
+                    <br>
+                    <button type="submit" class="btn btn-outline-primary">중복확인</button>
+                </div><br>
+            </div>
+
+
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-3">
+                    <br>
+                    <label for="pwinput" class="form-label">비밀번호</label>
+                    <input type="password" class="form-control" id="pwinput" placeholder="숫자, 영문, 특수문자(!@#$)포함 8자리 이상">
+                    <br>
+                    <label for="checkpw" class="form-label">비밀번호 확인</label>
+                    <input type="password" class="form-control" id="checkpw">
+                    <br>
+                    <label for="nameinput" class="form-label">이름</label>
+                    <input type="text" class="form-control" id="nameinput">
+                    <br>
+                    <label for="birthinput" class="form-label">생년월일</label>
+                </div>
+            </div>
+            <div class="row" id="birthinput">
+                <div class="col-4"></div>
+                <div class="col-1"><input type="text" class="form-control" placeholder="년(4자)"></div>
+                <div class="col-1">
+
+                    <select class="form-select">
+                                <option selected>월</option>
+                                <script>
+                                    i=1;
+                                    while(i<13){
+                                        document.write('<option>'+i+'</option>');
+                                    i=i+1;
+                                    }
+                                </script>
+                                
+                        </select>
+                </div>
+                <div class="col-1">
+                    <select class="form-select">
+                                <option selected>일</option>
+                                <script>
+                                    i=1;
+                                    while(i<32){
+                                        document.write('<option>'+i+'</option>');
+                                    i=i+1;
+                                    }
+                                </script>
+
+                                
+                                </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-3">
+                    <br>
+                    <label for="phoneinput" class="form-label">휴대폰</label>
+                    <input type="text" class="form-control" id="phoneinput" placeholder="(-없이 입력)">
+                    <br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-2">
+                    <label for="addnuminput" class="form-label">우편번호(선택) </label>
+                    <input type="text" class="form-control" id="addnuminput">
+
+                </div>
+                <div class="col-2" id="doublecheck">
+                    <br>
+                    <a href="">
+                        <button type="submit" class="btn btn-outline-primary">우편번호 찾기</button></a>
+                </div><br>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-3">
+                    <label for="addinput" class="form-label">주소(선택) </label>
+                    <div id="addinput">
+                        <input type="text" class="form-control" placeholder="주소">
+                        <input type="text" class="form-control" placeholder="상세주소">
+                        <br></div>
+
+                    <label for="mailinput" class="form-label">이메일 </label>
+                </div>
+            </div>
+
+            <div class="row" id="mailinput">
+                <div class="col-4"></div>
+                <div class="col-2"><input type="email" class="form-control" placeholder="이메일"></div>
+                <div class="col-2">
+                    <select class="form-select">
+                        <option selected>직접입력</option>
+                        <option>@naver.com</option>
+                        <option>@gmail.com</option>
+                        <option>@daum.net</option>
+                        <option>@hanmail.net</option>
+                        <option>@kakao.com</option>
+                        <option>@nate.com</option>
+                    </select>
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="agreeform">
+                        <label class="form-check-label" for="agreeform">
+               광고 SMS 및 메일 수신 동의 (선택)
+            </label>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <br><br><br><br>
+            <div class="row">
+                <div class="col-5"></div>
+                <div class="col-5">
+                    <a href="">
+                        <button type="submit" class="btn btn-outline-primary">가입하기</button></a>
+                </div><br>
+            </div>
+
+        </div>
+    </form>
+    <br><br><br>
+
+
+</body>
+
+</html>

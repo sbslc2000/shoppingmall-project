@@ -28,8 +28,9 @@ public class ItemServiceImpl implements ItemService {
     private final int BASIC_ITEM_VIEWS_IN_PAGE = 16;
 
     @Override
-    public List<ItemDto> getHot8Items() {
-        List<Item> items = itemRepository.findTop8ByOrderBySalesDesc();
+    public List<ItemDto> getHot8Items(Long categoryId) {
+
+        List<Item> items = itemRepository.findTop8ByCategory_IdOrderBySalesDesc(categoryId);
         List<ItemDto> result = new ArrayList<>();
         for(Item i : items) {
             result.add(ItemDto.of(i));
