@@ -1,0 +1,54 @@
+h2 {
+    border: 5px solid gray;
+    display: inline;
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+h1 {
+    border-bottom: 5px solid gray;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+#joinbutton {
+    margin: 60px;
+}
+
+#phoneinput,
+#nameinput,
+#birthinput,
+h1 {
+    margin-bottom: 25px;
+}
+
+.form-check {
+    margin-top: 25px;
+}
+
+#doublebtn {
+    margin-top: 30px;
+}
+
+#findnum {
+    margin-top: 30px;
+}
+
+input,
+select {
+    margin-top: 5px;
+}
+
+#pw1,
+#pw2,
+#nameinput {
+    width: 306px;
+    height: 38px;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
