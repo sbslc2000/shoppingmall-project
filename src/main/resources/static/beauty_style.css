@@ -1,0 +1,143 @@
+*{
+    font-family: 'Noto Sans KR', sans-serif;
+    list-style: none;
+    text-decoration: none;
+    border-collapse: none;
+    color:black;
+    margin: auto;
+    align-items: center;
+
+}
+
+header{
+    margin: 0 auto;
+    align-items: center;
+    background: yellow;
+    margin-bottom: 50px;
+    
+}
+
+header img{
+    width: 100vw;
+    height: 100px;
+}
+
+
+.searchArea{
+    display: flex;
+    width:500px;
+    height:30px;
+    background: rgb(240, 240, 240);
+    border-radius: 40px 40px 40px 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+
+}
+
+.searchArea > form > input{
+
+    border: none;
+    width:400px;
+    height:20px;
+    background: rgb(240, 240, 240);
+    text-align: center;
+}
+
+.searchArea > form > input::placeholder{
+    color: rgb(192, 192, 192);
+}
+
+
+nav{
+    width: 1100px;
+    height:50px;
+    background: green;
+    text-align: center;
+}
+
+
+nav ul li{
+    display: inline-block;
+    margin-right: 50px;
+    margin-left: 50px;
+    padding: 12px;
+}
+
+.slidewrap {
+    width: 1100px;
+    height: auto;
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+    background: orange;
+    margin-bottom: 50px;
+}
+
+.homeItems{
+    width:1100px;
+    height:auto;
+    background: orange;
+    margin-bottom: 200px;
+    padding-top: 50px;
+    padding-bottom: 100px;
+   text-align: center;
+}
+
+.homeItems h3{
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.homeItems h4{
+    text-align: left;
+}
+
+.homeItems p{
+    text-align: left;
+}
+
+.item{
+    height: 400px;
+    max-width: 250px;
+    display: inline-block;
+    padding-bottom: 0px;
+    margin-bottom: 20px;
+    background: pink;
+}
+
+.itemWrap{
+    background: purple;
+    text-align: left;
+}
+
+.itemWrap h4{
+    display: inline;
+
+}
+
+
+.hotItems{
+    margin-bottom: 50px;
+}
+
+.footerBox{
+    width: 100vw;
+    height: 100px;
+    background: #000;
+    display: inline-flex;
+    padding: 20px;
+}
+
+
+.footerBox h3{
+    color: #fff;
+}
+
+.footerBox li{
+    color: #fff;
+}
+
+.footerBox a{
+    color: #fff;
+}
