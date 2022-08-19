@@ -55,18 +55,11 @@ public class OrderServiceImpl implements OrderService{
     @Override
     @Transactional
     public Orders create(OrderForm form, Long userId) {
-        Optional<User> user = userRepository.findById(userId);
-
-        if(user.isEmpty()) {
-            throw new NoSuchElementException("사용자를 찾을 수 없습니다.");
-        }
-
+        User user = userRepository.findById(userId).orElseThrow( () ->
+                new NoSuchElementException("사용자를 찾을 수 없습니다."));
 
         OrderProcess orderProcess = orderProcessRepository.findById(1L).get();
         PaymentMethod paymentMethod = paymentMethodRepository.findById(form.getPaymentMethod()).get();
-
-
-
 
         int sumOfPrice = 0;
         //user 의 point를 확인한 후 sum of orderedItem.price - point 한 가격 주입하기
@@ -88,7 +81,6 @@ public class OrderServiceImpl implements OrderService{
             if(findStockDetails.getQuantity() < itemForm.getQuantity()) {
                 throw new IllegalArgumentException("재고보다 구매량이 많습니다.");
             }
-
 
             sumOfPrice += item.getPrice();
             OrderedItem buildedOrderedItem = new OrderedItem().builder()
@@ -113,7 +105,7 @@ public class OrderServiceImpl implements OrderService{
         //db update
         user.getShoppingmallData().changePointAmount(result.getPayment().getPointUsed());
         user.getShoppingmallData().raiseSalesCount();
-        user.getShoppingmallData().changePointAmount(result.getPayment().getPaymentPrice()*0.05);
+        user.getShoppingmallData().changePointAmount((int) Math.round(result.getPayment().getPaymentPrice()*0.05));
 
         for(OrderedItem oItem : orderedItemList) {
             Item item = itemRepository.findById(oItem.getItemId()).get();
@@ -136,7 +128,7 @@ public class OrderServiceImpl implements OrderService{
             Orders orders = findOrder.get();
 
             //if not userId same: exception
-            User user = userRepository.findById(userId).orElse( () ->
+            User user = userRepository.findById(userId).orElseThrow( () ->
                     new NoSuchElementException("해당하는 사용자가 없습니다."));
 
             if(user.getId().equals(userId) || user.getAuthority().getName().equals("관리자")) {

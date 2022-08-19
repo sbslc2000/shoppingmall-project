@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 import org.cau.shoppingmall.entity.order.*;
+import org.cau.shoppingmall.entity.user.User;
 import springfox.documentation.spring.web.json.Json;
 
 import java.time.LocalDateTime;

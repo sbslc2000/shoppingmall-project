@@ -36,7 +36,7 @@ class ItemRepositoryTest {
 
     @Autowired
     private ColorRepository colorRepository;
-`
+
     @Autowired
     private SizeRepository sizeRepository;
 

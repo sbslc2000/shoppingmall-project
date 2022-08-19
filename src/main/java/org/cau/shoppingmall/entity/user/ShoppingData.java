@@ -1,12 +1,13 @@
 package org.cau.shoppingmall.entity.user;
 
 import lombok.Getter;
+import org.cau.shoppingmall.entity.entityInterface.ShoppingmallDataInterface;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
-public class ShoppingData {
+public class ShoppingData implements ShoppingmallDataInterface {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,4 +28,13 @@ public class ShoppingData {
     @Column(name = "reviews")
     private int reviews;
 
+    @Override
+    public void raiseSalesCount() {
+
+    }
+
+    @Override
+    public void changePointAmount(int amount) {
+
+    }
 }

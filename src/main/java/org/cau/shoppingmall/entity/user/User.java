@@ -1,12 +1,13 @@
 package org.cau.shoppingmall.entity.user;
 
 import lombok.Getter;
+import org.cau.shoppingmall.entity.entityInterface.UserInterface;
 import org.cau.shoppingmall.entity.item.Category;
 
 import javax.persistence.*;
 @Entity
 @Getter
-public class User {
+public class User implements UserInterface {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -41,4 +42,13 @@ public class User {
     @JoinColumn(name = "authority")
     private Authority authority;
 
+    @Override
+    public int getPoint() {
+        return 0;
+    }
+
+    @Override
+    public ShoppingData getShoppingmallData() {
+        return null;
+    }
 }
