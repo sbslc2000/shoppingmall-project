@@ -1,4 +1,4 @@
-package org.cau.shoppingmall.dto;
+package org.cau.shoppingmall.dto.review;
 
 import lombok.Builder;
 import lombok.Data;

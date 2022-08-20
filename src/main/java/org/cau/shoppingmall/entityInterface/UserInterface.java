@@ -1,4 +1,4 @@
-package org.cau.shoppingmall.entity.entityInterface;
+package org.cau.shoppingmall.entityInterface;
 
 import org.cau.shoppingmall.entity.user.ShoppingData;
 

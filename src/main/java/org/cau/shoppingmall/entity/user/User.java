@@ -1,8 +1,7 @@
 package org.cau.shoppingmall.entity.user;
 
 import lombok.Getter;
-import org.cau.shoppingmall.entity.entityInterface.UserInterface;
-import org.cau.shoppingmall.entity.item.Category;
+import org.cau.shoppingmall.entityInterface.UserInterface;
 
 import javax.persistence.*;
 @Entity

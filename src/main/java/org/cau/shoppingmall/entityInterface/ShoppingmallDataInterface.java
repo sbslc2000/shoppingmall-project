@@ -1,4 +1,4 @@
-package org.cau.shoppingmall.entity.entityInterface;
+package org.cau.shoppingmall.entityInterface;
 
 public interface ShoppingmallDataInterface {
 

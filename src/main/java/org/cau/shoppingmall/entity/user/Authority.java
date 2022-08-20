@@ -1,6 +1,6 @@
 package org.cau.shoppingmall.entity.user;
 
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

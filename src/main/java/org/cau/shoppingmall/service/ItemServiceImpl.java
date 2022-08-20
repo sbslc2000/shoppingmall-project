@@ -32,9 +32,7 @@ public class ItemServiceImpl implements ItemService {
 
         List<Item> items = itemRepository.findTop8ByCategory_IdOrderBySalesDesc(categoryId);
         List<ItemDto> result = new ArrayList<>();
-        for(Item i : items) {
-            result.add(ItemDto.of(i));
-        }
+        toDtoList(items,result);
 
         return result;
     }
@@ -43,9 +41,7 @@ public class ItemServiceImpl implements ItemService {
     public List<ItemDto> getHot4Items() {
         List<Item> items = itemRepository.findTop4ByOrderBySalesDesc();
         List<ItemDto> result = new ArrayList<>();
-        for(Item i : items) {
-            result.add(ItemDto.of(i));
-        }
+        toDtoList(items,result);
 
         return result;
     }
@@ -131,5 +127,12 @@ public class ItemServiceImpl implements ItemService {
 
 
         return itemDtoList;
+    }
+
+
+    private void toDtoList(List<Item> itemList, List<ItemDto> targetList)  {
+        for(Item i : itemList) {
+            targetList.add(ItemDto.of(i));
+        }
     }
 }
