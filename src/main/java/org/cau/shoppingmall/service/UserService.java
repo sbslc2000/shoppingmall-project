@@ -1,5 +1,9 @@
 package org.cau.shoppingmall.service;
 
+import org.cau.shoppingmall.dto.Users.UserDto;
+import org.cau.shoppingmall.dto.Users.UserForm;
+import org.cau.shoppingmall.entity.user.User;
+
 public interface UserService {
 
     /*
@@ -9,8 +13,8 @@ public interface UserService {
 
     점검사항:
     -아이디 중복 체크하기
-
     */
+    User create(UserForm user);
 
     /*
     User get : Id에 해당하는 user 정보를 반환한다
@@ -18,6 +22,7 @@ public interface UserService {
     -session에서 ID 확인 후 반환
 
     */
+    UserDto get(Long userId);
 
     /*
     User update : 사용자가 수정한 유저 정보를 반영한다
@@ -26,9 +31,8 @@ public interface UserService {
 
     DB 변경사항:
     -User entity에 해당하는 내용 변경
-
     */
-
+    User update(Long userId, UserForm form);
 
     /*
     User delete : 사용자에게 삭제 요청을 받은 유저 정보를 삭제한다
@@ -36,9 +40,9 @@ public interface UserService {
     - 요청이 들어온 User의 id에 해당하는 DB 삭제
 
     DB 변경사항:
-    -
-
+    -User 삭제
     */
+    User delete(Long userId);
 
 
 }
