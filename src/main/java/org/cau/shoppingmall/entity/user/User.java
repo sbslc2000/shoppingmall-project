@@ -1,12 +1,20 @@
 package org.cau.shoppingmall.entity.user;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.cau.shoppingmall.entity.entityInterface.UserInterface;
 import org.cau.shoppingmall.entity.item.Category;
 
 import javax.persistence.*;
+
+@Builder
 @Entity
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class User implements UserInterface {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
