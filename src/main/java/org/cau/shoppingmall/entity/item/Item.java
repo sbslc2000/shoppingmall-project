@@ -118,4 +118,11 @@ public class Item {
     public void raiseSales(int amount) {
         this.sales += amount;
     }
+
+    public void addNewReviewStars(int stars) {
+        float allStars = averageStars * reviews;
+        allStars += stars;
+        reviews++;
+        averageStars = allStars / reviews;
+    }
 }

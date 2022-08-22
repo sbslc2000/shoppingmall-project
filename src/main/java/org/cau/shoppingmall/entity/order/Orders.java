@@ -4,10 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.cau.shoppingmall.entity.item.OrderedItem;
 import org.cau.shoppingmall.entity.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Builder
 @Entity
@@ -23,11 +26,6 @@ public class Orders {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    /*
-     * TODO: OrderProcess Entity와 연관관계 매핑
-     *  db와 컬럼명 통일
-     * */
 
     @ManyToOne
     @JoinColumn(name = "order_process_id")
@@ -64,6 +62,10 @@ public class Orders {
     @OneToOne
     @JoinColumn(name = "payment_id")
     private Payment payment;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "order")
+    private List<OrderedItem> orderedItemList = new ArrayList<>();
 
     /*
     * 약관 동의 여부

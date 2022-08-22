@@ -13,11 +13,12 @@ public interface ReviewService {
     * - multipart 를 통해 사용자가 입력한 사진을 서버에 저장하고 파일명을 포함한 path를 각각 string_list 형식으로 변형한다.
     * - form을 Entity로 변환 후 db에 저장한다.
     * - item과 연관관계 매핑을 지어준다.
+    * - review 의 id를 반환한다.
     *
     * 체크사항
     * - user->shoppingmallData 에 작성 리뷰수를 올린다.
     * */
-    void create(ReviewForm form, Long userId);
+    Long create(ReviewForm form, Long userId,String img);
 
 
     /*

@@ -56,8 +56,4 @@ public class User implements UserInterface {
         return 0;
     }
 
-    @Override
-    public ShoppingData getShoppingmallData() {
-        return null;
-    }
 }

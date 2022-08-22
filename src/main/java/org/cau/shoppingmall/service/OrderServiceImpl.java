@@ -85,7 +85,7 @@ public class OrderServiceImpl implements OrderService{
             sumOfPrice += item.getPrice();
             OrderedItem buildedOrderedItem = new OrderedItem().builder()
                     .colorId(itemForm.getColorId())
-                    .itemId(itemForm.getItemId())
+                    .item(item)
                     .sizeId(itemForm.getSizeId())
                     .exchangeFlag(false)
                     .returnFlag(false)
@@ -103,15 +103,15 @@ public class OrderServiceImpl implements OrderService{
         Orders result = orderRepository.save(order);
 
         //db update
-        user.getShoppingmallData().changePointAmount(result.getPayment().getPointUsed());
-        user.getShoppingmallData().raiseSalesCount();
-        user.getShoppingmallData().changePointAmount((int) Math.round(result.getPayment().getPaymentPrice()*0.05));
+        user.getShoppingData().changePointAmount(result.getPayment().getPointUsed());
+        user.getShoppingData().raiseSalesCount();
+        user.getShoppingData().changePointAmount((int) Math.round(result.getPayment().getPaymentPrice()*0.05));
 
         for(OrderedItem oItem : orderedItemList) {
-            Item item = itemRepository.findById(oItem.getItemId()).get();
+            Item item = itemRepository.findById(oItem.getItem().getId()).get();
             item.raiseSales(oItem.getQuantity());
             item.changeQuantity(-oItem.getQuantity());
-            StockDetails stockDetails = stockDetailsRepository.findByItem_IdAndSize_IdAndColor_Id(oItem.getItemId(), oItem.getSizeId(), oItem.getColorId()).get();
+            StockDetails stockDetails = stockDetailsRepository.findByItem_IdAndSize_IdAndColor_Id(oItem.getItem().getId(), oItem.getSizeId(), oItem.getColorId()).get();
             stockDetails.changeQuantity(-oItem.getQuantity());
         }
 

@@ -75,7 +75,7 @@ public class OrderForm {
                 .ordererContact(ordererContact)
                 .recipientName(recipientName)
                 .recipientContact(recipientContact)
-                .shippingAddress(locationCode+":"+location+":"+locationDetail)
+                .shippingAddress(locationCode+"\\"+location+"\\"+locationDetail)
                 .shippingRequirements(shippingRequirement)
                 .payment(payment)
                 .termsAndConditionsAccepted(termsAndConditionsAccepted)

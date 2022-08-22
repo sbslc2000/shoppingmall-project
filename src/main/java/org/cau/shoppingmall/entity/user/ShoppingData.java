@@ -37,4 +37,9 @@ public class ShoppingData implements ShoppingmallDataInterface {
     public void changePointAmount(int amount) {
 
     }
+
+    @Override
+    public void addReviews() {
+
+    }
 }

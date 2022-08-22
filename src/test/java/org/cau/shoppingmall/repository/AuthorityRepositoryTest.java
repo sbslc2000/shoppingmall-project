@@ -28,11 +28,15 @@ class AuthorityRepositoryTest {
                 .name("최고관리자")
                 .build();
 
-         */
+
+
 
         authorityRepository.save(normalUser);
         authorityRepository.save(manager);
         authorityRepository.save(topManager);
+
+        /*
+         */
 
     }
 
