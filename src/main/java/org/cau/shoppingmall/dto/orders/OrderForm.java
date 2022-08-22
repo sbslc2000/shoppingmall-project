@@ -12,13 +12,13 @@ import springfox.documentation.spring.web.json.Json;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Data
 @Builder
 @ToString
+@Data
 @ApiModel(value = "주문 요청 정보", description = "여러 데이터를 가진 domain dto class")
 public class OrderForm {
 
-    @ApiModelProperty(value = "주문 아이템 정보 : colorId, sizeId, itemId, quantity 를 가지며, 리스트 형식임")
+   // @ApiModelProperty(value = "주문 아이템 정보 : colorId, sizeId, itemId, quantity 를 가지며, 리스트 형식임")
     private List<OrderedItemForm> orderedItemList;
 
     @ApiModelProperty(value = "주문자 이름")
@@ -49,7 +49,7 @@ public class OrderForm {
     private Boolean termsAndConditionsAccepted;
 
     @ApiModelProperty(value = "주문한 상품의 수")
-    private String orderedItems;
+    private int orderedItems;
 
     @ApiModelProperty(value = "사용된 포인트")
     private int pointUsed;
