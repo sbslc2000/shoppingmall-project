@@ -31,6 +31,8 @@ public class OrderServiceImpl implements OrderService{
     private final UserRepository userRepository;
     private final OrderedItemRepository orderedItemRepository;
     private final StockDetailsRepository stockDetailsRepository;
+    private final ColorRepository colorRepository;
+    private final SizeRepository sizeRepository;
 
     /*
         Order createOrder : 사용자에게 입력받은 정보를 토대로 주문을 등록한다.
@@ -84,9 +86,9 @@ public class OrderServiceImpl implements OrderService{
 
             sumOfPrice += item.getPrice();
             OrderedItem buildedOrderedItem = new OrderedItem().builder()
-                    .colorId(itemForm.getColorId())
+                    .color(colorRepository.findById(itemForm.getColorId()).get())
                     .item(item)
-                    .sizeId(itemForm.getSizeId())
+                    .size(sizeRepository.findById(itemForm.getSizeId()).get())
                     .exchangeFlag(false)
                     .returnFlag(false)
                     .reviewFlag(false)
@@ -111,7 +113,7 @@ public class OrderServiceImpl implements OrderService{
             Item item = itemRepository.findById(oItem.getItem().getId()).get();
             item.raiseSales(oItem.getQuantity());
             item.changeQuantity(-oItem.getQuantity());
-            StockDetails stockDetails = stockDetailsRepository.findByItem_IdAndSize_IdAndColor_Id(oItem.getItem().getId(), oItem.getSizeId(), oItem.getColorId()).get();
+            StockDetails stockDetails = stockDetailsRepository.findByItem_IdAndSize_IdAndColor_Id(oItem.getItem().getId(), oItem.getSize().getId(), oItem.getColor().getId()).get();
             stockDetails.changeQuantity(-oItem.getQuantity());
         }
 
