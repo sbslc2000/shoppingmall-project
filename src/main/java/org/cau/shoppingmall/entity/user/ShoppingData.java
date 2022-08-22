@@ -1,7 +1,7 @@
 package org.cau.shoppingmall.entity.user;
 
 import lombok.Getter;
-import org.cau.shoppingmall.entityInterface.ShoppingmallDataInterface;
+import org.cau.shoppingmall.entityinterface.ShoppingmallDataInterface;
 
 import javax.persistence.*;
 
