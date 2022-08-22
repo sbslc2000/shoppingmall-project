@@ -1,12 +1,18 @@
 package org.cau.shoppingmall.entity.user;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.cau.shoppingmall.entityinterface.ShoppingmallDataInterface;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ShoppingData implements ShoppingmallDataInterface {
 
     @Id

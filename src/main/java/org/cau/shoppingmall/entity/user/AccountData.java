@@ -1,11 +1,18 @@
 package org.cau.shoppingmall.entity.user;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AccountData {
 
     @Id
@@ -13,9 +20,9 @@ public class AccountData {
     private Long id;
 
     @Column(name = "late_date")
-    private int lateDate;
+    private LocalDateTime lateDate;
 
     @Column(name = "register_date")
-    private int registerDate;
+    private LocalDateTime registerDate;
 
 }
