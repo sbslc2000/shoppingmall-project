@@ -14,13 +14,14 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("api/items")
 @Api(tags = {"상품 관련 API"})
 @RequiredArgsConstructor
 public class ItemRestController {
 
     private final ItemService itemService;
-
+    
     @GetMapping("/{itemId}")
     @ApiOperation(value = "id에 해당하는 상품 정보 가져오기", notes="id에 해당하는 상품 정보를 얻을 수 있습니다.")
     public ItemDto getItem(@PathVariable("itemId") Long itemId) {
