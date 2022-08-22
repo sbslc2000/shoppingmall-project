@@ -1,12 +1,14 @@
 package org.cau.shoppingmall.dto.Users;
 
 import lombok.Builder;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 @Builder
+@Data
 public class UserForm {
 
     private Long id;

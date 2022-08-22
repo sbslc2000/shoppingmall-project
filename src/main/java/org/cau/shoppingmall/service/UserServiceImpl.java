@@ -27,21 +27,20 @@ public class UserServiceImpl implements UserService{
     @Transactional
     public User create(UserForm user) {
         /*중복회원처리*/
-        userRepository.findByUserId(user)
+        userRepository.findByUser_Id(user)
                 .ifPresent(u -> {
-                    throw new IllegalStateException("이미 존재하는 회원입니다.");
+                    throw new IllegalStateException("이미 존재하는 아이디입니다.");
                 });
-        // 전송받은 user 정보 변수 저장
-        UserDto itemDto = ItemDto.of(findItem.get());
+        UserForm userData = null;
 
         //user 정보 저장
         User createUser = new User().builder()
-                .userId(UserForm.getUserId())
-                .password(UserForm.getPassword())
-                .userName(UserForm.getUserName())
-                .birthday(UserForm.getBirthday())
-                .email(UserForm.getEmail())
-                .address(UserForm.getAddress())
+                .userId(userData.getUserId())
+                .password(userData.getPassword())
+                .userName(userData.getUserName())
+                .birthday(userData.getBirthday())
+                .email(userData.getEmail())
+                .address(userData.getAddress())
                 .build();
 
         User result = userRepository.save(createUser);
