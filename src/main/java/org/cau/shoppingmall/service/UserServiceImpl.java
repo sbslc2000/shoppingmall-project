@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.cau.shoppingmall.dto.Users.UserDto;
 import org.cau.shoppingmall.dto.Users.UserForm;
 import org.cau.shoppingmall.entity.user.AccountData;
-import org.cau.shoppingmall.entity.user.Authority;
 import org.cau.shoppingmall.entity.user.ShoppingData;
 import org.cau.shoppingmall.entity.user.User;
 import org.cau.shoppingmall.repository.AccountDataRepository;
@@ -100,13 +99,27 @@ public class UserServiceImpl implements UserService{
             User user = userRepository.findById(userId).orElseThrow(() ->
                     new NoSuchElementException("해당하는 사용자가 없습니다."));
         }
-        User user = userRepository.save(users);
+        User savedUser = userRepository.save(users);
 
-        return user;
+        return savedUser;
     }
 
     @Override
     public User delete(Long userId) {
+
+        Optional<User> findUser = userRepository.findById(userId);
+
+        User users = null;
+        if (findUser.isPresent()) {
+            users = findUser.get();
+
+            //if not userId same: exception
+            User user = userRepository.findById(userId).orElseThrow(() ->
+                    new NoSuchElementException("해당하는 사용자가 없습니다."));
+        }
+
+        userRepository.delete(users);
+
         return null;
     }
 }
