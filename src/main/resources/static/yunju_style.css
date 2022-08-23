@@ -1,0 +1,321 @@
+*{
+    font-family: 'Noto Sans KR', sans-serif;
+    list-style: none;
+    text-decoration: none;
+    border-collapse: none;
+    color:black;
+    margin: auto;
+    align-items: center;
+
+}
+
+header{
+    margin: 0 auto;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.banner{
+    text-align: center;
+    background: #e3e6f3;
+
+
+}
+
+.banner h1{
+}
+
+.searchArea{
+    display: flex;
+    width:500px;
+    height:30px;
+    background: rgb(240, 240, 240);
+    border-radius: 40px 40px 40px 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+
+}
+
+.searchArea > form > input{
+
+    border: none;
+    width:400px;
+    height:20px;
+    background: rgb(240, 240, 240);
+    text-align: center;
+}
+
+.searchArea > form > input::placeholder{
+    color: rgb(192, 192, 192);
+}
+
+
+nav{
+    display: flex;
+    width: 1100px;
+    height:50px;
+    text-align: center;
+    position: relative;
+}
+
+
+nav ul li{
+    display: inline-block;
+    margin-right: 50px;
+    margin-left: 50px;
+    padding: 12px;
+    position: relative;
+}
+
+nav ul li a{
+    color: black;
+    transition: 0.3s ease;
+}
+
+nav ul li a:hover{
+    color: skyblue;
+}
+
+nav ul li a:hover::after{
+    content: "";
+    width: 30%;
+    height: 2px;
+    background: #fff;
+    position: absolute;
+    bottom: -4px;
+    left: 20px;
+}
+
+.slidewrap {
+    width: 1100px;
+    height: auto;
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.homeItems{
+    width:1100px;
+    height:auto;
+    margin-bottom: 200px;
+    text-align: center;
+}
+
+.homeItems h3{
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.homeItems h4{
+    text-align: left;
+}
+
+.homeItems p{
+    text-align: left;
+}
+
+.item{
+    display: inline-block;
+    margin: 0px 11px;
+    padding-bottom: 100px;
+
+}
+.item img{
+    width: 250px;
+    height: 300px;
+    cursor: pointer;
+
+}
+
+.hotItems,
+.homeHotItems{
+    display: inline-block;
+    margin-bottom: 50px;
+}
+
+.hotItems h3{
+    text-align: left;
+    margin-left: 10px;
+
+}
+
+.totalItems{
+    margin-bottom: 50px;
+
+}
+
+.totalBlock{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.totalItems h3{
+    margin-left: 10px;
+
+}
+
+.totalItems p{
+    float: right;
+    margin-bottom: 50px;
+}
+
+
+.itemWrap{
+    text-align: left;
+}
+
+
+/********************문의하기(inquiry.html)********************/
+
+
+.inquiryBox{
+    width: 1100px;
+    min-height:400px;
+    margin-bottom: 45px;
+    clear:left;
+}
+
+.inquiryBox1{
+    margin-bottom: 50px;
+}
+
+.inquiryBox h3{
+    text-align: left;
+    margin: 20px;
+}
+
+.inquiryBox2 p{
+    margin-left: 30px;
+    color: grey;
+}
+
+.btn_black_inquiry_btn1,
+.btn_black_inquiry_write{
+    display: flex;
+    width: 800px;
+    height: 40px;
+    background: black;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    padding: 0px 350px;
+    cursor: pointer;
+
+}
+
+
+/********************1:1 문의하기(inquiry_write.html)********************/
+
+
+.inquiry_type1{
+    
+}
+
+.inquiryBox h2{
+    text-align: center;
+}
+
+.inquiryBox2{
+    display: inline-block;
+}
+
+.inquiryBox2 p{
+    margin-left: 30px;
+}
+
+.inquiry_contents{
+    float: left;
+    width: 1020px;
+    height: 200px;
+    white-space: nowrap;
+    margin:0px 0px 10px 30px
+}
+
+.inquiry_type1_wrap{
+    margin-left: 30px;
+}
+
+
+/********************주문하기(order_form.html)********************/
+
+.order_wrap{
+    margin: 0px 250px 100px 250px;
+}
+
+.order_form{
+    float: left;
+    width: 900px;
+    min-height: 1000px;
+    background: pink;
+    display: inline-block;
+}
+
+.orderer_info,
+.recipient_info,
+.address_info,
+.pay_info{
+    margin: 0px 0px 50px 20px;
+
+}
+
+
+.info{
+    border-top: 1px solid black;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.div2{
+    display: inline-block;
+    background: white;
+    padding: 2px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.total_pay{
+    float: right;
+    width: 400px;
+    min-height: 1000px;
+    background: skyblue;
+    display: inline-block;
+}
+
+/********************footer********************/
+.footerBox{
+    clear: both;
+    background: black;
+    text-align: left;
+    padding: 50px;
+
+}
+
+
+.footerBox h3, li, a{
+    color: #fff;
+}
+
+.footerBox h3{
+    margin-left: 40px;
+}
+
+.inquiry{
+    float: left;
+    width: 300px;
+    height: 100px;
+}
+
+.cs{
+    width: 300px;
+    height: 100px;
+}
+
+
+
+
+
+
