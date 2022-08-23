@@ -54,4 +54,10 @@ public class UserUtil {
 
         return savedUser;
     }
+
+    public User createUser(int point) {
+        User user = createUser();
+        user.getShoppingData().changePointAmount(point);
+        return user;
+    }
 }

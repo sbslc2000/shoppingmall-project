@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService{
     @Transactional
     public User create(UserForm userForm) {
         /*중복회원처리*/
-        userRepository.findByUser_Id(userForm)
+        userRepository.findByUserId(userForm.getUserId())
                 .ifPresent(u -> {
                     throw new IllegalStateException("이미 존재하는 아이디입니다.");
                 });

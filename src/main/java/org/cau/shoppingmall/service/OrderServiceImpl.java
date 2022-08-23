@@ -87,7 +87,7 @@ public class OrderServiceImpl implements OrderService{
                 throw new IllegalArgumentException("재고보다 구매량이 많습니다.");
             }
 
-            sumOfPrice += item.getPrice();
+            sumOfPrice += item.getPrice()*itemForm.getQuantity();
             OrderedItem buildedOrderedItem = new OrderedItem().builder()
                     .color(colorRepository.findById(itemForm.getColorId()).get())
                     .item(item)

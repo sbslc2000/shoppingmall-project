@@ -2,6 +2,7 @@ package org.cau.shoppingmall.util;
 
 import org.cau.shoppingmall.dto.orders.OrderForm;
 import org.cau.shoppingmall.dto.orders.OrderedItemForm;
+import org.cau.shoppingmall.entity.item.OrderedItem;
 import org.cau.shoppingmall.entity.order.Orders;
 import org.cau.shoppingmall.entity.user.User;
 import org.cau.shoppingmall.repository.OrderProcessRepository;
@@ -37,5 +38,15 @@ public class OrderUtil {
 
         return orderForm;
 
+    }
+
+    public OrderedItemForm createOrderedItemForm(Long itemId, Long colorId, Long sizeId, int quantity) {
+        OrderedItemForm orderedItemForm = new OrderedItemForm();
+        orderedItemForm.setItemId(itemId);
+        orderedItemForm.setColorId(colorId);
+        orderedItemForm.setSizeId(sizeId);
+        orderedItemForm.setQuantity(quantity);
+
+        return orderedItemForm;
     }
 }

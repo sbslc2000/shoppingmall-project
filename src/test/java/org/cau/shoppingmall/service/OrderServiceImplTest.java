@@ -62,12 +62,9 @@ class OrderServiceImplTest {
         int beforeItemQuantity = item.getQuantity();
         //stockdetails q:40, color_id = 1 , size_id = 3
 
-        OrderedItemForm orderedItemForm1 = new OrderedItemForm();
-        orderedItemForm1.setItemId(1L);
-        orderedItemForm1.setColorId(1L);
-        orderedItemForm1.setSizeId(3L);
-        orderedItemForm1.setQuantity(3);
-        orderedItemFormList.add(orderedItemForm1);
+
+        OrderedItemForm orderedItemForm = orderUtil.createOrderedItemForm(1L, 1L, 3L, 3);
+        orderedItemFormList.add(orderedItemForm);
 
         OrderForm orderForm = orderUtil.createOrderForm(orderedItemFormList);
 
@@ -87,7 +84,7 @@ class OrderServiceImplTest {
         }
 
         assertThat(findOrder.getOrderedItemList().size()).isEqualTo(1);
-        assertThat(findOrder.getPayment().getPaymentPrice()).isEqualTo(item.getPrice());
+        assertThat(findOrder.getPayment().getPaymentPrice()).isEqualTo(item.getPrice()* orderForm.getOrderedItemList().get(0).getQuantity());
         assertThat(findOrder.getPayment().isCashReceiptFlag()).isFalse();
         assertThat(beforeStockCount - afterStockCount).isEqualTo(salesCount);
         assertThat(findUser.getPoint()).isEqualTo((int) Math.round(order.getPayment().getPaymentPrice()*0.05));
@@ -100,11 +97,17 @@ class OrderServiceImplTest {
     @Test
     @DisplayName("포인트 사용 테스트")
     void pointUseTest() {
+        User user = userUtil.createUser(20000);
+
+        List<OrderedItemForm> orderedItemFormList = new ArrayList<>();
+
+        Item item = itemRepository.findById(1L).get();
+        OrderedItemForm orderedItemForm = orderUtil.createOrderedItemForm(1L, 1L, 3L, 3);
+        orderedItemFormList.add(orderedItemForm);
+
+       
 
     }
-
-    @Test
-    @DisplayName()
 
 
 }
