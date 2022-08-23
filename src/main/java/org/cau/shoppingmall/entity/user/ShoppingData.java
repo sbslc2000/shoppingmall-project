@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import org.cau.shoppingmall.entityinterface.ShoppingmallDataInterface;
+import org.cau.shoppingmall.entityinterface.ShoppingDataInterface;
 
 
 import javax.persistence.*;
@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ShoppingData implements ShoppingmallDataInterface {
+public class ShoppingData implements ShoppingDataInterface {
 
 
     @Id
