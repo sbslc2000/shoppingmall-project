@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Builder
 @Entity
@@ -19,9 +20,9 @@ public class AccountData {
     private Long id;
 
     @Column(name = "late_date")
-    private int lateDate;
+    private LocalDateTime lateDate;
 
     @Column(name = "register_date")
-    private int registerDate;
+    private LocalDateTime registerDate;
 
 }

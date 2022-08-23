@@ -4,16 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.cau.shoppingmall.entityinterface.ShoppingDataInterface;
+
+import org.cau.shoppingmall.entityinterface.ShoppingmallDataInterface;
+
 
 import javax.persistence.*;
 
 @Builder
 @Entity
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
-public class ShoppingData implements ShoppingDataInterface {
+@NoArgsConstructor
+public class ShoppingData implements ShoppingmallDataInterface {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
