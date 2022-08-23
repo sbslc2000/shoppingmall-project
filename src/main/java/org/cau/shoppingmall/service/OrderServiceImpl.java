@@ -10,6 +10,8 @@ import org.cau.shoppingmall.entity.item.StockDetails;
 import org.cau.shoppingmall.entity.order.*;
 import org.cau.shoppingmall.entity.user.User;
 import org.cau.shoppingmall.repository.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +25,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService{
 
-
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final ItemRepository itemRepository;
     private final OrdersRepository orderRepository;
     private final OrderProcessRepository orderProcessRepository;
@@ -33,6 +35,7 @@ public class OrderServiceImpl implements OrderService{
     private final StockDetailsRepository stockDetailsRepository;
     private final ColorRepository colorRepository;
     private final SizeRepository sizeRepository;
+    private final PaymentRepository paymentRepository;
 
     /*
         Order createOrder : 사용자에게 입력받은 정보를 토대로 주문을 등록한다.
@@ -95,12 +98,14 @@ public class OrderServiceImpl implements OrderService{
                     .quantity(itemForm.getQuantity())
                     .build();
 
-            orderedItemRepository.save(buildedOrderedItem);
+            OrderedItem savedOrderedItem = orderedItemRepository.save(buildedOrderedItem);
+            orderedItemList.add(savedOrderedItem);
         }
 
         CashReceipt cashReceipt = form.isCashReceiptFlag() ? form.createCashReceipt() : null;
         Payment payment = form.createPayment(paymentMethod, sumOfPrice - form.getPointUsed(), cashReceipt);
-        Orders order = form.toEntity(user, orderProcess, payment);
+        Payment savedPayment = paymentRepository.save(payment);
+        Orders order = form.toEntity(user, orderProcess, savedPayment);
 
         Orders result = orderRepository.save(order);
 
@@ -110,6 +115,7 @@ public class OrderServiceImpl implements OrderService{
         user.getShoppingData().changePointAmount((int) Math.round(result.getPayment().getPaymentPrice()*0.05));
 
         for(OrderedItem oItem : orderedItemList) {
+            oItem.setOrder(result);
             Item item = itemRepository.findById(oItem.getItem().getId()).get();
             item.raiseSales(oItem.getQuantity());
             item.changeQuantity(-oItem.getQuantity());

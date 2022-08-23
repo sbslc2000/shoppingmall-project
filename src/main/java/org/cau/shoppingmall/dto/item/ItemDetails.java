@@ -1,7 +1,9 @@
 package org.cau.shoppingmall.dto.item;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 
@@ -11,15 +13,12 @@ import javax.persistence.Embeddable;
 @Embeddable
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ItemDetails{
-
-    private Long itemId;
 
     private Long colorId;
 
     private Long sizeId;
 
-    public ItemDetails() {
-
-    }
 }

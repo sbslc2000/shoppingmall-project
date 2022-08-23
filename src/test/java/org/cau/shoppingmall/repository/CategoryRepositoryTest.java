@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-@SpringBootTest
+//@SpringBootTest
 class CategoryRepositoryTest {
 
     @Autowired
@@ -19,7 +19,7 @@ class CategoryRepositoryTest {
     @Autowired
     private SizeRepository sizeRepository;
 
-    @Test
+   //@Test
     void insertSize() {
         Size m = new Size().builder()
                 .name("M")

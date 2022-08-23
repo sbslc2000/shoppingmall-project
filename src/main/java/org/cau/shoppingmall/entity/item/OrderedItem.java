@@ -43,6 +43,7 @@ public class OrderedItem {
         }
 
         this.order = order;
+        System.out.println("add this in OrderedItemList!");
         order.getOrderedItemList().add(this);
     }
 

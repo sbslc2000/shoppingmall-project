@@ -54,7 +54,7 @@ public class ReviewServiceImpl implements ReviewService {
             for(OrderedItem orderedItem : orderedItemList) {
                 if(orderedItem.getColor().getId() == savedReview.getItemDetails().getColorId()
                 && orderedItem.getSize().getId() == savedReview.getItemDetails().getSizeId()
-                && orderedItem.getItem().getId() == savedReview.getItemDetails().getItemId()) {
+                && orderedItem.getItem().getId() == savedReview.getItem().getId()) {
                     orderedItem.setTrueAtReviewFlag();
                     find = true;
                 }

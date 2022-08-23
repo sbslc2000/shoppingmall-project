@@ -1,13 +1,19 @@
 package org.cau.shoppingmall.entity.user;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import org.cau.shoppingmall.entityinterface.ShoppingmallDataInterface;
+import lombok.NoArgsConstructor;
+import org.cau.shoppingmall.entityinterface.ShoppingDataInterface;
 
 import javax.persistence.*;
 
+@Builder
 @Entity
 @Getter
-public class ShoppingData implements ShoppingmallDataInterface {
+@NoArgsConstructor
+@AllArgsConstructor
+public class ShoppingData implements ShoppingDataInterface {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +41,7 @@ public class ShoppingData implements ShoppingmallDataInterface {
 
     @Override
     public void changePointAmount(int amount) {
-
+        this.point += amount;
     }
 
     @Override

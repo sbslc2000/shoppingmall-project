@@ -53,7 +53,7 @@ public class User implements UserInterface {
 
     @Override
     public int getPoint() {
-        return 0;
+        return shoppingData.getPoint();
     }
 
 }
