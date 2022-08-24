@@ -102,10 +102,16 @@ class OrderServiceImplTest {
         List<OrderedItemForm> orderedItemFormList = new ArrayList<>();
 
         Item item = itemRepository.findById(1L).get();
-        OrderedItemForm orderedItemForm = orderUtil.createOrderedItemForm(1L, 1L, 3L, 3);
+        OrderedItemForm orderedItemForm = orderUtil.createOrderedItemForm(item.getId(), 1L, 3L, 3);
         orderedItemFormList.add(orderedItemForm);
 
-       
+        OrderForm orderForm = orderUtil.createOrderForm(orderedItemFormList,20000);
+
+        Orders order = orderService.create(orderForm, user.getId());
+
+
+        assertThat(order.getPayment().getPaymentPrice()).isEqualTo(39000*3 - 20000);
+        assertThat(user.getPoint()).isEqualTo(4850);
 
     }
 

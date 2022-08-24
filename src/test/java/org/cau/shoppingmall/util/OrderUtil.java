@@ -37,7 +37,27 @@ public class OrderUtil {
                 .build();
 
         return orderForm;
+    }
 
+    public OrderForm createOrderForm(List<OrderedItemForm> orderedItemFormList,int pointUsed) {
+        OrderForm orderForm = OrderForm.builder()
+                .orderedItemList(orderedItemFormList)
+                .ordererName("테스트용 주문자")
+                .ordererContact("테스트용 주문자 연락처")
+                .recipientName("테스트용 수령자")
+                .recipientContact("테스트용 수령자 연락처")
+                .shippingRequirement("테스트용 배송시 요구사항")
+                .locationCode("15980")
+                .location("서울특별시 동작구 흑석로 84")
+                .locationDetail("310관 826호")
+                .termsAndConditionsAccepted(true)
+                .orderedItems(orderedItemFormList.size())
+                .pointUsed(pointUsed)
+                .paymentMethod(1L)
+                .cashReceiptFlag(false)
+                .build();
+
+        return orderForm;
     }
 
     public OrderedItemForm createOrderedItemForm(Long itemId, Long colorId, Long sizeId, int quantity) {

@@ -110,7 +110,7 @@ public class OrderServiceImpl implements OrderService{
         Orders result = orderRepository.save(order);
 
         //db update
-        user.getShoppingData().changePointAmount(result.getPayment().getPointUsed());
+        user.getShoppingData().changePointAmount(-result.getPayment().getPointUsed());
         user.getShoppingData().raiseSalesCount();
         user.getShoppingData().changePointAmount((int) Math.round(result.getPayment().getPaymentPrice()*0.05));
 
