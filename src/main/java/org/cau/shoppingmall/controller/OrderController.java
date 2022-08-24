@@ -6,28 +6,33 @@ import org.cau.shoppingmall.service.OrderService;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
 import java.util.List;
 
-@Controller("/order")
+@EnableWebMvc
+@Controller
+@RequestMapping("/order")
 @RequiredArgsConstructor
 public class OrderController {
 
     private final OrderService orderService;
 
 
-    @GetMapping
+    @PostMapping
     public String orderForm(Model model,
-                            @RequestParam List<OrderItem> orderItemList) {
+                            @ModelAttribute(value = "orderItem") OrderItem orderItemList) {
 
-        for(OrderItem orderItem: orderItemList) {
+
+        for (OrderItem orderItem : orderItemList.getOrderItemList()) {
+            System.out.println(orderItem.getColorId());
             orderService.setNameData(orderItem);
         }
 
-        model.addAttribute("orderItems",orderItemList);
+        model.addAttribute("orderItems",orderItemList.getOrderItemList());
 
-        return "order/order-form";
+        return "order/order_form";
 
 
 

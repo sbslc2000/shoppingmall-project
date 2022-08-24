@@ -37,7 +37,7 @@
 
 <body class="container">
     <h2>SHOPPING MALL</h2>
-    <form action="" accept-charset="utf-8" name="join" method="get">
+    <form th:action="@{/users}" accept-charset="utf-8" name="join" method="post">
         <div class="container text-center">
             <div class="row align-items-start">
                 <div class="col-4">
@@ -55,7 +55,7 @@
                 <div class="col-4"></div>
                 <div class="col-3">
                     <label for="idinput" class="form-label">아이디</label>
-                    <input type="text" class="form-control" id="idinput" placeholder="영문 소문자, 숫자만 사용 가능">
+                    <input name="userId" type="text" class="form-control" id="idinput" placeholder="영문 소문자, 숫자만 사용 가능">
 
                 </div>
                 <div class="col-2" id="doublecheck">

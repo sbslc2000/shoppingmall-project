@@ -2,6 +2,7 @@ package org.cau.shoppingmall.service;
 
 import org.cau.shoppingmall.dto.Users.UserDto;
 import org.cau.shoppingmall.dto.Users.UserForm;
+import org.cau.shoppingmall.dto.Users.UserUpdateForm;
 import org.cau.shoppingmall.entity.user.User;
 
 public interface UserService {
@@ -32,7 +33,7 @@ public interface UserService {
     DB 변경사항:
     -User entity에 해당하는 내용 변경
     */
-    User update(Long userId, UserForm form);
+    User update(Long userId, UserUpdateForm form) throws Exception;
 
     /*
     User delete : 사용자에게 삭제 요청을 받은 유저 정보를 삭제한다
@@ -42,7 +43,7 @@ public interface UserService {
     DB 변경사항:
     -User 삭제
     */
-    User delete(Long userId);
+    void delete(Long userId);
 
 
 }

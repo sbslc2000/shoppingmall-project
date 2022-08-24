@@ -17,8 +17,8 @@ import javax.persistence.Embeddable;
 @AllArgsConstructor
 public class ItemDetails{
 
-    private String colorName;
+    private Long colorId;
 
-    private String sizeName;
+    private Long sizeId;
 
 }

@@ -3,7 +3,9 @@ package org.cau.shoppingmall.service;
 import lombok.RequiredArgsConstructor;
 import org.cau.shoppingmall.dto.Users.UserDto;
 import org.cau.shoppingmall.dto.Users.UserForm;
+import org.cau.shoppingmall.dto.Users.UserUpdateForm;
 import org.cau.shoppingmall.entity.user.AccountData;
+import org.cau.shoppingmall.entity.user.Authority;
 import org.cau.shoppingmall.entity.user.ShoppingData;
 import org.cau.shoppingmall.entity.user.User;
 import org.cau.shoppingmall.repository.AccountDataRepository;
@@ -45,6 +47,7 @@ public class UserServiceImpl implements UserService{
                 .likes(0)
                 .reviews(0)
                 .build();
+
         ShoppingData savedShoppingData = shoppingDataRepository.save(buildedShoppingData);
 
         AccountData buildedAccountData = new AccountData().builder()
@@ -53,6 +56,8 @@ public class UserServiceImpl implements UserService{
                 .build();
         AccountData savedAccountData = accountDataRepository.save(buildedAccountData);
 
+
+        Authority authority = authorityRepository.findById(1L).get();
         User createUser = new User().builder()
                 .userId(userForm.getUserId())
                 .password(userForm.getPassword())
@@ -62,7 +67,7 @@ public class UserServiceImpl implements UserService{
                 .address(userForm.getAddress())
                 .shoppingData(savedShoppingData)
                 .accountData(savedAccountData)
-                //.authority()
+                .authority(authority)
                 .build();
 
         User result = userRepository.save(createUser);
@@ -86,7 +91,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User update(Long userId, UserForm form) {
+    public User update(Long userId, UserUpdateForm form) throws Exception {
 
         // 존재하는 유저인지 확인
         Optional<User> findUser = userRepository.findById(userId);
@@ -95,31 +100,26 @@ public class UserServiceImpl implements UserService{
         if (findUser.isPresent()) {
             users = findUser.get();
 
-            //if not userId same: exception
-            User user = userRepository.findById(userId).orElseThrow(() ->
-                    new NoSuchElementException("해당하는 사용자가 없습니다."));
+            users.update(form);
+        } else {
+            throw new NoSuchElementException("해당하는 사용자가 없습니다.");
         }
-        User savedUser = userRepository.save(users);
 
-        return savedUser;
+        return users;
     }
 
     @Override
-    public User delete(Long userId) {
+    public void delete(Long userId) {
 
         Optional<User> findUser = userRepository.findById(userId);
 
         User users = null;
         if (findUser.isPresent()) {
             users = findUser.get();
+            userRepository.delete(users);
 
-            //if not userId same: exception
-            User user = userRepository.findById(userId).orElseThrow(() ->
-                    new NoSuchElementException("해당하는 사용자가 없습니다."));
+        } else {
+            throw new NoSuchElementException("해당하는 사용자가 없습니다.");
         }
-
-        userRepository.delete(users);
-
-        return null;
     }
 }

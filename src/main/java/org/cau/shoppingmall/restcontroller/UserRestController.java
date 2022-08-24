@@ -2,12 +2,18 @@ package org.cau.shoppingmall.restcontroller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.cau.shoppingmall.dto.Users.UserDto;
 import org.cau.shoppingmall.dto.Users.UserForm;
+import org.cau.shoppingmall.dto.Users.UserUpdateForm;
 import org.cau.shoppingmall.dto.orders.OrderDto;
 import org.cau.shoppingmall.service.UserService;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+
+// 사용자 url -> controller 찾음 -> 비즈니스로직 -> 페이지(뷰렌더링), 데이터(데이터 던져주는데)
 
 @RestController
 @RequestMapping("api/users")
@@ -18,20 +24,20 @@ public class UserRestController {
     private final UserService userService;
 
     // 유저 정보 추가
-    @PostMapping("/user/new")
-    @ApiOperation(value = "유저 회원가입", notes = "UserForm 형태를 전송하면 유저 정보가 등록됩니다.")
-    public void insert(@RequestParam UserForm userForm){
-        userService.create(userForm);
-    }
+
 
     // 유저 수정
     @PutMapping("/user/{id}")
     @ApiOperation(value = "유저 정보 업데이트", notes = "UserId와 UserForm 형태를 전송하면 유저 정보가 변경됩니다..")
     public void updateUser(
-            @PathVariable("userId") Long userId,
-            @RequestParam UserForm userForm){
-
-        userService.update(userId, userForm);
+            HttpSession session,
+            @RequestParam UserUpdateForm userForm){
+        Long userId = 1L;
+        try{
+            userService.update(userId, userForm);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // 유저 상세
@@ -49,5 +55,13 @@ public class UserRestController {
         userService.delete(userId);
     }
 
-
+    @PostMapping("/isDuplicate")
+    @ApiOperation(value = "회원 아이디 중복 검사", notes = "id를 전송하면 중복된 아이디인지에 대한 결과를 반환한다.\n" +
+            "true : 중복, false : 중복아님")
+    public boolean isDuplicateUsername(
+            @ApiParam(value = "유저 아이디",example = "sbslc2000")
+            @RequestParam("username") String username
+    ) {
+        return false;
+    }
 }

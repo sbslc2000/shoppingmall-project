@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" th:href="@{/yunju_style.css}">
+    </head>
+    <body>
+        <header>
+            <div class="banner">
+                <h1>우당탕탕 개발자</h1>
+                <a href="home.html"></a>
+            </div>
+        </header>
+
+        <div class="inquiryBox">
+            <h2>1:1 문의하기</h2>
+            <form th:action="@{/test/inquiry/oneToOne}"  th:object="${oneToOneInquiryForm}" method="post">
+            <div class="inquiryBox1">
+                <h3>문의 유형</h3>
+                <div class="inquiry_type1_wrap">
+                    <select id="inquiry_type1" th:field="*{type}" required>
+                        <option value="선택해주세요" selected>선택해주세요</option>
+                        <option th:value="1">배송</option>
+                        <option th:value="2">엣지</option>
+                        <option th:value="3">주문/결제</option>
+                        <option th:value="4">교환/반품</option>
+                        <option th:value="5">회원</option>
+                        <option th:value="6">기타</option>
+                    </select>
+                </div>
+                <div class="inquiryType2"></div>
+            </div>
+            <div class="inquiryBox2">
+                <h3>문의 내용</h3>
+                <input class="inquiry_contents" size="2000" placeholder="내용을 입력해주세요(2,000자 이내)" onfocus="this.placeholder=''" onblur="this.placeholder='내용을 입력해주세요(2,000자 이내)'" th:field="*{content}">
+                <br>
+                <input type="file" id="pic_upload" class="pic_upload" accept="img/*" required multiple style="margin:0px 0px 30px 30px">
+            </div>
+            <button onclick="location.href='#.html'" type="submit" class="btn_black_inquiry_write">문의 등록하기</button>
+            </form>
+        </div>
+        
+
+        <footer>
+            <div class="footerBox">
+                <div class="inquiry">
+                    <h3>문의</h3>
+                    <ul>
+                        <li><a href="">공지사항</a></li>
+                        <li><a href="inquiry.html">1:1문의</a></li>
+                    </ul>
+                </div>
+                <div class="cs">
+                    <h3>고객센터</h3>
+                    <ul>
+                        <li>전화: 0000_0000</li>
+                        <li>메일: 0000@gmail.com</li>
+                        <li>평일 10:00 ~ 17:00</li>
+                    </ul>
+                </div>
+                <div class="box">
+                    
+                </div>
+            </div>
+        </footer>
+
+        <script scr="script.js"></script>
+    </body>
+
+</html>
+
+        

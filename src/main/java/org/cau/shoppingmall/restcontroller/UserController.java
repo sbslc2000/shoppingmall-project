@@ -20,34 +20,36 @@ public class UserController {
 
     private final UserService userService;
 
-    //회원가입 페이지
-    @PostMapping
-    @ApiOperation(value = "회원 등록",notes= "memberForm 과 함께 넘겨주면 회원 가입을 진행합니다.")
-    public UserDto newUser(
-        @ApiParam(value = "UserForm")
-        @ModelAttribute UserForm userForm
-        ) {
-             User user = userService.create(userForm);
-             UserDto result = UserDto.of(user);
 
-             return result;
-        }
+    @PostMapping
+    @ApiOperation(value = "유저 회원가입", notes = "UserForm 형태를 전송하면 유저 정보가 등록됩니다.")
+    public void insert(@RequestParam UserForm userForm){
+        userService.create(userForm);
+    }
+
+    //회원가입 페이지
+    @GetMapping
+    public String joinPage() {
+        //view Resolver
+
+        return "user/join";
+    }
+
+    @GetMapping("/login")
+    public String loginPage() {
+
+
+        return "user/login";
+    }
+
+
 
     //유저 상세보기
-    @GetMapping("{id}")
+    @GetMapping("{/id}")
     public String getUser(@PathVariable Long userId){
 
         return "user/detail";
     }
 
-    @ResponseBody
-    @PostMapping("/isDuplicate")
-    @ApiOperation(value = "회원 아이디 중복 검사", notes = "id를 전송하면 중복된 아이디인지에 대한 결과를 반환한다.\n" +
-            "true : 중복, false : 중복아님")
-    public boolean isDuplicateUsername(
-            @ApiParam(value = "유저 아이디",example = "sbslc2000")
-            @RequestParam("username") String username
-    ) {
-        return false;
-    }
+
 }

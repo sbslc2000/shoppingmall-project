@@ -87,21 +87,54 @@ function addSelect() {
 
 function goBuyPage() {
 
-    var url = "http://shoppingmall.ddnsking.com/order?"
+    var form = document.createElement('form');
+    form.setAttribute("method","post");
+    form.setAttribute("action","http://shoppingmall.ddnsking.com/order");
+    document.characterSet="utf-8";
 
-    let selectedItems = document.getElementById("selectedItems");
-    let itemDetailsList = selectedItems.getElementsByClassName("itemDetails");
+    let selectedItemTag = document.getElementById("selectedItems");
+    let itemDetailsList = selectedItemTag.getElementsByClassName("itemDetails");
 
-    var i = 0;
-    for(var selectedItemTag in itemDetailsList) {
-        url += "orderItem["+i+"].itemId="+"#itemId(uri에서가져온다)"+"&";
-        url += "orderItem["+i+"].colorId="+selectedItemTag.getElementsByTag+"&";
-        url += "orderItem["+i+"].quantity="+selectedItemTag.getElementsByTagName("count").innerHTML+"&";
-        url += "orderItem["+i+"].sizeId="+"#sizeId(option에서 parsing해서 가져온다)  "+"&";
+    for (var i = 0; i < itemDetailsList.length; i++) {
+        let splitedOption = itemDetailsList.item(i).getElementsByClassName("option")[0].innerHTML.split("/");
+        var colorId = colorToId(splitedOption[0].trim());
+        //console.log(colorId);
+        var sizeId = sizeToId(splitedOption[1].trim());
+        //console.log(sizeId);
+        let quantity = itemDetailsList.item(i).getElementsByClassName("count")[0].innerHTML;
+
+
+
+        var colorField = document.createElement("input");
+        colorField.setAttribute("type","hidden");
+        colorField.setAttribute("name","orderItemList["+i+"].colorId")
+        colorField.setAttribute("value",colorId);
+
+        var sizeField = document.createElement("input");
+        sizeField.setAttribute("type","hidden");
+        sizeField.setAttribute("name","orderItemList["+i+"].sizeId")
+        sizeField.setAttribute("value",sizeId);
+
+        var itemField = document.createElement("input");
+        itemField.setAttribute("type","hidden");
+        itemField.setAttribute("name","orderItemList["+i+"].itemId")
+        itemField.setAttribute("value",1);
+
+        var quantityField = document.createElement("input");
+        quantityField.setAttribute("type","hidden");
+        quantityField.setAttribute("name","orderItemList["+i+"].quantity")
+        quantityField.setAttribute("value",quantity);
+
+        form.appendChild(colorField);
+        form.appendChild(sizeField);
+        form.appendChild(itemField);
+        form.appendChild(quantityField);
+
     }
 
-    location.href = url;
 
+    document.body.appendChild(form);
+    form.submit();
 
 
 }

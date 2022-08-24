@@ -11,11 +11,11 @@ import javax.persistence.Id;
 @Data
 public class UserForm {
 
-    private Long id;
-
     private String userId;
 
     private String password;
+
+    private String confirmPassword;
 
     private String userName;
 
