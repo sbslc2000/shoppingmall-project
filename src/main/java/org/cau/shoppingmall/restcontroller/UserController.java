@@ -4,8 +4,13 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
+import org.cau.shoppingmall.dto.Users.UserDto;
+import org.cau.shoppingmall.dto.Users.UserForm;
+import org.cau.shoppingmall.entity.user.User;
+import org.cau.shoppingmall.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 
 @Controller
 @RequestMapping("/users")
@@ -13,11 +18,26 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserController {
 
+    private final UserService userService;
+
+    //회원가입 페이지
     @PostMapping
     @ApiOperation(value = "회원 등록",notes= "memberForm 과 함께 넘겨주면 회원 가입을 진행합니다.")
-    public String createUser(
-    ) {
-        return null;
+    public UserDto newUser(
+        @ApiParam(value = "UserForm")
+        @ModelAttribute UserForm userForm
+        ) {
+             User user = userService.create(userForm);
+             UserDto result = UserDto.of(user);
+
+             return result;
+        }
+
+    //유저 상세보기
+    @GetMapping("{id}")
+    public String getUser(@PathVariable Long userId){
+
+        return "user/detail";
     }
 
     @ResponseBody
