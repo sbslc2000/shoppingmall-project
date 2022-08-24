@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="yunju_style.css">
+    </head>
+    <body>
+        <header>
+            <div class="banner">
+                <h1>우당탕탕 개발자</h1>
+                <a href="home.html"></a>
+            </div>
+            <div class="searchArea">
+                <form>
+                    <input type="search" placeholder="원하는 상품을 검색해주세요">
+                </form>
+            </div>
+
+            <form action="#" name="#" method="get">
+                <fieldset style="width:150px">
+                    <legend>교환 사유</legend>
+                        <div class="pay_with_btn">
+                            <div class="div2">색상/사이즈 변경</div>
+                            <div class="div2">주문 실수</div>
+                            <div class="div2">파손 및 불량</div>
+                            <div class="div2">오배송</div>
+                    </div>
+                    <div class="inquiryBox2">
+                        <h3>상세 사유 입력</h3>
+                        <input class="inquiry_contents" size="2000" placeholder="내용을 입력해주세요(2,000자 이내)" onfocus="this.placeholder=''" onblur="this.placeholder='내용을 입력해주세요(2,000자 이내)'" name="inquiry_contents">
+                        <br>
+                        <input type="file" id="pic_upload" class="pic_upload" accept="img/*" required multiple style="margin:0px 0px 30px 30px">
+                    </div>
+                    <button onclick="location.href='#.html'" type="button" class="btn_black_inquiry_write">문의 등록하기</button>
+                    
+                    <div class="return_method">
+                        <h3>상품 수거</h3>
+                        <div class="orderer_info">
+                            <h4>주문자</h4>
+                            <div class="info">
+                                <div class="name">
+                                    <span>이름 <span id="orderer_name"> </span></span>
+                                    <input type="text" class="form-control" id="nameinput">
+                                </div>
+                                <div class="phone">
+                                    <span>연락처 <span id="orderder_phone"></span></span>
+                                    <input type="text" class="form-control" name="phone" id="phoneinput" placeholder="(-없이 입력)">
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="recipient_info">
+                            <h4>수령인</h4>
+                            <div class="info">
+                                <div class="name">
+                                    <span>이름 <span id="recipient_name"> </span></span>
+                                    <input type="text" class="form-control" id="nameinput">
+                                </div>
+                                <div class="phone">
+                                    <span>연락처 <span id="recipient_phone"></span></span>
+                                    <input type="text" class="form-control" name="phone" id="phoneinput" placeholder="(-없이 입력)">
+                                </div>
+                                <div class="form-check">
+        
+                                    <input class="form-check-input" type="checkbox" value="" id="agreeform">
+                                    <label class="form-check-label" for="agreeform">
+                                    주문자 정보와 동일
+                                     </label>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="address_info">
+                            <h4>배송지</h4>
+                            <div class="info">
+                                <div class="zipcode">
+                                    <span>우편번호</span> <span id="zipcode"> </span></span>
+                                    <button type="button" class="btn btn-outline-primary" id="findnum" onclick="location.href='home.html'">우편번호 찾기</button></a>
+                                </div>
+                                <div class="address">
+                                    <span>주소</span>
+                                    <input type="text" class="form-control" placeholder="" id="address"><br>
+                                </div>
+                                <div class="address_detail">
+                                    <span>상세주소</span>
+                                    <input type="text" class="form-control" placeholder="상세주소를 입력해주세요" id="detailaddress">
+                                </div>
+                                <div class="request">
+                                    <span>요청사항</span>
+                                    <input type="text" class="form-control" placeholder="요청사항을 입력해주세요" id="request">
+                                </div>
+                            </div>
+                        </div>
+        
+                    </div>
+
+                    <div class="return_method">
+                        <h3>수거지</h3>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <footer>
+            <div class="footerBox">
+                <div class="inquiry">
+                    <h3>문의</h3>
+                    <ul>
+                        <li><a href="">공지사항</a></li>
+                        <li><a href="inquiry.html">1:1문의</a></li>
+                    </ul>
+                </div>
+                <div class="cs">
+                    <h3>고객센터</h3>
+                    <ul>
+                        <li>전화: 0000-0000</li>
+                        <li>메일: 0000@gmail.com</li>
+                        <li>평일 10:00 ~ 17:00</li>
+                    </ul>
+                </div>
+                <div class="box">
+                    
+                </div>
+            </div>
+        </footer>
+
+        <script scr="script.js"></script>
+    </body>
+
+</html>
+
+        
