@@ -3,10 +3,9 @@ package org.cau.shoppingmall.service;
 import lombok.RequiredArgsConstructor;
 import org.cau.shoppingmall.dto.orders.OrderForm;
 import org.cau.shoppingmall.dto.orders.OrderDto;
+import org.cau.shoppingmall.dto.orders.OrderItem;
 import org.cau.shoppingmall.dto.orders.OrderedItemForm;
-import org.cau.shoppingmall.entity.item.Item;
-import org.cau.shoppingmall.entity.item.OrderedItem;
-import org.cau.shoppingmall.entity.item.StockDetails;
+import org.cau.shoppingmall.entity.item.*;
 import org.cau.shoppingmall.entity.order.*;
 import org.cau.shoppingmall.entity.user.User;
 import org.cau.shoppingmall.repository.*;
@@ -150,5 +149,27 @@ public class OrderServiceImpl implements OrderService{
         } else {
             throw new NoSuchElementException("해당하는 주문정보가 없습니다.");
         }
+    }
+
+    @Override
+    public void setNameData(OrderItem orderItem) {
+
+
+        Item item = itemRepository.findById(orderItem.getItemId()).orElseThrow(
+                () -> new NoSuchElementException("해당하는 상품이 없습니다.")
+        );
+
+        Color color = colorRepository.findById(orderItem.getColorId()).orElseThrow(
+                () -> new NoSuchElementException("해당하는 색상이 없습니다..")
+        );
+
+        Size size = sizeRepository.findById(orderItem.getSizeId()).orElseThrow(
+                () -> new NoSuchElementException("해당하는 사이즈가 없습니다.")
+        );
+
+        orderItem.setItemName(item.getName());
+        orderItem.setColorName(color.getName());
+        orderItem.setSizeName(size.getName());
+        orderItem.setPrice(orderItem.getQuantity()*item.getPrice());
     }
 }

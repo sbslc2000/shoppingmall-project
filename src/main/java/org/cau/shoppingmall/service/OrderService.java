@@ -3,6 +3,7 @@ package org.cau.shoppingmall.service;
 import org.cau.shoppingmall.dto.orders.OrderForm;
 import org.cau.shoppingmall.dto.orders.OrderDto;
 
+import org.cau.shoppingmall.dto.orders.OrderItem;
 import org.cau.shoppingmall.entity.order.Orders;
 
 
@@ -45,4 +46,6 @@ public interface OrderService {
     * - 사용자가 일반사용자라면 : Order 의 userId 와 비교해서 같은 경우만 반환
     * */
     OrderDto get(Long orderId,Long userId) throws Exception;
+
+    void setNameData(OrderItem orderItem);
 }

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Embeddable;
 
 /*
-* Review의 아이템 정보를 다룰때 사용
+* Review의 아이템 정보를 가져올 때 사용
 * */
 @Embeddable
 @Builder
@@ -17,8 +17,8 @@ import javax.persistence.Embeddable;
 @AllArgsConstructor
 public class ItemDetails{
 
-    private Long colorId;
+    private String colorName;
 
-    private Long sizeId;
+    private String sizeName;
 
 }
