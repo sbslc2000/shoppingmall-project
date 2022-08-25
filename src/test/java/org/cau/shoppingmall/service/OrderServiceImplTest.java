@@ -1,15 +1,14 @@
 package org.cau.shoppingmall.service;
 
-import org.assertj.core.api.Assertions;
 import org.cau.shoppingmall.dto.orders.OrderForm;
 import org.cau.shoppingmall.dto.orders.OrderedItemForm;
 import org.cau.shoppingmall.entity.item.Item;
 import org.cau.shoppingmall.entity.item.OrderedItem;
 import org.cau.shoppingmall.entity.order.Orders;
 import org.cau.shoppingmall.entity.user.User;
-import org.cau.shoppingmall.repository.ItemRepository;
-import org.cau.shoppingmall.repository.OrderedItemRepository;
-import org.cau.shoppingmall.repository.OrdersRepository;
+import org.cau.shoppingmall.repository.item.ItemRepository;
+import org.cau.shoppingmall.repository.order.OrderedItemRepository;
+import org.cau.shoppingmall.repository.order.OrdersRepository;
 import org.cau.shoppingmall.repository.UserRepository;
 import org.cau.shoppingmall.util.OrderUtil;
 import org.cau.shoppingmall.util.UserUtil;
@@ -23,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional

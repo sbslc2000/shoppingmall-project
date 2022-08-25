@@ -8,11 +8,10 @@ import org.cau.shoppingmall.entity.item.OrderedItem;
 import org.cau.shoppingmall.entity.order.Orders;
 import org.cau.shoppingmall.entity.user.Review;
 import org.cau.shoppingmall.entity.user.User;
-import org.cau.shoppingmall.repository.ItemRepository;
-import org.cau.shoppingmall.repository.OrdersRepository;
+import org.cau.shoppingmall.repository.item.ItemRepository;
+import org.cau.shoppingmall.repository.order.OrdersRepository;
 import org.cau.shoppingmall.repository.ReviewRepository;
 import org.cau.shoppingmall.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

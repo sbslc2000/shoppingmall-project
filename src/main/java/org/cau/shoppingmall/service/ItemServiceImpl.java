@@ -5,7 +5,7 @@ import org.cau.shoppingmall.dto.item.ItemForm;
 import org.cau.shoppingmall.dto.item.ItemDto;
 import org.cau.shoppingmall.dto.item.ItemRequest;
 import org.cau.shoppingmall.entity.item.Item;
-import org.cau.shoppingmall.repository.ItemRepository;
+import org.cau.shoppingmall.repository.item.ItemRepository;
 import org.cau.shoppingmall.specification.ItemSpecification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

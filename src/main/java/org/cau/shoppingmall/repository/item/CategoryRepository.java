@@ -1,4 +1,4 @@
-package org.cau.shoppingmall.repository;
+package org.cau.shoppingmall.repository.item;
 
 import org.cau.shoppingmall.entity.item.Category;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -2,12 +2,9 @@ package org.cau.shoppingmall.repository;
 
 import org.cau.shoppingmall.entity.item.Category;
 import org.cau.shoppingmall.entity.item.Size;
-import org.junit.jupiter.api.Test;
+import org.cau.shoppingmall.repository.item.CategoryRepository;
+import org.cau.shoppingmall.repository.item.SizeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 
 //@SpringBootTest

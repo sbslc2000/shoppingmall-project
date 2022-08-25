@@ -9,12 +9,16 @@ import org.cau.shoppingmall.entity.item.*;
 import org.cau.shoppingmall.entity.order.*;
 import org.cau.shoppingmall.entity.user.User;
 import org.cau.shoppingmall.repository.*;
+import org.cau.shoppingmall.repository.item.ColorRepository;
+import org.cau.shoppingmall.repository.item.ItemRepository;
+import org.cau.shoppingmall.repository.item.SizeRepository;
+import org.cau.shoppingmall.repository.item.StockDetailsRepository;
+import org.cau.shoppingmall.repository.order.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -58,7 +62,7 @@ public class OrderServiceImpl implements OrderService{
  */
     @Override
     @Transactional
-    public Orders create(OrderForm form, Long userId) {
+    public OrderDto create(OrderForm form, Long userId) {
         User user = userRepository.findById(userId).orElseThrow( () ->
                 new NoSuchElementException("사용자를 찾을 수 없습니다."));
 
@@ -106,15 +110,15 @@ public class OrderServiceImpl implements OrderService{
         Payment savedPayment = paymentRepository.save(payment);
         Orders order = form.toEntity(user, orderProcess, savedPayment);
 
-        Orders result = orderRepository.save(order);
+        Orders savedOrder = orderRepository.save(order);
 
         //db update
-        user.getShoppingData().changePointAmount(-result.getPayment().getPointUsed());
+        user.getShoppingData().changePointAmount(-savedOrder.getPayment().getPointUsed());
         user.getShoppingData().raiseSalesCount();
-        user.getShoppingData().changePointAmount((int) Math.round(result.getPayment().getPaymentPrice()*0.05));
+        user.getShoppingData().changePointAmount((int) Math.round(savedOrder.getPayment().getPaymentPrice()*0.05));
 
         for(OrderedItem oItem : orderedItemList) {
-            oItem.setOrder(result);
+            oItem.setOrder(savedOrder);
             Item item = itemRepository.findById(oItem.getItem().getId()).get();
             item.raiseSales(oItem.getQuantity());
             item.changeQuantity(-oItem.getQuantity());
@@ -122,7 +126,8 @@ public class OrderServiceImpl implements OrderService{
             stockDetails.changeQuantity(-oItem.getQuantity());
         }
 
-        return result;
+        OrderDto orderDto = OrderDto.of(savedOrder);
+        return orderDto;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package org.cau.shoppingmall.repository;
+package org.cau.shoppingmall.repository.order;
 
 import org.cau.shoppingmall.entity.order.PaymentMethod;
 import org.springframework.data.jpa.repository.JpaRepository;

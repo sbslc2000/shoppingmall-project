@@ -1,11 +1,8 @@
 package org.cau.shoppingmall.repository;
 
 import org.cau.shoppingmall.entity.order.OrderProcess;
-import org.junit.jupiter.api.Test;
+import org.cau.shoppingmall.repository.order.OrderProcessRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 //@SpringBootTest
 class OrderProcessRepositoryTest {

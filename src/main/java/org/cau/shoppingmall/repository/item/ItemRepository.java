@@ -1,4 +1,4 @@
-package org.cau.shoppingmall.repository;
+package org.cau.shoppingmall.repository.item;
 
 import org.cau.shoppingmall.entity.item.Item;
 import org.springframework.data.domain.Page;

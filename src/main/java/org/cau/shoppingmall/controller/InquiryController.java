@@ -6,12 +6,15 @@ import org.cau.shoppingmall.dto.inquiry.OneToOneInquiryForm;
 import org.cau.shoppingmall.dto.review.ReviewForm;
 import org.cau.shoppingmall.service.ImageService;
 import org.cau.shoppingmall.service.OneToOneInquiryService;
+import org.hibernate.mapping.OneToOne;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 
@@ -27,7 +30,7 @@ public class InquiryController {
     public String inquiryForm(Model model, HttpSession session) {
 
 
-        model.addAttribute("reviewForm", new ReviewForm());
+        model.addAttribute("oneToOneInquiryform", new OneToOneInquiryForm());
 
         return "inquiry/inquiry_form";
     }
@@ -39,8 +42,14 @@ public class InquiryController {
         Long userId = 0L;
         //session 에서 userId를 가져온다.
 
-        List<String> imgs = imageService.storeOneToOneInquiryImages(imgList);
-        inquiryService.create(form,userId,imgs);
+        try {
+            inquiryService.create(form,userId,imgList);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+
+
+        return "redirect:/inquiry/inquiry";
 
 
     }

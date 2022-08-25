@@ -1,13 +1,10 @@
 package org.cau.shoppingmall.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.assertj.core.api.Assertions;
 import org.cau.shoppingmall.entity.item.*;
-import org.cau.shoppingmall.util.ImgMapper;
+import org.cau.shoppingmall.repository.item.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.BufferedReader;
@@ -18,7 +15,6 @@ import java.nio.file.Paths;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 //@SpringBootTest
 //@Transactional

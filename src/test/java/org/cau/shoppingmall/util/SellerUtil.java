@@ -1,7 +1,7 @@
 package org.cau.shoppingmall.util;
 
 import org.cau.shoppingmall.entity.item.Seller;
-import org.cau.shoppingmall.repository.SellerRepository;
+import org.cau.shoppingmall.repository.item.SellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
