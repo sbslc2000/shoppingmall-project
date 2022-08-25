@@ -8,7 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.multipart.MultipartFile;
+import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class TestController {
@@ -24,7 +25,7 @@ public class TestController {
     }
 
     @PostMapping("/test/inquiry/oneToOne")
-    public String test2(Model model) {
+    public String test2(Model model, List<MultipartFile> files) {
         return "ok";
     }
 

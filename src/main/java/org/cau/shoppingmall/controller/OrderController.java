@@ -3,15 +3,13 @@ package org.cau.shoppingmall.controller;
 import lombok.RequiredArgsConstructor;
 import org.cau.shoppingmall.dto.orders.OrderItem;
 import org.cau.shoppingmall.service.OrderService;
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Required;import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.List;
 
-@EnableWebMvc
 @Controller
 @RequestMapping("/order")
 @RequiredArgsConstructor
