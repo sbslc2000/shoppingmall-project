@@ -19,89 +19,78 @@
 
             <form action="#" name="#" method="get">
                 <fieldset style="width:150px">
-                    .
-                    <h3>교환 사유</h3>
-                    <div class="info_checkbox">
-                        <input type="checkbox" name="exchange_reason" value="color_size" id="checkbox" onclick='checkOnlyOne(this)'>
-                        <label for="checkbox">
-                            <p>색상/사이즈 변경</p>
-                        </label>
-                        <input type="checkbox" name="exchange_reason" value="order_mistake" id="checkbox2" onclick='checkOnlyOne(this)'>
-                        <label for="checkbox2">
-                            <p>주문 실수</p>
-                        </label>
-                        <input type="checkbox" name="exchange_reason" value="defective" id="checkbox3" onclick='checkOnlyOne(this)'>
-                        <label for="checkbox3">
-                            <p>파손 및 불량</p>
-                        </label>
-                        <input type="checkbox" name="exchange_reason" value="wrong_delivery" id="checkbox4" onclick='checkOnlyOne(this)'>
-                        <label for="checkbox4">
-                            <p>오배송</p>
-                        </label>
+                    <div class="form_wrap">
+                        <h3>교환 사유</h3>
+                        <div class="info_checkbox">
+                            <input type="checkbox" name="exchange_reason" value="color_size" id="color_size" onclick='checkOnlyOne(this)'>
+                            <label for="color_size">
+                                <p>색상/사이즈 변경</p>
+                            </label>
+                            <input type="checkbox" name="exchange_reason" value="order_mistake" id="order_mistake" onclick='checkOnlyOne(this)'>
+                            <label for="order_mistake">
+                                <p>주문 실수</p>
+                            </label>
+                            <input type="checkbox" name="exchange_reason" value="defective" id="defective" onclick='checkOnlyOne(this)'>
+                            <label for="defective">
+                                <p>파손 및 불량</p>
+                            </label>
+                            <input type="checkbox" name="exchange_reason" value="wrong_delivery" id="wrong_delivery" onclick='checkOnlyOne(this)'>
+                            <label for="wrong_delivery">
+                                <p>오배송</p>
+                            </label>
+                        </div>
                     </div>
-                    <div class="inquiryBox2">
+                    
+                    <div class="form_wrap">
                         <h3>상세 사유 입력</h3>
-                        <input class="inquiry_contents" size="2000" placeholder="내용을 입력해주세요(2,000자 이내)" onfocus="this.placeholder=''" onblur="this.placeholder='내용을 입력해주세요(2,000자 이내)'" name="inquiry_contents">
+                        <input class="inquiry_contents" size="2000" placeholder="내용을 입력해주세요(2,000자 이내)" onfocus="this.placeholder=''" onblur="this.placeholder='내용을 입력해주세요(2,000자 이내)'" name="inquiry_contents" style="margin-top:20px;">
                         <br>
                         <input type="file" id="pic_upload" class="pic_upload" accept="img/*" required multiple style="margin:0px 0px 30px 30px">
-                    </div>
                     <button onclick="location.href='#.html'" type="button" class="btn_black_inquiry_write">문의 등록하기</button>
-                    
-                    <div class="return_method">
-                        <h3>상품 수거</h3>
-                        <div class="info">
-                            <div class="div2">수거 요청</div>
-                            <div class="div2">직접 발송</div>
-                        </div>
-        
-                        <div class="recipient_info">
-                            <h4>수령인</h4>
-                            <div class="info">
-                                <div class="name">
-                                    <span>이름 <span id="recipient_name"> </span></span>
-                                    <input type="text" class="form-control" id="nameinput">
-                                </div>
-                                <div class="phone">
-                                    <span>연락처 <span id="recipient_phone"></span></span>
-                                    <input type="text" class="form-control" name="phone" id="phoneinput" placeholder="(-없이 입력)">
-                                </div>
-                                <div class="form-check">
-        
-                                    <input class="form-check-input" type="checkbox" value="" id="agreeform">
-                                    <label class="form-check-label" for="agreeform">
-                                    주문자 정보와 동일
-                                     </label>
-                                    <br>
-                                </div>
-                            </div>
-                        </div>
-        
-                        <div class="address_info">
-                            <h4>배송지</h4>
-                            <div class="info">
-                                <div class="zipcode">
-                                    <span>우편번호</span> <span id="zipcode"> </span></span>
-                                    <button type="button" class="btn btn-outline-primary" id="findnum" onclick="location.href='home.html'">우편번호 찾기</button></a>
-                                </div>
-                                <div class="address">
-                                    <span>주소</span>
-                                    <input type="text" class="form-control" placeholder="" id="address"><br>
-                                </div>
-                                <div class="address_detail">
-                                    <span>상세주소</span>
-                                    <input type="text" class="form-control" placeholder="상세주소를 입력해주세요" id="detailaddress">
-                                </div>
-                                <div class="request">
-                                    <span>요청사항</span>
-                                    <input type="text" class="form-control" placeholder="요청사항을 입력해주세요" id="request">
-                                </div>
-                            </div>
-                        </div>
-        
                     </div>
 
-                    <div class="return_method">
+                    <div class="form_wrap">
+                        <h3>상품 수거</h3>
+                        <div class="info_checkbox">
+                            <input type="checkbox" name="collection_method" value="collection_request" id="collection_request" onclick='checkOnlyOne(this)'>
+                            <label for="collection_request">
+                                <p>수거 요청</p>
+                            </label>
+                            <input type="checkbox" name="collection_method" value="self_collection" id="self_collection" onclick='checkOnlyOne(this)'>
+                            <label for="self_collection">
+                                <p>직접 발송</p>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form_wrap">
                         <h3>수거지</h3>
+                        <div class="info">
+                            <div class="name">
+                                <span>이름 <span id="recipient_name"> </span></span>
+                                <input type="text" class="form-control" id="nameinput">
+                            </div>
+                            <div class="phone">
+                                <span>연락처 <span id="recipient_phone"></span></span>
+                                <input type="text" class="form-control" name="phone" id="phoneinput" placeholder="(-없이 입력)">
+                            </div>
+                            <div class="zipcode">
+                                <span>우편번호</span> <span id="zipcode"> </span></span>
+                                <button type="button" class="btn btn-outline-primary" id="findnum" onclick="location.href='home.html'">우편번호 찾기</button></a>
+                            </div>
+                            <div class="address">
+                                <span>주소</span>
+                                <input type="text" class="form-control" placeholder="" id="address"><br>
+                            </div>
+                            <div class="address_detail">
+                                <span>상세주소</span>
+                                <input type="text" class="form-control" placeholder="상세주소를 입력해주세요" id="detailaddress">
+                            </div>
+                            <div class="request">
+                                <span>요청사항</span>
+                                <input type="text" class="form-control" placeholder="요청사항을 입력해주세요" id="request">
+                            </div>
+                        </div>
                     </div>
                 </fieldset>
             </form>
