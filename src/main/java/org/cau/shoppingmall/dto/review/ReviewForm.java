@@ -1,8 +1,6 @@
 package org.cau.shoppingmall.dto.review;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
 import org.cau.shoppingmall.dto.item.ItemDetails;
 import org.cau.shoppingmall.entity.item.Item;
 import org.cau.shoppingmall.entity.user.Review;
@@ -12,6 +10,8 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ReviewForm {
 
     private Long itemId;

@@ -1,16 +1,21 @@
 package org.cau.shoppingmall.entity.inquiry;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.cau.shoppingmall.entity.user.User;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 import java.time.LocalDateTime;
 
 
+@Builder
 @Entity
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class OneToOneInquiry {
 
     @Id
@@ -20,12 +25,18 @@ public class OneToOneInquiry {
     /*
      * TODO: Type Entity 와 연관관계 매핑
      * */
-    private Long typeId;
+
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    private InquiryType type;
 
     /*
      * TODO: User Entity와 연관관계 매핑
      * */
-    private Long userId;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     private LocalDateTime registerDate;
 
