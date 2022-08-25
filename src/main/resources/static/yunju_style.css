@@ -250,18 +250,16 @@ nav ul li a:hover::after{
     float: left;
     width: 900px;
     min-height: 1000px;
-    background: pink;
+    background: orange;
     display: inline-block;
 }
 
-.orderer_info,
-.recipient_info,
-.address_info,
-.pay_info{
+.form_wrap{
     margin: 0px 0px 50px 20px;
+    min-height: auto;
+    background: pink;
 
 }
-
 
 .info{
     border-top: 1px solid black;
@@ -285,9 +283,10 @@ nav ul li a:hover::after{
     display: inline-block;
 }
 
+
 /********************교환하기(exchange)********************/
 
-label {
+.info_checkbox label {
 	width: 100px;
 	height: 80px;
     border: 3px solid gray;
@@ -297,19 +296,19 @@ label {
 	cursor: pointer;
 }
 
-label p{
+.info_checkbox label p{
     display: flex;
     justify-content: center;
     text-align: center;
 
 }
 
-input[type="checkbox"] {
+.info_checkbox input[type="checkbox"] {
     display: none;
 }
 
 
-input[type="checkbox"]:checked + label {
+.info_checkbox input[type="checkbox"]:checked + label {
     outline: 3px solid black;
     border-color: black;
 }
@@ -321,7 +320,6 @@ input[type="checkbox"]:checked + label {
     margin-top: 10px;
     display: flex;
 }
-
 
 
 /********************footer********************/
