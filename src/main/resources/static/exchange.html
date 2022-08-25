@@ -19,12 +19,25 @@
 
             <form action="#" name="#" method="get">
                 <fieldset style="width:150px">
-                    <legend>교환 사유</legend>
-                        <div class="pay_with_btn">
-                            <div class="div2">색상/사이즈 변경</div>
-                            <div class="div2">주문 실수</div>
-                            <div class="div2">파손 및 불량</div>
-                            <div class="div2">오배송</div>
+                    .
+                    <h3>교환 사유</h3>
+                    <div class="info_checkbox">
+                        <input type="checkbox" name="exchange_reason" value="color_size" id="checkbox" onclick='checkOnlyOne(this)'>
+                        <label for="checkbox">
+                            <p>색상/사이즈 변경</p>
+                        </label>
+                        <input type="checkbox" name="exchange_reason" value="order_mistake" id="checkbox2" onclick='checkOnlyOne(this)'>
+                        <label for="checkbox2">
+                            <p>주문 실수</p>
+                        </label>
+                        <input type="checkbox" name="exchange_reason" value="defective" id="checkbox3" onclick='checkOnlyOne(this)'>
+                        <label for="checkbox3">
+                            <p>파손 및 불량</p>
+                        </label>
+                        <input type="checkbox" name="exchange_reason" value="wrong_delivery" id="checkbox4" onclick='checkOnlyOne(this)'>
+                        <label for="checkbox4">
+                            <p>오배송</p>
+                        </label>
                     </div>
                     <div class="inquiryBox2">
                         <h3>상세 사유 입력</h3>
@@ -36,18 +49,9 @@
                     
                     <div class="return_method">
                         <h3>상품 수거</h3>
-                        <div class="orderer_info">
-                            <h4>주문자</h4>
-                            <div class="info">
-                                <div class="name">
-                                    <span>이름 <span id="orderer_name"> </span></span>
-                                    <input type="text" class="form-control" id="nameinput">
-                                </div>
-                                <div class="phone">
-                                    <span>연락처 <span id="orderder_phone"></span></span>
-                                    <input type="text" class="form-control" name="phone" id="phoneinput" placeholder="(-없이 입력)">
-                                </div>
-                            </div>
+                        <div class="info">
+                            <div class="div2">수거 요청</div>
+                            <div class="div2">직접 발송</div>
                         </div>
         
                         <div class="recipient_info">
@@ -125,7 +129,23 @@
             </div>
         </footer>
 
-        <script scr="script.js"></script>
+        <script scr="script.js">
+            document.onselectstart=function(){
+                return false;
+            }
+
+            function checkOnlyOne(element) {
+                
+                const checkboxes 
+                = document.getElementsByName("exchange_reason");
+
+                checkboxes.forEach((cb) => {
+                    cb.checked = false;
+                })
+                element.checked = true;
+                
+            }
+        </script>
     </body>
 
 </html>
