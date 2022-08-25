@@ -321,6 +321,25 @@ nav ul li a:hover::after{
     display: flex;
 }
 
+/********************재고관리(inventory_management)********************/
+
+.title h2{
+    float: left;
+}
+
+.title a{
+    float: right;
+    color: black
+}
+
+.inventory_table{
+    width: 1100px;
+    height: auto;
+    margin-top: 50px;
+
+}
+
+
 
 /********************footer********************/
 .footerBox{
