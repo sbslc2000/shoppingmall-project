@@ -285,6 +285,45 @@ nav ul li a:hover::after{
     display: inline-block;
 }
 
+/********************교환하기(exchange)********************/
+
+label {
+	width: 100px;
+	height: 80px;
+    border: 3px solid gray;
+    border-radius: 5px;
+    display: flex;	
+    box-sizing: border-box;
+	cursor: pointer;
+}
+
+label p{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+
+input[type="checkbox"]:checked + label {
+    outline: 3px solid black;
+    border-color: black;
+}
+
+
+.info_checkbox{
+    border-top: 1px solid black;
+    padding-top: 10px;
+    margin-top: 10px;
+    display: flex;
+}
+
+
+
 /********************footer********************/
 .footerBox{
     clear: both;
