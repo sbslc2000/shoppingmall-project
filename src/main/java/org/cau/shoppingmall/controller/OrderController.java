@@ -45,7 +45,7 @@ public class OrderController {
         //userId를 세션에서 가져옴
         OrderDto order = orderService.create(orderForm, userId);
 
-
+        return "OK";
     }
 
 

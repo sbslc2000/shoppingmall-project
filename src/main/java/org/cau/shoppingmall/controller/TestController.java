@@ -33,6 +33,7 @@ public class TestController {
         return "test/inquiry/inquiry_form";
     }
 
+    /*
     @PostMapping("/test/inquiry/oneToOne")
     public String test2(Model model, @RequestParam List<MultipartFile> files,
                         @ModelAttribute("oneToOneInquiryForm") OneToOneInquiryForm form) {
@@ -47,7 +48,8 @@ public class TestController {
         }
 
         return "ok";
-    }
+    }*/
+    
 
     @GetMapping("/test/get")
     @ResponseBody
