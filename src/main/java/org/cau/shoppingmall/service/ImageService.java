@@ -33,12 +33,31 @@ public class ImageService {
                 String storeFileName = createStoreFileName(originalFileName);
 
                 storedFileNameList.add(storeFileName);
+                multipartFile.transferTo(new File(getFullPath("onetooneinquiry",storeFileName)));
+            }
+        }
+
+        return storedFileNameList;
+    }
+
+    public List<String> storeReviewImages(List<MultipartFile> multipartFiles) throws IOException {
+
+        List<String> storedFileNameList = new ArrayList<>();
+        for (MultipartFile multipartFile : multipartFiles) {
+            if (!multipartFile.isEmpty()) {
+                String originalFileName = multipartFile.getOriginalFilename();
+                String storeFileName = createStoreFileName(originalFileName);
+
+                storedFileNameList.add(storeFileName);
                 multipartFile.transferTo(new File(getFullPath("review",storeFileName)));
             }
         }
 
         return storedFileNameList;
     }
+
+
+
 
     private String createStoreFileName(String originalFilename) {
         String ext = extractExt(originalFilename);

@@ -33,9 +33,8 @@ public class OrderRestController {
         //session 에서 id 를 가져오는 코드
         Long id = 0L;
 
-        Orders orders = orderService.create(orderForm, id);
+        OrderDto result = orderService.create(orderForm, id);
 
-        OrderDto result = OrderDto.of(orders);
 
         return result;
     }

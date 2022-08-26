@@ -33,14 +33,14 @@ public class TestController {
         return "test/inquiry/inquiry_form";
     }
 
-    /*
+
     @PostMapping("/test/inquiry/oneToOne")
     public String test2(Model model, @RequestParam List<MultipartFile> files,
                         @ModelAttribute("oneToOneInquiryForm") OneToOneInquiryForm form) {
 
         log.info("multipartFile={}",files);
         try{
-            List<String> imgs = imageService.storeReviewImages(files);
+            List<String> imgs = imageService.storeOneToOneInquiryImages(files);
 
             System.out.println(imgs.toString());
         } catch (IOException e) {
@@ -48,7 +48,7 @@ public class TestController {
         }
 
         return "ok";
-    }*/
+    }
 
 
     @GetMapping("/test/get")

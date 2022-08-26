@@ -20,7 +20,7 @@ public class UserController {
 
     private final UserService userService;
 
-
+/*
     @PostMapping
     @ApiOperation(value = "유저 회원가입", notes = "UserForm 형태를 전송하면 유저 정보가 등록됩니다.")
     public void insert(@RequestParam UserForm userForm){
@@ -49,7 +49,7 @@ public class UserController {
     public String getUser(@PathVariable Long userId){
 
         return "user/detail";
-    }
+    }*/
 
 
 }

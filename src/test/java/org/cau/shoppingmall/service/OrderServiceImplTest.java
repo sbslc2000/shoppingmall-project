@@ -1,5 +1,6 @@
 package org.cau.shoppingmall.service;
 
+import org.cau.shoppingmall.dto.orders.OrderDto;
 import org.cau.shoppingmall.dto.orders.OrderForm;
 import org.cau.shoppingmall.dto.orders.OrderedItemForm;
 import org.cau.shoppingmall.entity.item.Item;
@@ -66,7 +67,7 @@ class OrderServiceImplTest {
 
         OrderForm orderForm = orderUtil.createOrderForm(orderedItemFormList);
 
-        Orders order = orderService.create(orderForm, user.getId());
+        OrderDto order = orderService.create(orderForm, user.getId());
 
 
         //then
@@ -105,8 +106,10 @@ class OrderServiceImplTest {
 
         OrderForm orderForm = orderUtil.createOrderForm(orderedItemFormList,20000);
 
-        Orders order = orderService.create(orderForm, user.getId());
+        OrderDto createdOrder = orderService.create(orderForm, user.getId());
 
+
+        Orders order = orderRepository.findById(createdOrder.getId()).get();
 
         assertThat(order.getPayment().getPaymentPrice()).isEqualTo(39000*3 - 20000);
         assertThat(user.getPoint()).isEqualTo(4850);

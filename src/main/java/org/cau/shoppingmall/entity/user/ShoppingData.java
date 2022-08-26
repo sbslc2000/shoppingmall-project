@@ -49,6 +49,6 @@ public class ShoppingData implements ShoppingDataInterface {
 
     @Override
     public void addReviews() {
-
+        reviews++;
     }
 }

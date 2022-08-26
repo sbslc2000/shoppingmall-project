@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class PaymentMethodRepositoryTest {
 
     @Autowired
     private PaymentMethodRepository paymentMethodRepository;
 
-    @Test
+   // @Test
     void insert() {
         PaymentMethod pm1 = new PaymentMethod().builder()
                 .name("무통장")

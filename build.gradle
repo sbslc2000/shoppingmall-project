@@ -23,6 +23,10 @@ dependencies {
 	//https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
+	// https://mvnrepository.com/artifact/org.mindrot/jbcrypt 암호화
+	implementation group: 'org.mindrot', name: 'jbcrypt', version: '0.4'
+
+
 	//redis
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 

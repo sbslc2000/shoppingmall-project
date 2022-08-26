@@ -2,6 +2,9 @@ package org.cau.shoppingmall.service;
 
 import org.cau.shoppingmall.dto.review.ReviewForm;
 import org.cau.shoppingmall.dto.review.ReviewDto;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 import java.util.List;
 
 public interface ReviewService {
@@ -18,7 +21,7 @@ public interface ReviewService {
     * 체크사항
     * - user->shoppingmallData 에 작성 리뷰수를 올린다.
     * */
-    Long create(ReviewForm form, Long userId,String img);
+    Long create(ReviewForm form, Long userId, List<MultipartFile> fileList) throws IOException;
 
 
     /*
