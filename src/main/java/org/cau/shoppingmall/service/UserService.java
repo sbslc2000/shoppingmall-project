@@ -4,6 +4,7 @@ import org.cau.shoppingmall.dto.Users.UserDto;
 import org.cau.shoppingmall.dto.Users.UserForm;
 import org.cau.shoppingmall.dto.Users.UserUpdateForm;
 import org.cau.shoppingmall.entity.user.User;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface UserService {
 
@@ -15,14 +16,17 @@ public interface UserService {
     점검사항:
     -아이디 중복 체크하기
     */
-    User create(UserForm user);
+    static User create(UserForm user);
+
+    @Transactional
+    User create(UserForm userForm);
 
     /*
-    User get : Id에 해당하는 user 정보를 반환한다
-    프로세스 로직:
-    -session에서 ID 확인 후 반환
+        User get : Id에 해당하는 user 정보를 반환한다
+        프로세스 로직:
+        -session에서 ID 확인 후 반환
 
-    */
+        */
     UserDto get(Long userId);
 
     /*

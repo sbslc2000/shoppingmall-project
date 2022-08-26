@@ -3,10 +3,13 @@ package org.cau.shoppingmall.controller;
 import lombok.RequiredArgsConstructor;
 import org.cau.shoppingmall.dto.Users.AuthInfo;
 import org.cau.shoppingmall.dto.Users.LoginForm;
+import org.cau.shoppingmall.dto.Users.UserForm;
 import org.cau.shoppingmall.dto.item.ItemDto;
+import org.cau.shoppingmall.entity.user.User;
 import org.cau.shoppingmall.exception.LoginFailedException;
 import org.cau.shoppingmall.service.ItemService;
 import org.cau.shoppingmall.service.LoginService;
+import org.cau.shoppingmall.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,10 +63,13 @@ public class AccountController {
         return "user/join";
     }
 
+    // 회원가입 페이지의 내용을 넘겨주는 역할이 필요
     @PostMapping("/users")
-    public String createUser() {
+    public String createUser(UserForm userForm) {
+        User user = new User();
+        user = UserService.create(userForm);
 
-        return null;
+        return "redirect:/";
     }
 
     /*
@@ -71,6 +77,7 @@ public class AccountController {
     * */
     @GetMapping("/users/find")
     public String findIdOrPassword() {
+
         return null;
     }
 
