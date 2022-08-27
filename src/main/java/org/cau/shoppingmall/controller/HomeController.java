@@ -1,6 +1,7 @@
 package org.cau.shoppingmall.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.cau.shoppingmall.dto.item.ItemDto;
 import org.cau.shoppingmall.dto.item.ItemRequest;
 import org.cau.shoppingmall.service.ItemService;
@@ -10,16 +11,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/")
+@RequestMapping("/home")
 public class HomeController {
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final ItemService itemService;
 
     @GetMapping
@@ -32,63 +34,29 @@ public class HomeController {
 
     }
 
-    @GetMapping("/clothes")
-    public String clothesController(Model model) {
+    @GetMapping("/{categoryName}")
+    public String clothesController(Model model,
+                                    @PathVariable String categoryName) {
 
-        Long categoryId = 1L;
+        log.info("categoryName = {}",categoryName);
+        Long categoryId = 0L;
+        switch(categoryName) {
+            case "clothes":
+                categoryId = 1L; break;
+            case "beauty":
+                categoryId = 2L; break;
+            case "bagWallet":
+                categoryId = 3L; break;
+            case "accessories":
+                categoryId = 4L; break;
+            case "shoes":
+                categoryId = 5L; break;
+            default:
+                categoryId = 1L;
+        }
+
         log.info("someone accessed in clothes!");
-        duplicated(model, categoryId);
 
-
-        return "home/cloths";
-
-    }
-
-    @GetMapping("/beauty")
-    public String beautyController(Model model) {
-        log.info("someone accessed in beauty!");
-        Long categoryId = 2L;
-        duplicated(model, categoryId);
-
-
-        return "home/beauty";
-
-    }
-
-
-
-    @GetMapping("/bagWallet")
-    public String bagWalletController(Model model) {
-        log.info("someone accessed in bagWallet!");
-        Long categoryId = 3L;
-        duplicated(model, categoryId);
-
-
-        return "home/bagWallet";
-
-    }
-
-    @GetMapping("/accessories")
-    public String accessoriesController(Model model) {
-        log.info("someone accessed in accessories!");
-        Long categoryId = 4L;
-        duplicated(model, categoryId);
-
-        return "home/accessories";
-
-    }
-
-    @GetMapping("/shoes")
-    public String shoesController(Model model) {
-        log.info("someone accessed in shoes!");
-        Long categoryId = 5L;
-        duplicated(model, categoryId);
-
-        return "home/shoes";
-
-    }
-
-    private void duplicated(Model model, Long categoryId) {
         List<ItemDto> hotItems = itemService.getHot8Items(categoryId);
 
         ItemRequest itemRequest = new ItemRequest();
@@ -97,9 +65,16 @@ public class HomeController {
         itemRequest.setCategory(category);
         Page<ItemDto> itempage = itemService.getItemsByConditions(itemRequest);
         List<ItemDto> items = itempage.getContent();
+        log.info("items.size()={}",items.size());
         model.addAttribute("items",items);
         model.addAttribute("hotItems",hotItems);
+
+
+
+        return "home/cloths";
+
     }
+
 
 
 }

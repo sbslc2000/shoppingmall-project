@@ -1,7 +1,9 @@
 package org.cau.shoppingmall.dto.Users;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserForm {
 
     private String userId;
@@ -23,6 +27,10 @@ public class UserForm {
 
     private String email;
 
+    private String addressCode;
+
     private String address;
+
+    private String addressDetails;
 
 }

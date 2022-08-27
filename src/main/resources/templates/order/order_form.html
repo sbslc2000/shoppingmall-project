@@ -76,7 +76,7 @@
                 <div class = "order_details">
                     <h4>주문 상품 내역</h4>
                     <ul th:each="orderItem : ${orderItems}">
-                        <li>주문상품명:<span th:text="${orderItem.itemId}">상품명</span></li>
+                        <li>주문상품명:<span th:text="${orderItem.itemName}">상품명</span></li>
                         <li>사이즈:<span th:text="${orderItem.sizeName}">사이즈</span></li>
                         <li>컬러:<span th:text="${orderItem.colorName}">컬러</span></li>
                         <li>수량:<span th:text="${orderItem.quantity}">수량</span></li>

@@ -3,11 +3,16 @@
 
     <head>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" th:href="@{cloths_style.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/yunju_style.css}">
     </head>
     <body>
         <header>
-            <img src="images/banner.png"><br><br/>
+            <div class="banner">
+                <a th:href="@{/}">
+                    <h1>우당탕탕 개발자</h1>
+                </a>
+            </div>
+
             <div class="searchArea">
                 <form>
                     <input type="search" placeholder="원하는 상품을 검색해주세요">
@@ -17,41 +22,49 @@
 
             <nav>
                 <ul>
-                    <li><a th:href="@{/clothes}">의류</a></li>
-                    <li><a th:href="@{/beauty}">뷰티</a></li>
-                    <li><a th:href="@{/bagWallet}">가방/지갑</a></li>
-                    <li><a th:href="@{/accessories}">액세사리</a></li>
-                    <li><a th:href="@{/shoes}">신발</a></li>
+                    <li><a th:href="@{/home/clothes}">의류</a></li>
+                    <li><a th:href="@{/home/beauty}">뷰티</a></li>
+                    <li><a th:href="@{/home/bagWallet}">가방/지갑</a></li>
+                    <li><a th:href="@{/home/accessories}">액세사리</a></li>
+                    <li><a th:href="@{/home/shoes}">신발</a></li>
                 </ul>
-            </nav>
         </header>
             
         <div class="homeItems">
             <!--인기상품-->
             <div class="hotItems">
                 <h3>인기상품</h3>
-
-                <div th:each="item : ${hotItems}" class="item">
-                    <img th:src="@{img/item/}+${item.img[0]}+'.jpg'">
-                    <div class="itemWrap">
-                        <h4 th:text="${item.seller.name}">#쇼핑몰 이름입니다#</h4>
-                        <h4 th:text="${item.name}">#상품 이름입니다#</h4>
-                    </div>
-                    <h4 th:text="${item.price}">#상품 가격입니다#</h4>
-
+                <div class="item" th:each="item : ${hotItems}">
+                    <a th:href="@{/item/}+${item.id}">
+                        <img th:src="@{/img/item/}+${item.img[0]}+'.jpg'">
+                        <div class="des">
+                            <div class="itemWrap">
+                                <h4 th:text="${item.seller.name}">#쇼핑몰 이름입니다#</h4>
+                                <h4 th:text="${item.name}">#상품 이름입니다#</h4>
+                            </div>
+                            <h4 th:text="${item.price}+'원'">#상품 가격입니다#</h4>
+                        </div>
+                    </a>
                 </div>
-
             </div>
             <!--전체상품-->
-            <div class="Items">
-                <h3>전체상품</h3>
+            <div class="totalItems">
+                <div class="totalBlock">
+                    <h3>전체상품</h3>
+                    <p>필터</p>
+                </div>
+
                 <div class="item" th:each="item : ${items}">
-                    <img th:src="@{img/item/}+${item.img[0]}+'.jpg'">
-                    <div class="itemWrap">
-                        <h4 th:text="${item.seller.name}">#쇼핑몰 이름입니다#</h4>
-                        <h4 th:text="${item.name}">#상품 이름입니다#</h4>
+                    <a th:href="@{/item/}+${item.id}">
+                    <img th:src="@{/img/item/}+${item.img[0]}+'.jpg'">
+                    <div class="des">
+                        <div class="itemWrap">
+                            <h4 th:text="${item.seller.name}">#쇼핑몰 이름입니다#</h4>
+                            <h4 th:text="${item.name}">#상품 이름입니다#</h4>
+                        </div>
+                        <h4 th:text="${item.price}+'원'">#상품 가격입니다#</h4>
                     </div>
-                    <h4 th:text="${item.price}">#상품 가격입니다#</h4>
+                    </a>
                 </div>
             </div>
         </div>
@@ -61,7 +74,7 @@
                     <h3>문의</h3>
                     <ul>
                         <li><a href="">공지사항</a></li>
-                        <li><a href="">1:1문의</a></li>
+                        <li><a TH:href="@{/inquiry}">1:1문의</a></li>
                     </ul>
                 </div>
                 <div class="cs">

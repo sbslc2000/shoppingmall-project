@@ -12,16 +12,15 @@
 <body class="container">
 <h1>SHOPPING MALL</h1>
 
-<form class="wholelogin">
+<form th:object="${loginForm}" class="wholelogin" th:action="@{/login}" method="post">
 
     <div id="all">
         <div></div>
         <div class="login">
-            <input type="id" placeholder="ID">
-            <input type="password" placeholder="PW">
-
+            <input th:field="*{userId}" type="text" placeholder="ID">
+            <input th:field="*{password}" type="password" placeholder="PW">
         </div>
-        <button type="button" class="btn btn-outline-dark">로그인</button>
+        <button type="submit" class="btn btn-outline-dark">로그인</button>
         <div></div>
     </div>
 </form>
@@ -44,5 +43,3 @@
 
 
 </body>
-
-</html>

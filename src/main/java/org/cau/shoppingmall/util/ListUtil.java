@@ -15,6 +15,14 @@ public class ListUtil {
         String replace1 = replace.replace("]","");
         List<String> myList = new ArrayList<String>(Arrays.asList(replace1.split(",")));
 
-        return myList;
+        List<String> result = new ArrayList<>();
+        for(String s : myList) {
+            s = s.trim();
+            result.add(s);
+        }
+
+
+
+        return result;
     }
 }

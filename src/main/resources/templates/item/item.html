@@ -195,7 +195,7 @@
             <div class="row">
                 <div class="col"></div>
                 <div class="col-6"><span id="banner">U.T.T Developer</span></div>
-                <div class="col" id="login"><a href="">로그인 </a>| <a href="">회원가입</a></div>
+                <div class="col" id="login"><a th:href="@{/login}">로그인 </a>| <a th:href="@{/user/join}">회원가입</a></div>
             </div>
             <div class="searchArea">
                 <form><input type="search" placeholder="원하는 상품을 검색해주세요"></form>
@@ -203,11 +203,11 @@
             <div id="catenav">
                 <nav>
                     <ul>
-                        <li><a href=" ">의류</a></li>
-                        <li><a href=" ">뷰티</a></li>
-                        <li><a href=" ">가방/지갑</a></li>
-                        <li><a href=" ">액세사리</a></li>
-                        <li><a href=" ">신발</a></li>
+                        <li><a th:href="@{/home/clothes}">의류</a></li>
+                        <li><a th:href="@{/home/beauty}">뷰티</a></li>
+                        <li><a th:href="@{/home/bagWallet}">가방/지갑</a></li>
+                        <li><a th:href="@{/home/accessories}">액세사리</a></li>
+                        <li><a th:href="@{/home/shoes}">신발</a></li>
                     </ul>
                 </nav>
             </div>
@@ -220,10 +220,10 @@
                     <itemex>
                         <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item" id="cate" name="categoryId"><a href="#">카테고리</a></li>
+                                <li class="breadcrumb-item" id="cate" name="categoryId"><a th:text="${item.category.name}" href="#">카테고리</a></li>
                             </ol>
                         </nav>
-                        <span id="itemname" name="name"> 상품명</span><span id="compname" name="sellerId">회사명</span>
+                        <span th:text="${item.name}" id="itemname" name="name"> 상품명</span><span th:text="${item.seller.name}" id="compname" name="sellerId">회사명</span>
                         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
                             <div class="carousel-indicators">
                                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -231,14 +231,8 @@
                                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                             </div>
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="item1.png" class="d-block w-100" alt="이미지 로드 불가" name="img">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="item2.png" class="d-block w-100" alt="이미지 로드 불가" name="img">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="item3.png" class="d-block w-100" alt="이미지 로드 불가" name="img">
+                                <div th:each="img : ${item.img}" class="carousel-item active">
+                                    <img th:src="@{/img/item/}+${img}+'.jpg'" class="d-block w-100" alt="이미지 로드 불가" name="img">
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -254,7 +248,7 @@
                 </div>
                 <div class="col-5 ">
                     <div id="priceselect">
-                        <div id="price" style="display:none">100000</div>
+                        <div th:text="${item.price}" id="price" style="display:none">100000</div>
                         <div id="showprice">
                             <script>
                                 document.getElementById('showprice').innerHTML = document.getElementById('price').innerHTML.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -264,18 +258,12 @@
                         <div id="selects">
                             <select name="colorId" class="form-select" id="color">
                                 <option selected>색상</option>
-                                <option value="화이트">화이트</option>
-                                <option value="그레이">그레이</option>
-                                <option value="블랙">블랙</option>
-                                <option value="레드">레드</option>
+                                <option th:each="stockDetails : ${item.stockDetailsList}" th:text="${stockDetails.color}" th:value="${stockDetails.color}"></option>
                                 
                             </select>
                             <select name="sizeId" id="size" class="form-select" onchange="addSelect()">
                                 <option selected>사이즈</option>
-                                <option value="L">L</option>
-                                <option value="M">M</option>
-                                <option value="Free">Free</option>
-                                
+                                <option th:each="stockDetails : ${item.stockDetailsList}" th:text="${stockDetails.size}" th:value = ${stockDetails.size}></option>
                             </select>
 
                             <div id="selectedItems">
@@ -301,8 +289,8 @@
                 </div>
             </div>
     </itmemain>
-    <script src="ColorConverter.js"></script>
-    <script src="itemBuyButton1.js"></script>
+    <script th:src="@{/js/ColorConverter.js}"></script>
+    <script th:src="@{/js/itemBuyButton.js?ver=1}"></script>
 </body>
 
 </html>

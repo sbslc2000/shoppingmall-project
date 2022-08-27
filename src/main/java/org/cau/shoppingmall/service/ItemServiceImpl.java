@@ -47,11 +47,12 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemDto get(Long itemId){
+    public ItemDto get(Long itemId) throws NoSuchElementException{
         Optional<Item> findItem = itemRepository.findById(itemId);
 
         if(findItem.isPresent()) {
             ItemDto itemDto = ItemDto.of(findItem.get());
+
             return itemDto;
         } else {
             throw new NoSuchElementException("해당하는 상품이 없습니다.");

@@ -89,12 +89,8 @@ function goBuyPage() {
 
     var form = document.createElement('form');
     form.setAttribute("method","post");
-    form.setAttribute("action","http://shoppingmall.ddnsking.com/order");
+    form.setAttribute("action","http://shoppingmall.ddnsking.com/order-form");
     document.characterSet="utf-8";
-
-    var uri = window.location.pathname;
-    var itemId = uri.split("/")[1];
-    console.log(itemId);
 
     let selectedItemTag = document.getElementById("selectedItems");
     let itemDetailsList = selectedItemTag.getElementsByClassName("itemDetails");
@@ -107,7 +103,9 @@ function goBuyPage() {
         //console.log(sizeId);
         let quantity = itemDetailsList.item(i).getElementsByClassName("count")[0].innerHTML;
 
-
+        var uri = window.location.pathname;
+        var itemId = uri.split("/")[2];
+        console.log(itemId);
 
         var colorField = document.createElement("input");
         colorField.setAttribute("type","hidden");

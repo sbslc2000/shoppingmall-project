@@ -16,7 +16,6 @@ public interface UserService {
     점검사항:
     -아이디 중복 체크하기
     */
-    static User create(UserForm user);
 
     @Transactional
     User create(UserForm userForm);

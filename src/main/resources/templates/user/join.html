@@ -29,7 +29,84 @@
         }
     </style>
     <script>
-        var warn = {
+        function checkpw() {
+            var pw11 = document.getElementById('pw1').value;
+            var pw22 = document.getElementById('pw2').value;
+
+            var char = ["!", "@", "#", "$", "%"];
+            var eng = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+            var num = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+            var check_char = 0;
+            var check_eng = 0;
+            var check_num = 0;
+
+
+            if (pw11.length < 8) {
+                document.getElementById('pw1warn').innerHTML = "숫자, 영문, 특수문자(!@#$%)포함 8자리 이상";
+                document.getElementById('pw1warn').style.color = 'red';
+            }
+
+            for (var i = 0; i < char.length; i++) {
+                if ((pw11.indexOf(char[i]) != -1)) {
+                    check_char = 1;
+                    break;
+
+                }
+            }
+            if (check_char != 0) {
+                for (var i = 0; i < eng.length; i++) {
+                    if (pw11.indexOf(eng[i]) != -1) {
+                        check_eng = 1;
+                        break;
+                    }
+                }
+            }
+            if ((check_char != 0) && (check_eng != 0)) {
+                for (var i = 0; i < eng.length; i++) {
+                    if (pw11.indexOf(num[i]) != -1) {
+                        check_char = 1;
+                        break;
+                    }
+                }
+            }
+
+            if ((check_char == 0) || (check_eng == 0) || (check_num == 0)) {
+                document.getElementById('pw1warn').innerHTML = "숫자, 영문, 특수문자(!@#$%)포함 8자리 이상";
+                document.getElementById('pw1warn').style.color = 'red';
+            }
+        }
+
+        function samePW() {
+            if (document.getElementById('pw1').value != '' && document.getElementById('pw2').value != '') {
+                if (document.getElementById('pw1').value == document.getElementById('pw2').value) {
+                    document.getElementById('pw2warn').innerHTML = "비밀번호가 일치합니다.";
+                    document.getElementById('pw2warn').style.color = 'green';
+                } else {
+                    document.getElementById('pw2warn').innerHTML = "비밀번호가 일치하지 않습니다.";
+                    document.getElementById('pw2warn').style.color = 'red';
+                }
+            }
+
+        }
+
+        function checkblank() {
+            if (document.getElementById('nameinput').value == '') {
+                document.getElementById('warnname').innerHTML = "*필수항목 입니다.";
+                document.getElementById('warnname').style.color = 'red';
+            }
+            if (document.getElementById('monthselect').value == '월' || document.getElementById('dayselect').value == '일' || document.getElementById('year').value == '') {
+                document.getElementById('warnbirth').innerHTML = "*필수항목 입니다.";
+                document.getElementById('warnbirth').style.color = 'red';
+            }
+            if (document.getElementById('phoneinput').value == '' || document.getElementById('dayselect').value == '') {
+                document.getElementById('warnphone').innerHTML = "*필수항목 입니다.";
+                document.getElementById('warnphone').style.color = 'red';
+            }
+            if (document.getElementById('mailinput').value == '' || document.getElementById('dayselect').value == '') {
+                document.getElementById('warnmail').innerHTML = "*필수항목 입니다.";
+                document.getElementById('warnmail').style.color = 'red';
+            }
+
 
         }
     </script>
@@ -37,7 +114,7 @@
 
 <body class="container">
     <h2>SHOPPING MALL</h2>
-    <form th:action="@{/users}" accept-charset="utf-8" name="join" method="post">
+    <form th:action="@{/users}" th:object="${userForm}" accept-charset="utf-8" name="join" method="post">
         <div class="container text-center">
             <div class="row align-items-start">
                 <div class="col-4">
@@ -55,12 +132,12 @@
                 <div class="col-4"></div>
                 <div class="col-3">
                     <label for="idinput" class="form-label">아이디</label>
-                    <input name="userId" type="text" class="form-control" id="idinput" placeholder="영문 소문자, 숫자만 사용 가능">
+                    <input th:field="*{userId}" type="text" class="form-control" id="idinput" placeholder="영문 소문자, 숫자만 사용 가능">
 
                 </div>
                 <div class="col-2" id="doublecheck">
                     <br>
-                    <button type="submit" class="btn btn-outline-primary">중복확인</button>
+                    <button type="button" class="btn btn-outline-primary">중복확인</button>
                 </div><br>
             </div>
 
@@ -70,13 +147,13 @@
                 <div class="col-3">
                     <br>
                     <label for="pwinput" class="form-label">비밀번호</label>
-                    <input type="password" class="form-control" id="pwinput" placeholder="숫자, 영문, 특수문자(!@#$)포함 8자리 이상">
+                    <input th:field="*{password}" type="password" class="form-control" id="pwinput" placeholder="숫자, 영문, 특수문자(!@#$)포함 8자리 이상">
                     <br>
                     <label for="checkpw" class="form-label">비밀번호 확인</label>
-                    <input type="password" class="form-control" id="checkpw">
+                    <input th:field="*{confirmPassword}" type="password" class="form-control" id="checkpw">
                     <br>
                     <label for="nameinput" class="form-label">이름</label>
-                    <input type="text" class="form-control" id="nameinput">
+                    <input th:field="*{userName}" type="text" class="form-control" id="nameinput">
                     <br>
                     <label for="birthinput" class="form-label">생년월일</label>
                 </div>
@@ -114,21 +191,24 @@
                 </div>
             </div>
 
+            <!--
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-3">
                     <br>
                     <label for="phoneinput" class="form-label">휴대폰</label>
-                    <input type="text" class="form-control" id="phoneinput" placeholder="(-없이 입력)">
+                    <input th:field="*{}"type="text" class="form-control" id="phoneinput" placeholder="(-없이 입력)">
                     <br>
                 </div>
             </div>
+
+            -->
 
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-2">
                     <label for="addnuminput" class="form-label">우편번호(선택) </label>
-                    <input type="text" class="form-control" id="addnuminput">
+                    <input th:field="*{addressCode}" type="text" class="form-control" id="addnuminput">
 
                 </div>
                 <div class="col-2" id="doublecheck">
@@ -143,35 +223,35 @@
                 <div class="col-3">
                     <label for="addinput" class="form-label">주소(선택) </label>
                     <div id="addinput">
-                        <input type="text" class="form-control" placeholder="주소">
-                        <input type="text" class="form-control" placeholder="상세주소">
+                        <input th:field="*{address}" type="text" class="form-control" placeholder="주소">
+                        <input th:field="*{addressDetails}" type="text" class="form-control" placeholder="상세주소">
                         <br></div>
 
-                    <label for="mailinput" class="form-label">이메일 </label>
+                    <label for="mailinputWrapper" class="form-label">이메일 </label>
                 </div>
             </div>
 
-            <div class="row" id="mailinput">
+            <div class="row" id="mailinputWrapper">
                 <div class="col-4"></div>
-                <div class="col-2"><input type="email" class="form-control" placeholder="이메일"></div>
+                <div class="col-2"><input id="emailInput" type="email" class="form-control" placeholder="이메일"></div>
                 <div class="col-2">
-                    <select class="form-select">
+                    <select class="form-select" onchange="addHiddenInput(this)">
                         <option selected>직접입력</option>
-                        <option>@naver.com</option>
-                        <option>@gmail.com</option>
-                        <option>@daum.net</option>
-                        <option>@hanmail.net</option>
-                        <option>@kakao.com</option>
-                        <option>@nate.com</option>
+                        <option value = "@naver.com">@naver.com</option>
+                        <option value = "@gmail.com">@gmail.com</option>
+                        <option value = "@hanmail.net">@hanmail.net</option>
+                        <option value = "@kakao.com">@kakao.com</option>
+                        <option value = "@nate.com" >@nate.com</option>
                     </select>
                 </div>
             </div>
             <br><br>
+            <!--
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="agreeform">
+                        <input class="form-check-input" type="checkbox" th:field="" id="agreeform">
                         <label class="form-check-label" for="agreeform">
                광고 SMS 및 메일 수신 동의 (선택)
             </label>
@@ -179,12 +259,12 @@
                     </div>
                 </div>
             </div>
+             -->
             <br><br><br><br>
             <div class="row">
                 <div class="col-5"></div>
                 <div class="col-5">
-                    <a href="">
-                        <button type="submit" class="btn btn-outline-primary">가입하기</button></a>
+                        <button type="submit" class="btn btn-outline-primary">가입하기</button>
                 </div><br>
             </div>
 
@@ -192,7 +272,21 @@
     </form>
     <br><br><br>
 
-
+    <script>
+        function addHiddenInput(selectElem) {
+            let findHiddenInput = document.getElementById("emailHiddenInput");
+            if( findHiddenInput != null ) {
+                findHiddenInput.remove();
+            }
+            let hiddenInput = document.createElement("input");
+            let emailInput = document.getElementById("emailInput");
+            var emailFront = emailInput.value;
+            var emailBack = selectElem.value;
+            hiddenInput.setAttribute("name",emailFront+emailBack);
+            hiddenInput.setAttribute("id","emailHiddenInput");
+        }
+    </script>
 </body>
 
 </html>
+

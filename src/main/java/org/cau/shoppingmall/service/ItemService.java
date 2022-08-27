@@ -7,6 +7,8 @@ import org.cau.shoppingmall.entity.item.Item;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+
 public interface ItemService {
 
     /*
@@ -23,7 +25,7 @@ public interface ItemService {
     /*
      *  Item get : 아이디에 해당하는 상품을 반환한다.
      * */
-    ItemDto get(Long itemId);
+    ItemDto get(Long itemId) throws NoSuchElementException;
 
     Item update(ItemForm form, Long itemId);
 

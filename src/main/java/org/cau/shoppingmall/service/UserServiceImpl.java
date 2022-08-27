@@ -12,6 +12,7 @@ import org.cau.shoppingmall.repository.AccountDataRepository;
 import org.cau.shoppingmall.repository.AuthorityRepository;
 import org.cau.shoppingmall.repository.ShoppingDataRepository;
 import org.cau.shoppingmall.repository.UserRepository;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -60,11 +61,11 @@ public class UserServiceImpl implements UserService{
         Authority authority = authorityRepository.findById(1L).get();
         User createUser = new User().builder()
                 .userId(userForm.getUserId())
-                .password(userForm.getPassword())
+                .password(BCrypt.hashpw(userForm.getPassword(),BCrypt.gensalt()))
                 .userName(userForm.getUserName())
                 .birthday(userForm.getBirthday())
                 .email(userForm.getEmail())
-                .address(userForm.getAddress())
+                .address(userForm.getAddressCode()+":"+userForm.getAddress()+":"+userForm.getAddressDetails())
                 .shoppingData(savedShoppingData)
                 .accountData(savedAccountData)
                 .authority(authority)
