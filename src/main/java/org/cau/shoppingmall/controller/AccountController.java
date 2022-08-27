@@ -27,6 +27,7 @@ public class AccountController {
     private final LoginService loginService;
     private final ItemService itemService;
     private final UserRepository userRepository;
+    private final UserService userService;
 
     /*
     * 로그인 페이지를 반환한다.
@@ -69,7 +70,7 @@ public class AccountController {
     @PostMapping("/users")
     public String createUser(UserForm userForm) {
         User user = new User();
-        user = UserService.create(userForm);
+        user = userService.create(userForm);
         userRepository.save(user);
         return "redirect:/";
     }
