@@ -21,11 +21,11 @@ public interface UserService {
     User create(UserForm userForm);
 
     /*
-        User get : Id에 해당하는 user 정보를 반환한다
-        프로세스 로직:
-        -session에서 ID 확인 후 반환
+            User get : Id에 해당하는 user 정보를 반환한다
+            프로세스 로직:
+            -session에서 ID 확인 후 반환
 
-        */
+            */
     UserDto get(Long userId);
 
     /*

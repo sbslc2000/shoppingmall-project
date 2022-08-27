@@ -80,6 +80,7 @@ public class AccountController {
 
         redirect.addFlashAttribute("loginForm",new LoginForm());
         return "redirect:/login";
+
     }
 
     /*
