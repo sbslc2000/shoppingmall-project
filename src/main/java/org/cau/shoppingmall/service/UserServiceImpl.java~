@@ -57,6 +57,7 @@ public class UserServiceImpl implements UserService{
                 .build();
         AccountData savedAccountData = accountDataRepository.save(buildedAccountData);
 
+
         Authority authority = authorityRepository.findById(1L).get();
         User createUser = new User().builder()
                 .userId(userForm.getUserId())
