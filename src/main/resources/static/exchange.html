@@ -92,6 +92,21 @@
                             </div>
                         </div>
                     </div>
+            
+                    <div class="form_wrap">
+                        <h3>교환 배송비 결제</h3>
+                        <div class="info_checkbox">
+                            <input type="checkbox" name="payment_for_exchange_shipping" value="direct_pay" id="direct_pay" onclick='checkOnlyOne(this)'>
+                            <label for="direct_pay">
+                                <p>직접 결제</p>
+                            </label>
+                            <input type="checkbox" name="payment_for_exchange_shipping" value="enclosed_in_package" id="enclosed_in_package" onclick='checkOnlyOne(this)'>
+                            <label for="enclosed_in_package">
+                                <p>택배에 동봉</p>
+                            </label>
+                        </div>
+                    </div>
+
                 </fieldset>
             </form>
         </div>
