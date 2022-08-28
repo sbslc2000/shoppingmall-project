@@ -1,5 +1,6 @@
 var selectedItemNum = 0;
 var price = parseInt(document.getElementById("price").innerHTML);
+
 function min(idNum) {
     let elem = document.getElementById(idNum);
     var countnum = elem.getElementsByClassName('count')[0].innerHTML;

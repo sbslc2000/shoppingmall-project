@@ -1,8 +1,11 @@
 var selectedItemNum = 0;
 var price = document.getElementById("price");
+
+
 function addSelect() {
 
     let selectedItemTag = document.createElement("div");
+    //selectedItemtag = "<div id="0"></div>"
     selectedItemTag.setAttribute("id",selectedItemNum.toString());
 
     selectedItemNum++;

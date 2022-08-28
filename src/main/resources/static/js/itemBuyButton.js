@@ -1,5 +1,7 @@
 var selectedItemNum = 0;
+
 var price = parseInt(document.getElementById("price").innerHTML);
+
 function min(idNum) {
     let elem = document.getElementById(idNum);
     var countnum = elem.getElementsByClassName('count')[0].innerHTML;
@@ -71,8 +73,6 @@ function addSelect() {
 
     selectedItemTag.getElementsByClassName("option")[0].innerHTML = document.getElementById('color').value + ' / ' + document.getElementById('size').value;
     //selectedItemTag.getElementById('option').innerHTML = document.getElementById('color').value + ' / ' + document.getElementById('size').value;
-    console.log(price);
-    console.log(selectedItemTag.getElementsByClassName("sumprice")[0].innerHTML);
     //selectedItemTag.getElementsByTagName("sumprice")[0].innerHTML = price.toString();
     //document.getElementById('sumprice').innerHTML = (parseInt(document.getElementById('count').innerHTML) * parseInt(document.getElementById('price').innerHTML)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 

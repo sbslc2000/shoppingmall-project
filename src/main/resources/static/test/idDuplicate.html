@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-3">
+            <span>아이디</span>
+            <input type="text" name="userId" class="form-control" id="idinput" placeholder="영문 소문자, 숫자만 사용 가능">
+            <span id="warnid"><br></span>
+        </div>
+        <div class="col-2" id="doublecheck">
+
+            <button type="button" onclick="isDuplicate()" class="btn btn-outline-primary" id="doublebtn">중복확인</button>
+        </div>
+    </div>
+</form>
+
+<script src="idDuplicateTest.js"></script>
+</body>
+</html>

@@ -8,20 +8,25 @@ import org.cau.shoppingmall.dto.Users.UserDto;
 import org.cau.shoppingmall.dto.Users.UserForm;
 import org.cau.shoppingmall.dto.Users.UserUpdateForm;
 import org.cau.shoppingmall.dto.orders.OrderDto;
+import org.cau.shoppingmall.entity.user.User;
+import org.cau.shoppingmall.repository.UserRepository;
 import org.cau.shoppingmall.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
 // 사용자 url -> controller 찾음 -> 비즈니스로직 -> 페이지(뷰렌더링), 데이터(데이터 던져주는데)
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("api/users")
 @Api(tags = {"유저 관련 API"})
 @RequiredArgsConstructor
 public class UserRestController {
 
     private final UserService userService;
+    private final UserRepository userRepository;
 
     // 유저 정보 추가
 
@@ -55,13 +60,21 @@ public class UserRestController {
         userService.delete(userId);
     }
 
-    @PostMapping("/isDuplicate")
+
+
+    @GetMapping("/isDuplicate")
     @ApiOperation(value = "회원 아이디 중복 검사", notes = "id를 전송하면 중복된 아이디인지에 대한 결과를 반환한다.\n" +
             "true : 중복, false : 중복아님")
     public boolean isDuplicateUsername(
             @ApiParam(value = "유저 아이디",example = "sbslc2000")
             @RequestParam("username") String username
     ) {
-        return false;
+        Optional<User> findUser = userRepository.findByUserId(username);
+
+        if(findUser.isPresent()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
