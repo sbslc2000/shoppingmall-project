@@ -1,6 +1,7 @@
 package org.cau.shoppingmall.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.cau.shoppingmall.dto.Users.AuthInfo;
 import org.cau.shoppingmall.dto.Users.LoginForm;
 import org.cau.shoppingmall.dto.Users.UserForm;
@@ -15,11 +16,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class AccountController {
@@ -34,8 +39,13 @@ public class AccountController {
     * 로그인 페이지를 반환한다.
     * */
     @GetMapping("/login")
-    public String loginPage(Model model) {
+    public String loginPage(Model model,
+                            @RequestParam(required = false) Boolean error,
+                            @RequestParam(required = false) String msg) {
 
+        log.info("error = {} , msg = {}",error,msg);
+        model.addAttribute("error",error);
+        model.addAttribute("msg",msg);
         model.addAttribute("loginForm",new LoginForm());
         return "user/login";
     }
@@ -49,9 +59,14 @@ public class AccountController {
         try {
             AuthInfo login = loginService.login(form, session);
         } catch (LoginFailedException e) {
+            log.info("loginFailed : {}",e.getMessage());
             e.printStackTrace();
             redirect.addFlashAttribute("loginForm",form);
-            return "redirect:/login";
+            try {
+                return "redirect:/login?error=true&msg="+ URLEncoder.encode(e.getMessage(),"UTF-8");
+            } catch (UnsupportedEncodingException ex) {
+                ex.printStackTrace();
+            }
         }
 
         List<ItemDto> hotItems = itemService.getHot4Items();

@@ -22,6 +22,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public AuthInfo login(LoginForm form,HttpSession session) throws LoginFailedException {
 
+        log.info("form id = {}",form.getUserId());
         User user = userRepository.findByUserId(form.getUserId()).orElseThrow(
                 () -> new LoginFailedException("해당 아이디가 존재하지 않습니다.")
         );
