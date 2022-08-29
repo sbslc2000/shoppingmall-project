@@ -53,7 +53,7 @@ public class InquiryController {
         }
 
 
-        return "redirect:/inquiry/inquiry";
+        return "redirect:/inquiry";
 
 
     }

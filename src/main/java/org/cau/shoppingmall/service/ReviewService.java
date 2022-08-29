@@ -50,4 +50,6 @@ public interface ReviewService {
     * - 리뷰 작성 횟수를 1 내린다.
     * */
     void delete(Long reviewId, Long userId);
+
+    List<ReviewDto> getAllReviews(Long itemId);
 }

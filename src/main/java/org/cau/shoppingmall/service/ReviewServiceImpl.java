@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -105,5 +106,20 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public void delete(Long reviewId, Long userId) {
 
+    }
+
+    @Override
+    public List<ReviewDto> getAllReviews(Long itemId) {
+
+        Item item = itemRepository.findById(itemId).orElseThrow(
+                () -> new NoSuchElementException("해당하는 상품이 없습니다.")
+        );
+
+        List<Review> reviewList = reviewRepository.findAllByItem(item);
+
+        List<ReviewDto> result = reviewList.stream().map( (review) -> ReviewDto.of(review)
+        ).collect(Collectors.toList());
+
+        return result;
     }
 }

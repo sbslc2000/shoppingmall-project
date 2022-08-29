@@ -81,7 +81,6 @@ class ReviewServiceImplTest {
         //제작한 주문정보를 토대로 리뷰 생성
         Long reviewId = reviewService.create(reviewUtil.createReviewForm(), user.getId(),fileList);
 
-
         ReviewDto reviewDto = reviewService.get(reviewId);
         //
         List<Review> afterReviews = reviewRepository.findAllByItem(item);
@@ -130,13 +129,12 @@ class ReviewServiceImplTest {
         assertThat(thrown.getMessage()).isEqualTo("사용자가 구매한 상품이 아니거나 이미 작성된 리뷰입니다.");
     }
 
+
     @Test
-    @DisplayName("리뷰 작성 후 재작성 방지")
-    void createDuplicatedReview() throws IOException {
+    @DisplayName("특정 상품의 전체 리뷰 불러오기")
+    void getReviewsTest() {
         Long testItemId = 1L;
         Item item = itemRepository.findById(testItemId).get();
-        List<Review> beforeReviews = reviewRepository.findAllByItem(item);
-        int beforeReviewsCount = beforeReviews.size();
 
         //유저생성
         User user = userUtil.createUser();
@@ -157,14 +155,30 @@ class ReviewServiceImplTest {
 
 
         //제작한 주문정보를 토대로 리뷰 생성
-        Long reviewId = reviewService.create(reviewUtil.createReviewForm(), user.getId(),fileList);
+        Long reviewId = null;
+        try {
+            reviewId = reviewService.create(reviewUtil.createReviewForm(), user.getId(),fileList);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-        NoSuchElementException thrown = assertThrows(NoSuchElementException.class,
-                () -> reviewService.create(reviewUtil.createReviewForm(), user.getId(),fileList));
+        ReviewDto reviewDto = reviewService.get(reviewId);
 
 
-        assertThat(thrown.getMessage()).isEqualTo("사용자가 구매한 상품이 아니거나 이미 작성된 리뷰입니다.");
+
+        //then
+
+        List<ReviewDto> reviews = reviewService.getAllReviews(testItemId);
+
+        assertThat(reviews.size()).isEqualTo(1);
+
+
     }
+
+    private void beforeSetting( ){
+
+    }
+
 
 
 }

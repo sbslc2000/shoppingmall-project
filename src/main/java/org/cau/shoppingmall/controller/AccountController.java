@@ -43,7 +43,6 @@ public class AccountController {
                             @RequestParam(required = false) Boolean error,
                             @RequestParam(required = false) String msg) {
 
-        log.info("error = {} , msg = {}",error,msg);
         model.addAttribute("error",error);
         model.addAttribute("msg",msg);
         model.addAttribute("loginForm",new LoginForm());
