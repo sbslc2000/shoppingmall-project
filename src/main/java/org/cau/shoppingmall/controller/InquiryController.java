@@ -2,6 +2,7 @@ package org.cau.shoppingmall.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.cau.shoppingmall.dto.inquiry.OneToOneInquiryDto;
 import org.cau.shoppingmall.dto.inquiry.OneToOneInquiryForm;
 import org.cau.shoppingmall.dto.review.ReviewForm;
 import org.cau.shoppingmall.exception.NoAuthInfoFoundException;
@@ -54,7 +55,22 @@ public class InquiryController {
 
 
         return "redirect:/inquiry";
+    }
 
+    @GetMapping("/inquiry")
+    public String inquiryHandler(Model model,HttpSession session) {
+
+        try {
+            Long userId = loginService.getUserId(session);
+
+            List<OneToOneInquiryDto> inquiryList = inquiryService.getByUserId(userId);
+            model.addAttribute("inquiryList", inquiryList);
+
+            return "inquiry/inquiry";
+        } catch (NoAuthInfoFoundException e) {
+            e.printStackTrace();
+            return "redirect:/login";
+        }
 
     }
 }

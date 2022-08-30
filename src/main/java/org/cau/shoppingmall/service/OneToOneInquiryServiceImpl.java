@@ -1,6 +1,7 @@
 package org.cau.shoppingmall.service;
 
 import lombok.RequiredArgsConstructor;
+import org.cau.shoppingmall.dto.inquiry.OneToOneInquiryDto;
 import org.cau.shoppingmall.dto.inquiry.OneToOneInquiryForm;
 import org.cau.shoppingmall.entity.inquiry.InquiryType;
 import org.cau.shoppingmall.entity.inquiry.OneToOneInquiry;
@@ -12,8 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -43,7 +46,16 @@ public class OneToOneInquiryServiceImpl implements OneToOneInquiryService{
 
         return savedOneToOneInquiry;
 
+    }
 
+    public List<OneToOneInquiryDto> getByUserId(Long userId) {
+        List<OneToOneInquiry> inquiryList = oneToOneInquiryRepository.findByUserId(userId);
+
+        List<OneToOneInquiryDto> dtoList = inquiryList.stream().map((m) -> OneToOneInquiryDto.of(m)).collect(Collectors.toList());
+
+        dtoList.sort(Comparator.comparing(OneToOneInquiryDto::getId).reversed());
+
+        return dtoList;
 
     }
 }

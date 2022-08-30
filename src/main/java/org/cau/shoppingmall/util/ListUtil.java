@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.stream.Collectors;
 
 public class ListUtil {
 
@@ -15,13 +16,7 @@ public class ListUtil {
         String replace1 = replace.replace("]","");
         List<String> myList = new ArrayList<String>(Arrays.asList(replace1.split(",")));
 
-        List<String> result = new ArrayList<>();
-        for(String s : myList) {
-            s = s.trim();
-            result.add(s);
-        }
-
-
+        List<String> result = myList.stream().map((s) -> s.trim()).collect(Collectors.toList());
 
         return result;
     }

@@ -9,13 +9,13 @@
 <body>
 <header>
     <div class="banner">
-        <a th:href="@{/}">
+        <a th:href="@{/home}">
             <h1>우당탕탕 개발자</h1>
          </a>
     </div>
     <div class="searchArea">
-        <form>
-            <input type="search" placeholder="원하는 상품을 검색해주세요">
+        <form th:action="@{/home}" method="get">
+            <input name="search" type="search" placeholder="원하는 상품을 검색해주세요">
         </form>
     </div>
 

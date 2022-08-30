@@ -21,4 +21,5 @@ public class OneToOneAnswer {
     private LocalDateTime registerDate;
 
     private String content;
+
 }
