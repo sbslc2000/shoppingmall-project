@@ -25,4 +25,10 @@ public class AccountData {
     @Column(name = "register_date")
     private LocalDateTime registerDate;
 
+    @Column(name = "sms_agreement")
+    private boolean smsAgreement;
+
+    public void setLateDateToNow() {
+        lateDate = LocalDateTime.now();
+    }
 }

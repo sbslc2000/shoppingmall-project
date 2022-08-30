@@ -15,6 +15,8 @@ import org.cau.shoppingmall.service.LoginService;
 import org.cau.shoppingmall.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +26,7 @@ import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -54,7 +57,7 @@ public class AccountController {
      * 로그인 처리를 한다.
      * */
     @PostMapping("/login")
-    public String loginHandler(LoginForm form,HttpSession session, RedirectAttributes redirect) {
+    public String loginHandler(LoginForm form, HttpSession session, RedirectAttributes redirect) {
 
         try {
             AuthInfo login = loginService.login(form, session);
@@ -88,10 +91,13 @@ public class AccountController {
 
     // 회원가입 페이지의 내용을 넘겨주는 역할이 필요
     @PostMapping("/users")
-    public String createUser(UserForm userForm,RedirectAttributes redirect) {
-        User user = new User();
+    public String createUser(@Validated UserForm userForm, RedirectAttributes redirect, BindingResult bindingResult) {
 
-        user = userService.create(userForm);
+        if(bindingResult.hasErrors()) {
+            List<String> errors = bindingResult.getAllErrors().stream().map(e -> e.getDefaultMessage()).collect(Collectors.toList());
+        }
+
+        User user = userService.create(userForm);
 
         redirect.addFlashAttribute("loginForm",new LoginForm());
         return "redirect:/login";
@@ -99,7 +105,8 @@ public class AccountController {
     }
 
     /*
-    * 아이디 비밀번호 찾기 페이지를 반환한다.
+    *
+    * TODO:아이디 비밀번호 찾기 페이지를 반환한다.
     * */
     @GetMapping("/users/find")
     public String findIdOrPassword() {
@@ -108,6 +115,9 @@ public class AccountController {
     }
 
 
+    /*
+    * todo: 유저 업데이트 정보를 받아 정보를 수정한다.
+    * */
     @PostMapping("/users/update")
     public String userUpdate(UserUpdateForm form,RedirectAttributes redirect) {
 

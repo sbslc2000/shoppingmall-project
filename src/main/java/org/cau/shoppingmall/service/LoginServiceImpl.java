@@ -34,6 +34,7 @@ public class LoginServiceImpl implements LoginService {
                     .build();
 
 
+            user.getAccountData().setLateDateToNow();
             session.setAttribute("authInfo",authInfo);
 
             return authInfo;

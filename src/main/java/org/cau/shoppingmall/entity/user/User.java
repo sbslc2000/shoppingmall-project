@@ -49,6 +49,9 @@ public class User implements UserInterface {
     @JoinColumn(name = "account_data")
     private AccountData accountData;
 
+    @Column( name = "phone_number")
+    private String phoneNumber;
+
     @ManyToOne
     @JoinColumn(name = "authority")
     private Authority authority;

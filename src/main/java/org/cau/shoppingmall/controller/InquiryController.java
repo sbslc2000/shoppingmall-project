@@ -12,6 +12,8 @@ import org.cau.shoppingmall.service.OneToOneInquiryService;
 import org.hibernate.mapping.OneToOne;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -41,8 +44,13 @@ public class InquiryController {
 
     @PostMapping("/inquiry")
     public String createInquiry(RedirectAttributes redirect, HttpSession session,
-                                List<MultipartFile> imgList, OneToOneInquiryForm form) {
+                                List<MultipartFile> imgList, @Validated OneToOneInquiryForm form,
+                                BindingResult bindingResult) {
 
+        //유효성 검사
+        if(bindingResult.hasErrors()) {
+            List<String> errors = bindingResult.getAllErrors().stream().map(e -> e.getDefaultMessage()).collect(Collectors.toList());
+        }
         try{
             Long userId = loginService.getUserId(session);
             inquiryService.create(form,userId,imgList);

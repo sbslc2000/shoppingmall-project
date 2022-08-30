@@ -61,12 +61,12 @@
         </div>
         <div class="row">
             <div class="col-4"></div>
-            <div class="col-1"><input type="text" id='year' class="form-control" placeholder="년(4자)"></div>
+            <div class="col-1"><input th:field="*{birthdayYear}"type="text" id='year' class="form-control" placeholder="년(4자)"></div>
 
             <div class="col-1">
 
-                <select id="monthselect" class="form-select">
-                    <option selected>월</option>
+                <select th:field="*{birthdayMonth}" id="monthselect" class="form-select">
+                    <option value="" selected>월</option>
                     <script>
                         i=1;
                         while(i<13){
@@ -80,8 +80,8 @@
             </div>
 
             <div class="col-1">
-                <select id='dayselect' class="form-select">
-                    <option selected>일</option>
+                <select th:field="*{birthdayDay}" id='dayselect' class="form-select">
+                    <option  value = "" selected>일</option>
                     <script>
                         var elem = document.getElementById("monthselect");
                         if (elem.value=='2'){
@@ -150,10 +150,10 @@
 
         <div class="row">
             <div class="col-4"></div>
-            <div class="col-2"><input type="text" id="mailinput" name="email" class="form-control" placeholder="이메일"></div>
+            <div class="col-2"><input th:field="*{email}" type="text" id="mailinput" name="email" class="form-control" placeholder="이메일"></div>
             <div class="col-2">
-                <select name class="form-select">
-                    <option selected>직접입력</option>
+                <select th:field="*{emailAfterAt}" class="form-select">
+                    <option value = "" selected>직접입력</option>
                     <option value="@naver.com">@naver.com</option>
                     <option value="@gmail.com">@gmail.com</option>
                     <option value="@daum.net">@daum.net</option>
@@ -171,7 +171,7 @@
 
                 <div class="form-check">
 
-                    <input class="form-check-input" type="checkbox" value="" id="agreeform">
+                    <input th:field="*{smsAgreement}" class="form-check-input" type="checkbox" value="" id="agreeform">
                     <label class="form-check-label" for="agreeform">
                         광고 SMS 및 메일 수신 동의 (선택)
                     </label>

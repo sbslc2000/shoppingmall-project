@@ -52,6 +52,7 @@ public class UserServiceImpl implements UserService{
         ShoppingData savedShoppingData = shoppingDataRepository.save(buildedShoppingData);
 
         AccountData buildedAccountData = new AccountData().builder()
+                .smsAgreement(userForm.isSmsAgreement())
                 .lateDate(LocalDateTime.now())
                 .registerDate(LocalDateTime.now())
                 .build();
@@ -62,7 +63,8 @@ public class UserServiceImpl implements UserService{
                 .userId(userForm.getUserId())
                 .password(BCrypt.hashpw(userForm.getPassword(),BCrypt.gensalt()))
                 .userName(userForm.getUserName())
-                .birthday(userForm.getBirthday())
+                .birthday(userForm.getBirthdayYear()+userForm.getBirthdayMonth()+userForm.getBirthdayDay())
+                .phoneNumber(userForm.getPhoneNumber())
                 .email(userForm.getEmail())
                 .address(userForm.getAddressCode()+":"+userForm.getAddress()+":"+userForm.getAddressDetails())
                 .shoppingData(savedShoppingData)
