@@ -1,0 +1,332 @@
+* {
+        font-family: 'Noto Sans KR', sans-serif;
+        list-style: none;
+        text-decoration: none;
+        color: black;
+        margin: auto;
+        align-items: center;
+        box-sizing: border-box;
+    }
+    
+    body {
+        margin-left: 24px;
+    }
+    
+    #banner {
+        text-align: center;
+        padding: 25px;
+        font-size: 50px;
+    }
+    
+    #login {
+        margin-top: 45px;
+    }
+    
+    header {
+        align-items: center;
+        border: 5px, solid, gray;
+    }
+    
+    .searchArea {
+        display: flex;
+        width: 500px;
+        height: 30px;
+        background: rgb(240, 240, 240);
+        border-radius: 40px 40px 40px 40px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    
+    .searchArea>form>input {
+        border: none;
+        width: 400px;
+        height: 20px;
+        background: rgb(240, 240, 240);
+        text-align: center;
+    }
+    
+    .searchArea>form>input::placeholder {
+        color: rgb(192, 192, 192);
+    }
+    
+    a {
+        color: black;
+        text-decoration: none;
+        color: black;
+        width: 1000;
+    }
+    
+    #catenav {
+        border-top: 1px solid gray;
+        border-bottom: 1px solid gray;
+    }
+    
+    ul,
+    .breadcrumb {
+        margin: 0px;
+    }
+    
+    nav ul li {
+        display: inline-block;
+        margin-right: 50px;
+        margin-left: 50px;
+        padding: 10px;
+    }
+    
+    #cate {
+        margin-left: 30px;
+        margin-top: 10px;
+        border-left: 15px;
+        color: gray;
+        font-size: 25px;
+        display: block;
+        height: 30px;
+    }
+    
+    #likesell {
+        margin-left: 30px;
+        margin-top: 10px;
+        border-left: 15px;
+        color: gray;
+        font-size: 25px;
+        margin-bottom: 10px;
+    }
+    
+    .carousel-inner {
+        max-width: 90%;
+        height: auto;
+    }
+    
+    #carouselExampleIndicators {
+        margin: 20px;
+        margin-left: 0px;
+        margin-top: 0;
+        margin-bottom: 5px;
+    }
+    
+    #itemname {
+        font-size: 40px;
+        margin-left: 25px;
+        font-weight: 500;
+    }
+    
+    #compname {
+        margin-left: 25px;
+        font-size: 25px;
+        font-weight: 100;
+    }
+    
+    #priceselect {
+        box-sizing: border-box;
+        margin-top: 100px;
+        margin-left: 10px;
+        width: 400px;
+        background-color: rgb(214, 214, 214);
+        border-radius: 25px 25px;
+        padding-bottom: 30px;
+    }
+    
+    #showprice {
+        font-size: 40px;
+        padding-top: 30px;
+        padding-left: 35px;
+    }
+    
+    #selects {
+        width: 300px;
+        margin-top: 20px;
+    }
+    
+    .form-select {
+        margin-bottom: 15px;
+    }
+    
+    .btns {
+        margin-top: 60px;
+    }
+    
+    #buy,
+    #bucket {
+        margin-left: 80px;
+        margin-top: 15px;
+        display: block;
+        align-items: center;
+        width: 250px;
+        height: 40px;
+    }
+    
+    .btn.btn-outline-secondary.minus {
+        margin-right: 10px;
+        height: 30px;
+        width: 30px;
+        border-radius: 100px;
+        padding: 0px;
+    }
+    
+    #likebutton {
+        margin-left: 360px;
+        margin-top: 30px;
+        height: 54px;
+        width: 54px;
+        border-radius: 100px;
+        padding: 0px;
+        font-size: 35px;
+        color: pink;
+        background-color: white;
+        border-color: pink;
+    }
+    
+    .btn.btn-outline-secondary.plus {
+        margin-right: 100px;
+        margin-left: 10px;
+        height: 30px;
+        width: 30px;
+        border-radius: 100px;
+        padding: 0px;
+    }
+    
+    #sumprice {
+        margin-left: 130;
+        font-size: 20px;
+        width: 200px;
+        border: 1px;
+    }
+    
+    #bucketalert {
+        display: none;
+    }
+    
+    #homereviewqna {
+        margin-left: 150px;
+        margin-right: 150px;
+    }
+    
+    .nav-item {
+        margin: 0px;
+    }
+    
+    .myTab {
+        margin: 30px;
+    }
+    
+    #home-tab,
+    #review-tab,
+    #qna-tab {
+        font-size: 25px;
+        text-decoration: none;
+        margin-left: 0px;
+        margin-right: 0px;
+        width: 332px;
+        height: 50px;
+    }
+    
+    .nav-tabs .nav-link {
+        color: black;
+    }
+    
+    .imgs {
+        display: block;
+        max-width: 60%;
+        height: auto;
+    }
+    
+    .star-rating {
+        width: 223px;
+    }
+    
+    .star-rating,
+    .star-rating span {
+        display: inline-block;
+        height: 40px;
+        overflow: hidden;
+        background: url(star1.png)no-repeat;
+    }
+    
+    .star-rating span {
+        background-position: left bottom;
+        line-height: 0;
+        vertical-align: top;
+    }
+    
+    #starpoint {
+        margin-top: 20px;
+        font-size: 38px;
+    }
+    
+    .star-rating1 {
+        width: 100px;
+    }
+    
+    .star-rating1,
+    .star-rating1 span {
+        display: inline-block;
+        height: 18px;
+        overflow: hidden;
+        background: url(star2.png)no-repeat;
+    }
+    
+    .star-rating1 span {
+        background-position: left bottom;
+        line-height: 0;
+        vertical-align: top;
+    }
+    
+    .reviewimg {
+        margin-top: 10px;
+    }
+    
+    .list-group-item.active {
+        background-color: none;
+    }
+    
+    .reviewcolor {
+        margin-right: 30px;
+    }
+    
+    .reviewsize {
+        width: 150px;
+        margin-left: 0;
+        margin-right: 15px;
+    }
+    
+    .list-group-item {
+        padding-left: 0px;
+        padding-right: 0px;
+        margin-left: 0px;
+        width: 996px;
+    }
+    
+    .reviewP {
+        margin: 0px;
+        width: 600px;
+    }
+    
+    .QnaContainer {
+        margin-top: 10px;
+    }
+    
+    .QnaNumT,
+    .QnaTitleT,
+    .QnaWritterT,
+    .QnaDataT,
+    .QnaNum,
+    .QnaTitle,
+    .QnaWritter,
+    .QnaData {
+        margin: 0px 0px 0px 0px;
+        display: inline;
+        font-size: 20px;
+        padding: 3px 0px 3px 0px;
+    }
+    
+    .QnaList {
+        border-bottom: solid 1px rgb(216, 216, 216);
+    }
+    
+    #Qnabtn {
+        margin-left: 870px;
+        margin-top: 30px;
+        border: solid 1px rgb(216, 216, 216);
+        font-size: 20px;
+    }
