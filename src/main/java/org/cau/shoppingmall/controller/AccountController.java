@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.cau.shoppingmall.dto.Users.AuthInfo;
 import org.cau.shoppingmall.dto.Users.LoginForm;
 import org.cau.shoppingmall.dto.Users.UserForm;
+import org.cau.shoppingmall.dto.Users.UserUpdateForm;
 import org.cau.shoppingmall.dto.item.ItemDto;
 import org.cau.shoppingmall.entity.user.User;
 import org.cau.shoppingmall.exception.LoginFailedException;
@@ -104,6 +105,13 @@ public class AccountController {
     public String findIdOrPassword() {
 
         return "users/find";
+    }
+
+
+    @PostMapping("/users/update")
+    public String userUpdate(UserUpdateForm form,RedirectAttributes redirect) {
+
+        return "redirect:/mypage";
     }
 
 
