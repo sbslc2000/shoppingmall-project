@@ -18,6 +18,8 @@ import java.util.List;
 @AllArgsConstructor
 public class ReviewDto {
 
+    private Long id;
+
     private ItemDto item;
 
     private String username;
@@ -38,6 +40,7 @@ public class ReviewDto {
         List<String> parsedImg = ListUtil.parse(review.getImg());
         ItemDto itemDto = ItemDto.of(review.getItem());
         return new ReviewDto().builder()
+                .id(review.getId())
                 .item(itemDto)
                 .username(review.getUser().getUserName())
                 .registerDate(LocalDateTime.now())

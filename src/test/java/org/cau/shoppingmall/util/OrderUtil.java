@@ -5,6 +5,8 @@ import org.cau.shoppingmall.dto.orders.OrderedItemForm;
 import org.cau.shoppingmall.repository.order.OrderProcessRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -64,5 +66,35 @@ public class OrderUtil {
         orderedItemForm.setQuantity(quantity);
 
         return orderedItemForm;
+    }
+
+    /*
+    * itemId = 1, quantity = 3, size=free, color = white
+    * */
+    public OrderForm createOrderFormSet1() {
+        List<OrderedItemForm> orderedItemFormList = new ArrayList<>();
+        OrderedItemForm orderedItemForm = createOrderedItemForm(1L, 1L, 3L, 3);
+
+        orderedItemFormList.add(orderedItemForm);
+
+        OrderForm orderForm = createOrderForm(orderedItemFormList);
+
+        return orderForm;
+    }
+
+    /*
+    * itemId = 2, quantity = 5, size = free, color = 2
+    * itemId = 11 ,quantity = 20, size= free ,color = 7
+    * */
+    public OrderForm createOrderFormSet2() {
+        List<OrderedItemForm> orderedItemFormList = new ArrayList<>();
+        OrderedItemForm orderedItemForm1 = createOrderedItemForm(2L, 2L, 3L, 5);
+        OrderedItemForm orderedItemForm2 = createOrderedItemForm(11L, 7L, 3L, 20);
+        orderedItemFormList.add(orderedItemForm1);
+        orderedItemFormList.add(orderedItemForm2);
+
+        OrderForm orderForm = createOrderForm(orderedItemFormList);
+
+        return orderForm;
     }
 }

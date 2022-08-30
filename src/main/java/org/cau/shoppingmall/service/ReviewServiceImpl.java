@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -119,6 +120,8 @@ public class ReviewServiceImpl implements ReviewService {
 
         List<ReviewDto> result = reviewList.stream().map( (review) -> ReviewDto.of(review)
         ).collect(Collectors.toList());
+
+        result.sort(Comparator.comparing(ReviewDto::getId).reversed());
 
         return result;
     }
