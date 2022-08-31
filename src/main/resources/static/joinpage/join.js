@@ -33,7 +33,7 @@ function checkpw() {
     if ((check_char != 0) && (check_eng != 0)) {
         for (var i = 0; i < eng.length; i++) {
             if (pw11.indexOf(num[i]) != -1) {
-                check_char = 1;
+                check_num = 1;
                 break;
             }
         }
