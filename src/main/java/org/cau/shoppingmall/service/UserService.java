@@ -1,8 +1,6 @@
 package org.cau.shoppingmall.service;
 
-import org.cau.shoppingmall.dto.Users.UserDto;
-import org.cau.shoppingmall.dto.Users.UserForm;
-import org.cau.shoppingmall.dto.Users.UserUpdateForm;
+import org.cau.shoppingmall.dto.Users.*;
 import org.cau.shoppingmall.entity.user.User;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,6 +45,12 @@ public interface UserService {
     -User 삭제
     */
     void delete(Long userId);
+
+    String validateAndGetUserId(FindUserIdForm form);
+
+    void validateAndSendEmailContainsUserPassword(FindUserPasswordForm form);
+
+
 
 
 }
