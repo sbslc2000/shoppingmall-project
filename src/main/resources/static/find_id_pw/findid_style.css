@@ -1,0 +1,77 @@
+#id-tab,
+#pw-tab {
+    font-size: 20px;
+    text-decoration: none;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 208px;
+    height: 50px;
+}
+
+.nav-tabs .nav-link {
+    color: black;
+}
+
+#myTab {
+    display: inline-flex;
+}
+
+#idname,
+#idnum,
+#pwid,
+#pwname,
+#pwnum {
+    display: inline-flex;
+    width: 250px;
+}
+
+#idname,
+#pwid {
+    margin-top: 50px;
+    margin-bottom: 15px;
+}
+
+#pwname,
+#pwnum {
+    margin-bottom: 15px;
+}
+
+#idbtn {
+    margin-top: 40px;
+    width: 200px;
+}
+
+#banner {
+    margin-top: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 25px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: rgb(204, 204, 204);
+}
+
+#idresult,
+.pwresult {
+    font-size: 20px;
+    margin-top: 20px;
+    display: none;
+    margin-right: 60px;
+}
+
+#userid {
+    font-size: 25px;
+    margin-top: 30px;
+    display: none;
+}
+
+#pwemail {
+    width: 180px;
+}
+
+#idwarn,
+#pwwarn {
+    display: none;
+    color: red;
+}
