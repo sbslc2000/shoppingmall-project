@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -25,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -91,13 +93,31 @@ public class AccountController {
 
     // 회원가입 페이지의 내용을 넘겨주는 역할이 필요
     @PostMapping("/users")
-    public String createUser(@Validated UserForm userForm, RedirectAttributes redirect, BindingResult bindingResult) {
-
+    public String createUser(@Validated @ModelAttribute UserForm userForm,BindingResult bindingResult, RedirectAttributes redirect) {
+        log.info("postMapping : /users");
         if(bindingResult.hasErrors()) {
-            List<String> errors = bindingResult.getAllErrors().stream().map(e -> e.getDefaultMessage()).collect(Collectors.toList());
+            log.info("bindingResult.hasErrors");
+            List<String> bindingErrors = bindingResult.getAllErrors().stream().map(e -> e.getDefaultMessage()).collect(Collectors.toList());
+            for(String errors : bindingErrors) {
+                log.info(errors);
+            }
+            redirect.addFlashAttribute("bindingErrors",bindingErrors);
+            redirect.addFlashAttribute("userForm",userForm);
+
+            log.info("before Redirect");
+            return "redirect:/user/join";
         }
 
-        User user = userService.create(userForm);
+        try {
+            User user = userService.create(userForm);
+        } catch (IllegalArgumentException e) {
+            List<String> bindingErrors = new ArrayList<>();
+            bindingErrors.add(e.getMessage());
+            redirect.addFlashAttribute("bindingErrors",bindingErrors);
+            redirect.addFlashAttribute("userForm",userForm);
+            return "redirect:/user/join";
+        }
+
 
         redirect.addFlashAttribute("loginForm",new LoginForm());
         return "redirect:/login";

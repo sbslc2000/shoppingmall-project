@@ -33,11 +33,11 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public User create(UserForm userForm) {
+    public User create(UserForm userForm) throws IllegalStateException{
         /*중복회원처리*/
         userRepository.findByUserId(userForm.getUserId())
                 .ifPresent(u -> {
-                    throw new IllegalStateException("이미 존재하는 아이디입니다.");
+                    throw new IllegalArgumentException("이미 존재하는 아이디입니다.");
                 });
 
         //user 정보 저장

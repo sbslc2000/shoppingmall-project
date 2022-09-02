@@ -18,7 +18,7 @@ public interface UserService {
     */
 
     @Transactional
-    User create(UserForm userForm);
+    User create(UserForm userForm) throws IllegalArgumentException;
 
     /*
             User get : Id에 해당하는 user 정보를 반환한다

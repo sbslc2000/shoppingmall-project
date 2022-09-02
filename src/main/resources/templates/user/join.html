@@ -33,7 +33,7 @@
             <div class="col-4"></div>
             <div class="col-3">
                 <span>아이디</span>
-                <input type="text" th:field="*{userId}" class="form-control" id="idinput" placeholder="영문 소문자, 숫자만 사용 가능">
+                <input type="text" th:field="*{userId}" th:value="${userForm.userId}" class="form-control" id="idinput" placeholder="영문 소문자, 숫자만 사용 가능">
                 <span id="warnid"><br></span>
             </div>
             <div class="col-2" id="doublecheck">
@@ -55,19 +55,19 @@
                 <div id="pw2warn"><br></div>
 
                 <span>이름 <span id="warnname"> </span></span>
-                <input th:field="*{userName}" type="text" class="form-control" id="nameinput">
+                <input th:field="*{userName}" th:value="${userForm.userName}" type="text" class="form-control" id="nameinput">
                 <div>생년월일 <span id="warnbirth"></span></div>
             </div>
         </div>
         <div class="row">
             <div class="col-4"></div>
-            <div class="col-1"><input th:field="*{birthdayYear}"type="text" id='year' class="form-control" placeholder="년(4자)"></div>
+            <div class="col-1"><input th:field="*{birthdayYear}" th:value="${userForm.birthdayYear}" type="text" id='year' class="form-control" placeholder="년(4자)"></div>
 
             <div class="col-1">
 
                 <select th:field="*{birthdayMonth}" id="monthselect" class="form-select">
                     <option value="" selected>월</option>
-                    <script>
+                    <script th:inline="javascript">
                         i=1;
                         while(i<13){
                             document.write('<option value='+i+'>'+i+'</option>');
@@ -116,7 +116,7 @@
             <div class="col-4"></div>
             <div class="col-3" style="margin-top:25px">
                 <div>휴대폰 <span id="warnphone"></span></div>
-                <input type="text" class="form-control" name="phone" id="phoneinput" placeholder="(-없이 입력)">
+                <input type="text" class="form-control" th:field="*{phoneNumber}" th:value="${userForm.phoneNumber}" id="phoneinput" placeholder="(-없이 입력)">
 
             </div>
         </div>
@@ -125,7 +125,7 @@
             <div class="col-4"></div>
             <div class="col-2">
                 <div>우편번호(선택) </div>
-                <input th:field="*{addressCode}" type="text" class="form-control" id="addnuminput">
+                <input th:field="*{addressCode}" th:value="${userForm.addressCode}" type="text" class="form-control" id="addnuminput">
 
             </div>
             <div class="col-2">
@@ -140,8 +140,8 @@
             <div class="col-3">
                 <div>주소(선택) </div>
                 <div id="addinput">
-                    <input th:field="*{address}" type="text" class="form-control" placeholder="주소" id="address">
-                    <input th:field="*{addressDetails}" type="text" class="form-control" placeholder="상세주소" id="detailaddress">
+                    <input th:field="*{address}" th:value="${userForm.address}" type="text" class="form-control" placeholder="주소" id="address">
+                    <input th:field="*{addressDetails}"  th:value="${userForm.addressDetails}" type="text" class="form-control" placeholder="상세주소" id="detailaddress">
                 </div>
 
                 <div style="margin-top:25px;">이메일 <span id="warnmail"></span></div>
@@ -150,7 +150,7 @@
 
         <div class="row">
             <div class="col-4"></div>
-            <div class="col-2"><input th:field="*{email}" type="text" id="mailinput" name="email" class="form-control" placeholder="이메일"></div>
+            <div class="col-2"><input th:field="*{email}" th:value="${userForm.email}" type="text" id="mailinput" name="email" class="form-control" placeholder="이메일"></div>
             <div class="col-2">
                 <select th:field="*{emailAfterAt}" class="form-select">
                     <option value = "" selected>직접입력</option>
@@ -190,6 +190,13 @@
     </div>
 </form>
 
+<script th:inline="javascript">
+
+    var bindingErrors = [[ ${bindingErrors} ]];
+    if(bindingErrors != null ) {
+        alert(bindingErrors[0]);
+    }
+</script>
 
 
 </body>

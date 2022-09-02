@@ -74,5 +74,13 @@
 
 </body>
 
+<script th:inline="javascript">
+
+    var errors = [[ ${errors} ]];
+    if(errors != null ) {
+        alert(errors[0]);
+    }
+</script>
+
 </html>
 
