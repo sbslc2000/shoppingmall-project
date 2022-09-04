@@ -1,0 +1,244 @@
+    * {
+        font-family: 'Noto Sans KR', sans-serif;
+        list-style: none;
+        text-decoration: none;
+        color: black;
+        margin: auto;
+        align-items: center;
+        box-sizing: border-box;
+    }
+    
+    body {
+        margin-left: 24px;
+    }
+    
+    #banner {
+        text-align: center;
+        padding: 25px;
+        font-size: 50px;
+    }
+    
+    #login {
+        margin-top: 45px;
+    }
+    
+    header {
+        align-items: center;
+        border: 5px, solid, gray;
+    }
+    
+    .searchArea {
+        display: flex;
+        width: 500px;
+        height: 30px;
+        background: rgb(240, 240, 240);
+        border-radius: 40px 40px 40px 40px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    
+    .searchArea>form>input {
+        border: none;
+        width: 400px;
+        height: 20px;
+        background: rgb(240, 240, 240);
+        text-align: center;
+    }
+    
+    .searchArea>form>input::placeholder {
+        color: rgb(192, 192, 192);
+    }
+    
+    a {
+        color: black;
+        text-decoration: none;
+        color: black;
+        width: 1000;
+    }
+    
+    #catenav {
+        border-top: 1px solid gray;
+        border-bottom: 1px solid gray;
+    }
+    
+    ul,
+    .breadcrumb {
+        margin: 0px;
+    }
+    
+    nav ul li {
+        display: inline-block;
+        margin-right: 50px;
+        margin-left: 50px;
+    }
+    
+    #pagetitle {
+        margin: 20px;
+    }
+    
+    .user {
+        font: 40px bold black;
+    }
+    
+    .pointword {
+        font: 35px bold black;
+    }
+    
+    .nim {
+        font-size: 25px;
+        color: rgb(107, 106, 106);
+    }
+    
+    #modify {
+        width: 150px;
+        margin: 10px;
+    }
+    
+    .usertop {
+        margin-left: 0px;
+    }
+    
+    #point,
+    .P {
+        font-size: 40px;
+    }
+    
+    .P {
+        color: rgb(107, 106, 106);
+    }
+    
+    .pointcol {
+        margin: 0px;
+        width: 324px;
+    }
+    
+    .top {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: solid 1px black;
+    }
+    
+    .delivery {
+        font-size: 25px;
+        width: 150px;
+    }
+    
+    .b {
+        margin-top: 10px;
+        border-right: solid 1px black;
+        margin-left: 0px;
+        margin-right: 0px;
+        width: 250px;
+        margin-bottom: 10px;
+    }
+    
+    #cancel {
+        margin-right: 0px;
+        width: 100px;
+    }
+    
+    .gun {
+        font-size: 25px;
+    }
+    
+    #cancelcount {
+        margin-left: 0px;
+        width: 100px;
+    }
+    
+    #before,
+    #prepare,
+    #ing,
+    #success {
+        font-size: 40px;
+    }
+    
+    .middle {
+        border-bottom: solid 1px black;
+    }
+    
+    .square {
+        margin-top: 15px;
+        font-size: 25px;
+        height: 130px;
+    }
+    
+    #bucketcnt,
+    #likecnt,
+    #reviewcnt,
+    #QnAcnt {
+        margin-top: 5px;
+        font-size: 40px;
+    }
+    
+    .recentcontainer {
+        margin-top: 10px;
+    }
+    
+    .recent {
+        margin: 12px;
+        width: 185px;
+    }
+    
+    #recentlink {
+        font-size: 25px;
+        text-align: left;
+        margin-left: 15px;
+    }
+    
+    .price,
+    .won,
+    .itemname {
+        font-size: 22px;
+        text-align: left;
+        align-items: left;
+    }
+    
+    .priceNname {
+        font-size: 22px;
+        text-align: left;
+        align-items: left;
+        margin-left: 10px;
+    }
+    
+    .itembox {
+        margin-left: 0px;
+        margin-right: 0px;
+        width: 124px;
+    }
+    
+    .likebox {
+        margin-left: 10px;
+        padding: 0px;
+    }
+    
+    #likebutton1,
+    #likebutton2,
+    #likebutton3,
+    #likebutton4,
+    #likebutton5,
+    #likebutton6 {
+        margin-top: 10px;
+        margin-right: 20px;
+        height: 35px;
+        width: 35px;
+        border-radius: 100px;
+        padding: 0px;
+        font-size: 20px;
+        color: pink;
+        background-color: white;
+        border-color: pink;
+    }
+    
+    .last {
+        font-size: 20px;
+        margin-top: 15px;
+        list-style-type: square
+    }
+    
+    .lastpart {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        list-style-type: square
+    }
