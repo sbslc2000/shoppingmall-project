@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.cau.shoppingmall.dto.Users.UserDto;
+import org.cau.shoppingmall.dto.item.ItemDto;
 import org.cau.shoppingmall.entity.inquiry.ItemInquiry;
 import org.cau.shoppingmall.entity.inquiry.OneToOneInquiry;
 import org.cau.shoppingmall.util.ListUtil;
@@ -20,9 +21,15 @@ public class ItemInquiryDto {
 
     private Long id;
 
+    private ItemDto item;
+
     private UserDto user;
 
+
+
     private String title;
+
+
 
 
     private LocalDateTime registerDate;
@@ -35,6 +42,7 @@ public class ItemInquiryDto {
 
         return new ItemInquiryDto().builder()
                 .id(inquiry.getId())
+                .item(ItemDto.of(inquiry.getItem()))
                 .user(UserDto.of(inquiry.getUser()))
                 .title(inquiry.getTitle())
                 .registerDate(inquiry.getRegisterDate())
@@ -42,4 +50,5 @@ public class ItemInquiryDto {
                 .content(inquiry.getContent())
                 .build();
     }
+
 }

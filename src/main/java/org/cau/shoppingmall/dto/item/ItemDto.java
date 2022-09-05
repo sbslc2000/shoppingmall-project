@@ -43,6 +43,8 @@ public class ItemDto {
 
     private int price;
 
+    private float stars;
+
     private Seller seller;
 
     private Category category;
@@ -76,6 +78,7 @@ public class ItemDto {
                 .id(item.getId())
                 .name(item.getName())
                 .price(item.getPrice())
+                .stars(item.getAverageStars())
                 .seller(item.getSeller())
                 .category(item.getCategory())
                 .quantity(item.getQuantity())

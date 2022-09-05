@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.cau.shoppingmall.entity.item.Item;
 import org.cau.shoppingmall.entity.user.User;
 
 import javax.persistence.*;
@@ -19,6 +20,10 @@ public class ItemInquiry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "item_id")
+    private Item item;
 
     private String title;
 

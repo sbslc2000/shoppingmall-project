@@ -47,13 +47,15 @@ public class ItemInquiryServiceImpl implements ItemInquiryService {
     }
 
     @Override
-    public ItemInquiry create(ItemInquiryForm form, Long userId, List<MultipartFile> multipartFileList) throws IOException {
+    public ItemInquiry create(ItemInquiryForm form, Long userId) throws IOException {
 
         User user = userRepository.findById(userId).get();
-        List<String> imgList = imageService.storeImages(multipartFileList, "iteminquiry");
 
+        Item item = itemRepository.findById(form.getItemId()).orElseThrow(
+                () -> new NoSuchElementException("요청으로 들어온 값의 상품이 없습니다.")
+        );
 
-        ItemInquiry itemInquiry = form.toEntity(user, imgList.toString());
+        ItemInquiry itemInquiry = form.toEntity(user,item);
         ItemInquiry savedItemInquiry = itemInquiryRepository.save(itemInquiry);
 
         return savedItemInquiry;

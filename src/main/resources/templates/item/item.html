@@ -168,7 +168,7 @@
                             </div>
                             <div><span class="reviewsize">사이즈</span><span th:text="${review.size}">L사이즈</span>
                             </div>
-                            <p th:text=${review.content}" class="reviewP">#####################상품의 후기는 여기까지 보이고 길어지면 아랫줄로 내려갑니다. 상품후기 입니다. 상품후기 입니다.
+                            <p th:text="${review.content}" class="reviewP">#####################상품의 후기는 여기까지 보이고 길어지면 아랫줄로 내려갑니다. 상품후기 입니다. 상품후기 입니다.
                             </p>
                         </div>
                     </li>
@@ -187,14 +187,14 @@
                         <div class="col-2 QnaWritterT">작성자</div>
                         <div class="col-2 QnaDataT">작성일</div>
                     </div>
-                    <div th:each="itemInquiry : ${itemInquiryList}" class="row QnaList">
+                    <div th:each="itemInquiry : ${itemInquirys}" class="row QnaList">
                         <div th:text="${itemInquiry.id}" class="col-1 QnaNum">1</div>
                         <div th:text="${itemInquiry.title}" class="col-7 QnaTitle">####상품문의#####</div>
                         <div th:text="${itemInquiry.user.userName}" class="col-2 QnaWritter">userIduserId</div>
                         <div th:text="${itemInquiry.registerDate}"class="col-2 QnaData">22.02.22</div>
                     </div>
                 </div>
-                <a href="" class="btn btn-outline-secondary" id='Qnabtn' type="button">문의하기</a>
+                <a th:href="@{/item/ask/}+${item.id}" class="btn btn-outline-secondary" id='Qnabtn' type="button">문의하기</a>
             </div>
 
         </div>
