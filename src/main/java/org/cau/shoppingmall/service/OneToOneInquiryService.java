@@ -11,4 +11,5 @@ public interface OneToOneInquiryService {
 
     List<OneToOneInquiryDto> getByUserId(Long userId);
     OneToOneInquiry create(OneToOneInquiryForm form, Long userId, List<MultipartFile> multipartFileList) throws IOException;
+
 }

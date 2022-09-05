@@ -56,6 +56,22 @@ public class ImageService {
         return storedFileNameList;
     }
 
+    public List<String> storeImages(List<MultipartFile> multipartFiles,String directory) throws IOException {
+
+        List<String> storedFileNameList = new ArrayList<>();
+        for (MultipartFile multipartFile : multipartFiles) {
+            if (!multipartFile.isEmpty()) {
+                String originalFileName = multipartFile.getOriginalFilename();
+                String storeFileName = createStoreFileName(originalFileName);
+
+                storedFileNameList.add(storeFileName);
+                multipartFile.transferTo(new File(getFullPath(directory,storeFileName)));
+            }
+        }
+
+        return storedFileNameList;
+    }
+
 
 
 
