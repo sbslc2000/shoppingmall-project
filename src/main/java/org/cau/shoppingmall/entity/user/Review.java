@@ -5,7 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.cau.shoppingmall.dto.item.ItemDetails;
+import org.cau.shoppingmall.entity.item.Color;
 import org.cau.shoppingmall.entity.item.Item;
+import org.cau.shoppingmall.entity.item.Size;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -31,7 +33,13 @@ public class Review {
     @JoinColumn( name = "user_id")
     private User user;
 
-    private ItemDetails itemDetails;
+    @ManyToOne
+    @JoinColumn(name = "size_id")
+    private Size size;
+
+    @ManyToOne
+    @JoinColumn(name = "color_id")
+    private Color color;
 
     @Column(name = "register_date")
     private LocalDateTime registerDate;

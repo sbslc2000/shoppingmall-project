@@ -5,7 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.cau.shoppingmall.dto.item.ItemDto;
+import org.cau.shoppingmall.entity.item.Color;
 import org.cau.shoppingmall.entity.item.Item;
+import org.cau.shoppingmall.entity.item.Size;
 import org.cau.shoppingmall.entity.user.Review;
 import org.cau.shoppingmall.util.ListUtil;
 
@@ -23,6 +25,10 @@ public class ReviewDto {
     private ItemDto item;
 
     private String username;
+
+    private String color;
+
+    private String size;
 
     private LocalDateTime registerDate;
 
@@ -48,6 +54,8 @@ public class ReviewDto {
                 .title(review.getTitle())
                 .img(parsedImg)
                 .content(review.getContent())
+                .size(review.getSize().getName())
+                .color(review.getColor().getName())
                 .build();
     }
 

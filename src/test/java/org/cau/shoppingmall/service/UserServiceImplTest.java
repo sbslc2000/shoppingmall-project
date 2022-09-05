@@ -71,6 +71,6 @@ class UserServiceImplTest {
     @Test
     @DisplayName("잘못된 정보가 들어왔을때")
     void passwordTest2() {
-        
+
     }
 }
