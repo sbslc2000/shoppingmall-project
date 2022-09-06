@@ -76,7 +76,13 @@ public class MyPageController {
      * */
     @GetMapping("/userUpdate")
     public String userUpdateForm(HttpSession session, Model model ) {
-
+        //유저 정보 유효성 검사
+        Long userId;
+        try {
+            userId = loginService.getUserId(session);
+        } catch (NoAuthInfoFoundException e) {
+            e.printStackTrace();
+        }
 
         return "mypage/userUpdate";
     }
@@ -102,7 +108,7 @@ public class MyPageController {
     }
 
     /*
-            User Update 부분 post 컨트롫러는 AccountController에 있음
+            User Update 부분 post 컨트롤러는 AccountController에 있음
     */
 
 
