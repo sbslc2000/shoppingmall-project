@@ -2,6 +2,7 @@ package org.cau.shoppingmall.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.cau.shoppingmall.dto.Users.UserDto;
 import org.cau.shoppingmall.dto.inquiry.OneToOneInquiryDto;
 import org.cau.shoppingmall.dto.inquiry.OneToOneInquiryForm;
 import org.cau.shoppingmall.dto.review.ReviewForm;
@@ -9,18 +10,21 @@ import org.cau.shoppingmall.exception.NoAuthInfoFoundException;
 import org.cau.shoppingmall.service.ImageService;
 import org.cau.shoppingmall.service.LoginService;
 import org.cau.shoppingmall.service.OneToOneInquiryService;
+import org.cau.shoppingmall.service.UserService;
 import org.hibernate.mapping.OneToOne;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpSession;
 
@@ -31,6 +35,7 @@ public class InquiryController {
 
     private final OneToOneInquiryService inquiryService;
     private final ImageService imageService;
+    private final UserService userService;
     private final LoginService loginService;
 
     @GetMapping("/inquiry-form")
@@ -71,14 +76,53 @@ public class InquiryController {
         try {
             Long userId = loginService.getUserId(session);
 
-            List<OneToOneInquiryDto> inquiryList = inquiryService.getByUserId(userId);
-            model.addAttribute("inquiryList", inquiryList);
+            UserDto user = userService.get(userId);
+
+            if(user.getAuthority().getId().equals(1L)) {
+                List<OneToOneInquiryDto> inquiryList = inquiryService.getByUserId(userId);
+                model.addAttribute("inquiryList", inquiryList);
+            } else if (user.getAuthority().getId().equals(2L) || user.getAuthority().getId().equals(3L)) {
+                List<OneToOneInquiryDto> inquiryList = inquiryService.getAllInquiries();
+                model.addAttribute("inquiryList", inquiryList);
+            }
 
             return "inquiry/inquiry";
         } catch (NoAuthInfoFoundException e) {
             e.printStackTrace();
             return "redirect:/login";
         }
+    }
 
+    @GetMapping("/inquiry/{inquiryId}")
+    public String showInquiry(Model model, HttpSession session,
+                              @PathVariable Long inquiryId, RedirectAttributes redirect) {
+
+        try {
+            Long userId = loginService.getUserId(session);
+            UserDto user = userService.get(userId);
+
+            OneToOneInquiryDto oneToOneInquiryDto = inquiryService.get(inquiryId);
+            Long userAuthorityId = user.getAuthority().getId();
+
+            if(userAuthorityId.equals(2L)) {
+
+                //관리자일때
+            } else if ( userId.equals(oneToOneInquiryDto.getUser().getId())) {
+                // 질의자 본인일때
+            } else {
+                //권한이 없음
+
+
+                return "redirect:/inquiry";
+
+            }
+
+        } catch (NoAuthInfoFoundException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchElementException e)  {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
