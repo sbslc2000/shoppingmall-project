@@ -67,10 +67,10 @@ public class InquiryController {
         }
 
 
-        return "redirect:/inquiry";
+        return "redirect:/inquiries";
     }
 
-    @GetMapping("/inquiry")
+    @GetMapping("/inquiries")
     public String inquiryHandler(Model model,HttpSession session) {
 
         try {
@@ -104,16 +104,16 @@ public class InquiryController {
             OneToOneInquiryDto oneToOneInquiryDto = inquiryService.get(inquiryId);
             Long userAuthorityId = user.getAuthority().getId();
 
-            if(userAuthorityId.equals(2L)) {
+            if((userAuthorityId.equals(2L) || userAuthorityId.equals(3L)) || userId.equals(oneToOneInquiryDto.getUser().getId()) ) {
+                //관리자일때 || 질의자 본인일때
 
-                //관리자일때
-            } else if ( userId.equals(oneToOneInquiryDto.getUser().getId())) {
-                // 질의자 본인일때
+                model.addAttribute("inquiry",oneToOneInquiryDto);
+                return "inquiry/inquiries";
             } else {
                 //권한이 없음
 
 
-                return "redirect:/inquiry";
+                return "redirect:/inquiries";
 
             }
 
