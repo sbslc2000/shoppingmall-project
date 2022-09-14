@@ -38,7 +38,6 @@ public class AccountController {
 
     private final LoginService loginService;
     private final ItemService itemService;
-    private final UserRepository userRepository;
     private final UserService userService;
 
     /*

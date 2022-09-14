@@ -62,7 +62,7 @@ public class ItemController {
         return "item/item";
     }
 
-    @GetMapping("/ask/{itemId}")
+    @GetMapping("/inquiry/{itemId}")
     public String itemAskForm(@PathVariable Long itemId,
                               Model model) {
 
