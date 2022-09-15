@@ -2,6 +2,7 @@ package org.cau.shoppingmall.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.cau.shoppingmall.dto.Users.LoginForm;
 import org.cau.shoppingmall.dto.Users.UserDto;
 import org.cau.shoppingmall.dto.inquiry.OneToOneInquiryDto;
 import org.cau.shoppingmall.dto.inquiry.OneToOneInquiryForm;
@@ -11,6 +12,7 @@ import org.cau.shoppingmall.service.ImageService;
 import org.cau.shoppingmall.service.LoginService;
 import org.cau.shoppingmall.service.OneToOneInquiryService;
 import org.cau.shoppingmall.service.UserService;
+import org.cau.shoppingmall.user.UserDetails;
 import org.hibernate.mapping.OneToOne;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,8 +59,8 @@ public class InquiryController {
             List<String> errors = bindingResult.getAllErrors().stream().map(e -> e.getDefaultMessage()).collect(Collectors.toList());
         }
         try{
-            Long userId = loginService.getUserId(session);
-            inquiryService.create(form,userId,imgList);
+            UserDetails userDetails = loginService.getUserData(session);
+            inquiryService.create(form, userDetails.getId(), imgList);
 
         } catch (NoAuthInfoFoundException e) {
             e.printStackTrace();
@@ -71,25 +73,25 @@ public class InquiryController {
     }
 
     @GetMapping("/inquiries")
-    public String inquiryHandler(Model model,HttpSession session) {
+    public String inquiryHandler(Model model,HttpSession session,RedirectAttributes redirect) {
 
         try {
-            Long userId = loginService.getUserId(session);
+            UserDetails userDetails =  loginService.getUserData(session);
+            Long userAuthorityId = userDetails.getAuthority().getId();
 
-            UserDto user = userService.get(userId);
-
-            if(user.getAuthority().getId().equals(1L)) {
-                List<OneToOneInquiryDto> inquiryList = inquiryService.getByUserId(userId);
+            if(userAuthorityId.equals(1L)) {
+                List<OneToOneInquiryDto> inquiryList = inquiryService.getByUserId(userDetails.getId());
                 model.addAttribute("inquiryList", inquiryList);
-            } else if (user.getAuthority().getId().equals(2L) || user.getAuthority().getId().equals(3L)) {
+            } else {
                 List<OneToOneInquiryDto> inquiryList = inquiryService.getAllInquiries();
                 model.addAttribute("inquiryList", inquiryList);
             }
 
-            return "inquiry/inquiry";
+            return "inquiry/inquiries";
         } catch (NoAuthInfoFoundException e) {
             e.printStackTrace();
-            return "redirect:/login";
+            redirect.addFlashAttribute("loginForm",new LoginForm());
+            return "redirect:/login?error=true&msg=";
         }
     }
 
@@ -98,17 +100,17 @@ public class InquiryController {
                               @PathVariable Long inquiryId, RedirectAttributes redirect) {
 
         try {
-            Long userId = loginService.getUserId(session);
-            UserDto user = userService.get(userId);
+            UserDetails userDetails = loginService.getUserData(session);
 
             OneToOneInquiryDto oneToOneInquiryDto = inquiryService.get(inquiryId);
-            Long userAuthorityId = user.getAuthority().getId();
+            Long userAuthorityId = userDetails.getAuthority().getId();
 
-            if((userAuthorityId.equals(2L) || userAuthorityId.equals(3L)) || userId.equals(oneToOneInquiryDto.getUser().getId()) ) {
+            if((userAuthorityId.equals(2L) || userAuthorityId.equals(3L)) ||
+                    userDetails.getId().equals(oneToOneInquiryDto.getUser().getId()) ) {
                 //관리자일때 || 질의자 본인일때
 
                 model.addAttribute("inquiry",oneToOneInquiryDto);
-                return "inquiry/inquiries";
+                return "inquiry/inquiry";
             } else {
                 //권한이 없음
 
@@ -119,10 +121,6 @@ public class InquiryController {
 
         } catch (NoAuthInfoFoundException e) {
             throw new RuntimeException(e);
-        } catch (NoSuchElementException e)  {
-            e.printStackTrace();
         }
-
-        return null;
     }
 }

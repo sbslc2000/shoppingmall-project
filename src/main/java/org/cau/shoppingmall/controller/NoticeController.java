@@ -10,6 +10,7 @@ import org.cau.shoppingmall.exception.NoAuthInfoFoundException;
 import org.cau.shoppingmall.service.LoginService;
 import org.cau.shoppingmall.service.NoticeService;
 import org.cau.shoppingmall.service.UserService;
+import org.cau.shoppingmall.user.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,10 +51,9 @@ public class NoticeController {
     public String noticeForm(Model model, HttpSession session,RedirectAttributes redirect) {
 
         try {
-            Long userId = loginService.getUserId(session);
-            UserDto user = userService.get(userId);
+            UserDetails userDetails = loginService.getUserData(session);
 
-            if(user.getAuthority().getId().equals(1L)) {
+            if(userDetails.getAuthority().getId().equals(1L)) {
                 String message = "공지 작성 권한이 없습니다.";
 
                 List<NoticeDto> noticeList = noticeService.get();
@@ -83,10 +83,9 @@ public class NoticeController {
                                HttpSession session, RedirectAttributes redirect) {
 
         try {
-            Long userId = loginService.getUserId(session);
-            UserDto user = userService.get(userId);
+            UserDetails userDetails = loginService.getUserData(session);
 
-            if(user.getAuthority().getId().equals(1L)) {
+            if(userDetails.getAuthority().getId().equals(1L)) {
                 String message = "공지 작성 권한이 없습니다.";
                 List<NoticeDto> noticeList = noticeService.get();
                 redirect.addFlashAttribute("noticeList",noticeList);
@@ -99,7 +98,7 @@ public class NoticeController {
 
 
             //정상적인 권한일시
-            Long noticeId = noticeService.createNotice(form, userId);
+            Long noticeId = noticeService.createNotice(form, userDetails.getId());
 
             List<NoticeDto> noticeList = noticeService.get();
             redirect.addFlashAttribute("noticeList",noticeList);
