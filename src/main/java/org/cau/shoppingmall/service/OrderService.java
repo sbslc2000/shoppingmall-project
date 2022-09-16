@@ -6,6 +6,8 @@ import org.cau.shoppingmall.dto.orders.OrderDto;
 import org.cau.shoppingmall.dto.orders.OrderItem;
 import org.cau.shoppingmall.entity.order.Orders;
 
+import java.util.List;
+
 
 /*
  * OrderService Interface
@@ -48,4 +50,10 @@ public interface OrderService {
     OrderDto get(Long orderId,Long userId) throws Exception;
 
     void setNameData(OrderItem orderItem);
+
+
+    /*
+    * Administration ONLY!!!
+    * */
+    List<OrderDto> getAllOrder();
 }

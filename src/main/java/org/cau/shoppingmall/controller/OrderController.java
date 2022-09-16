@@ -35,7 +35,7 @@ public class OrderController {
                                 HttpSession session, RedirectAttributes redirect) {
 
         try {
-            UserDetails userDetails = loginService.getUserData(session);
+            UserDetails userDetails = loginService.getLoginedUserData(session);
         } catch (NoAuthInfoFoundException e) {
             List<String> errors = new ArrayList<>();
             errors.add("로그인이 필요한 서비스 입니다.");

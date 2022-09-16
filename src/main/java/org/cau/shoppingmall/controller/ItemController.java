@@ -39,7 +39,7 @@ public class ItemController {
 
         UserDto user = null;
         try {
-            UserDetails userDetails = loginService.getUserData(session);
+            UserDetails userDetails = loginService.getLoginedUserData(session);
             user = userDetails.getUser();
         } catch (NoAuthInfoFoundException e) {
         }
@@ -77,7 +77,7 @@ public class ItemController {
     public String createItemInquiry(@ModelAttribute ItemInquiryForm form, RedirectAttributes redirect, HttpSession session) {
 
         try {
-            UserDetails userDetails = loginService.getUserData(session);
+            UserDetails userDetails = loginService.getLoginedUserData(session);
 
             ItemInquiry itemInquiry = itemInquiryService.create(form, userDetails.getId());
 

@@ -59,7 +59,7 @@ public class InquiryController {
             List<String> errors = bindingResult.getAllErrors().stream().map(e -> e.getDefaultMessage()).collect(Collectors.toList());
         }
         try{
-            UserDetails userDetails = loginService.getUserData(session);
+            UserDetails userDetails = loginService.getLoginedUserData(session);
             inquiryService.create(form, userDetails.getId(), imgList);
 
         } catch (NoAuthInfoFoundException e) {
@@ -76,7 +76,7 @@ public class InquiryController {
     public String inquiryHandler(Model model,HttpSession session,RedirectAttributes redirect) {
 
         try {
-            UserDetails userDetails =  loginService.getUserData(session);
+            UserDetails userDetails =  loginService.getLoginedUserData(session);
             Long userAuthorityId = userDetails.getAuthority().getId();
 
             if(userAuthorityId.equals(1L)) {
@@ -100,7 +100,7 @@ public class InquiryController {
                               @PathVariable Long inquiryId, RedirectAttributes redirect) {
 
         try {
-            UserDetails userDetails = loginService.getUserData(session);
+            UserDetails userDetails = loginService.getLoginedUserData(session);
 
             OneToOneInquiryDto oneToOneInquiryDto = inquiryService.get(inquiryId);
             Long userAuthorityId = userDetails.getAuthority().getId();

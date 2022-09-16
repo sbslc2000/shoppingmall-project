@@ -19,10 +19,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -176,5 +174,18 @@ public class OrderServiceImpl implements OrderService{
         orderItem.setColorName(color.getName());
         orderItem.setSizeName(size.getName());
         orderItem.setPrice(orderItem.getQuantity()*item.getPrice());
+    }
+
+    @Override
+    public List<OrderDto> getAllOrder() {
+        List<Orders> findOrders = orderRepository.findAll();
+
+        List<OrderDto> result = findOrders.stream().
+                map(m -> OrderDto.of(m)).
+                sorted(Comparator.comparing(OrderDto::getId).reversed()).
+                collect(Collectors.toList());
+
+
+        return result;
     }
 }

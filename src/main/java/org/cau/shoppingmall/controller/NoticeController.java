@@ -51,7 +51,7 @@ public class NoticeController {
     public String noticeForm(Model model, HttpSession session,RedirectAttributes redirect) {
 
         try {
-            UserDetails userDetails = loginService.getUserData(session);
+            UserDetails userDetails = loginService.getLoginedUserData(session);
 
             if(userDetails.getAuthority().getId().equals(1L)) {
                 String message = "공지 작성 권한이 없습니다.";
@@ -83,7 +83,7 @@ public class NoticeController {
                                HttpSession session, RedirectAttributes redirect) {
 
         try {
-            UserDetails userDetails = loginService.getUserData(session);
+            UserDetails userDetails = loginService.getLoginedUserData(session);
 
             if(userDetails.getAuthority().getId().equals(1L)) {
                 String message = "공지 작성 권한이 없습니다.";

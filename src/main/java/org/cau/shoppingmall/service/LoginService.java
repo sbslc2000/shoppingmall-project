@@ -19,7 +19,7 @@ public interface LoginService {
     /*
     * 세션에 로그인 되어있는 사용자의 정보를 담은 객체를 반환
     * */
-    UserDetails getUserData(HttpSession session) throws NoAuthInfoFoundException;
+    UserDetails getLoginedUserData(HttpSession session) throws NoAuthInfoFoundException;
     /*
     *   session에서 로그인 정보를 삭제한다.
     * */

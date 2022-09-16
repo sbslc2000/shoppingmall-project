@@ -47,7 +47,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public UserDetails getUserData(HttpSession session) throws NoAuthInfoFoundException {
+    public UserDetails getLoginedUserData(HttpSession session) throws NoAuthInfoFoundException {
         AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
         if(authInfo == null) {
             throw new NoAuthInfoFoundException("로그인 정보가 없습니다.");
