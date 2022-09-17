@@ -64,8 +64,15 @@ public class ItemController {
 
     @GetMapping("/ask/{itemId}")
     public String itemAskForm(@PathVariable Long itemId,
-                              Model model) {
+                              Model model,HttpSession session) {
 
+        try {
+            Long userId = loginService.getUserId(session);
+            UserDto user = userService.get(userId);
+            model.addAttribute("user",user);
+        } catch (NoAuthInfoFoundException e) {
+            e.printStackTrace();
+        }
         model.addAttribute("itemInquiryForm",new ItemInquiryForm());
         model.addAttribute("itemId",itemId);
 

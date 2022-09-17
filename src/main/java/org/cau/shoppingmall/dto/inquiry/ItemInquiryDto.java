@@ -34,7 +34,6 @@ public class ItemInquiryDto {
 
     private LocalDateTime registerDate;
 
-    private List<String> img;
 
     private String content;
 
@@ -46,7 +45,6 @@ public class ItemInquiryDto {
                 .user(UserDto.of(inquiry.getUser()))
                 .title(inquiry.getTitle())
                 .registerDate(inquiry.getRegisterDate())
-                .img(ListUtil.parse(inquiry.getImg()))
                 .content(inquiry.getContent())
                 .build();
     }

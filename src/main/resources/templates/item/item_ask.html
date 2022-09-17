@@ -20,8 +20,8 @@
         <div class="row">
             <div class="col"></div>
             <div class="col-6"><span id="banner">U.T.T Developer</span></div>
-            <div class="col" id="login"><a th:if="${user} == null" th:text="로그인 " th:href="@{/login}">로그인 </a>
-                <a th:unless="${user} == null" th:text="로그아웃 " th:href="@{/logout}">로그아웃 </a>| <a th:href="@{/user/join}">회원가입</a></div>
+            <div class="col" id="login"><a th:if="${user} == null" th:text="로그인" th:href="@{/login}">로그인 </a>
+                <a th:unless="${user} == null" th:text="로그아웃" th:href="@{/logout}">로그아웃 </a>| <a th:href="@{/user/join}">회원가입</a></div>
         </div>
         <div class="searchArea">
             <form><input type="search" placeholder="원하는 상품을 검색해주세요"></form>
