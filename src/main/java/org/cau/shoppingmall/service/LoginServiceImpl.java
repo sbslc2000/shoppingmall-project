@@ -8,6 +8,8 @@ import org.cau.shoppingmall.entity.user.User;
 import org.cau.shoppingmall.exception.LoginFailedException;
 import org.cau.shoppingmall.exception.NoAuthInfoFoundException;
 import org.cau.shoppingmall.repository.UserRepository;
+import org.cau.shoppingmall.user.UserDetails;
+import org.cau.shoppingmall.user.UserDetailsImpl;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
@@ -45,14 +47,16 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public Long getUserId(HttpSession session) throws NoAuthInfoFoundException {
+    public UserDetails getLoginedUserData(HttpSession session) throws NoAuthInfoFoundException {
         AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
-
         if(authInfo == null) {
             throw new NoAuthInfoFoundException("로그인 정보가 없습니다.");
         }
 
-        return authInfo.getId();
+        User user = userRepository.findById(authInfo.getId()).get();
+
+        UserDetailsImpl userDetails = new UserDetailsImpl(user);
+        return userDetails;
     }
 
     @Override

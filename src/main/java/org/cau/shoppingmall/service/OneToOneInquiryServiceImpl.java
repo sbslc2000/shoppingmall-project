@@ -48,6 +48,26 @@ public class OneToOneInquiryServiceImpl implements OneToOneInquiryService{
 
     }
 
+    @Override
+    public OneToOneInquiryDto get(Long inquiryId) throws NoSuchElementException {
+        OneToOneInquiry findInquiry = oneToOneInquiryRepository.findById(inquiryId).orElseThrow(
+                () -> new NoSuchElementException("해당 질의내역이 없습니다.")
+        );
+
+        OneToOneInquiryDto result = OneToOneInquiryDto.of(findInquiry);
+
+        return result;
+    }
+
+    @Override
+    public List<OneToOneInquiryDto> getAllInquiries() {
+        List<OneToOneInquiry> findInquiries = oneToOneInquiryRepository.findAll();
+        List<OneToOneInquiryDto> result = findInquiries.stream().map(m -> OneToOneInquiryDto.of(m)).collect(Collectors.toList());
+        result.sort(Comparator.comparing(OneToOneInquiryDto::getId).reversed());
+
+        return result;
+    }
+
     public List<OneToOneInquiryDto> getByUserId(Long userId) {
         List<OneToOneInquiry> inquiryList = oneToOneInquiryRepository.findByUserId(userId);
 

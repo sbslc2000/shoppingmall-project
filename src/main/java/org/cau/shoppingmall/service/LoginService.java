@@ -4,6 +4,7 @@ import org.cau.shoppingmall.dto.Users.AuthInfo;
 import org.cau.shoppingmall.dto.Users.LoginForm;
 import org.cau.shoppingmall.exception.LoginFailedException;
 import org.cau.shoppingmall.exception.NoAuthInfoFoundException;
+import org.cau.shoppingmall.user.UserDetails;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,8 +16,10 @@ public interface LoginService {
     * */
     public AuthInfo login(LoginForm form,HttpSession session) throws LoginFailedException;
 
-
-    Long getUserId(HttpSession session) throws NoAuthInfoFoundException;
+    /*
+    * 세션에 로그인 되어있는 사용자의 정보를 담은 객체를 반환
+    * */
+    UserDetails getLoginedUserData(HttpSession session) throws NoAuthInfoFoundException;
     /*
     *   session에서 로그인 정보를 삭제한다.
     * */

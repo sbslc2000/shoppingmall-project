@@ -10,6 +10,7 @@ import org.cau.shoppingmall.dto.review.ReviewDto;
 import org.cau.shoppingmall.entity.inquiry.ItemInquiry;
 import org.cau.shoppingmall.exception.NoAuthInfoFoundException;
 import org.cau.shoppingmall.service.*;
+import org.cau.shoppingmall.user.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,8 +39,8 @@ public class ItemController {
 
         UserDto user = null;
         try {
-            Long userId = loginService.getUserId(session);
-            user = userService.get(userId);
+            UserDetails userDetails = loginService.getLoginedUserData(session);
+            user = userDetails.getUser();
         } catch (NoAuthInfoFoundException e) {
         }
 
@@ -62,7 +63,7 @@ public class ItemController {
         return "item/item";
     }
 
-    @GetMapping("/ask/{itemId}")
+    @GetMapping("/inquiry/{itemId}")
     public String itemAskForm(@PathVariable Long itemId,
                               Model model,HttpSession session) {
 
@@ -83,9 +84,9 @@ public class ItemController {
     public String createItemInquiry(@ModelAttribute ItemInquiryForm form, RedirectAttributes redirect, HttpSession session) {
 
         try {
-            Long userId = loginService.getUserId(session);
+            UserDetails userDetails = loginService.getLoginedUserData(session);
 
-            ItemInquiry itemInquiry = itemInquiryService.create(form, userId);
+            ItemInquiry itemInquiry = itemInquiryService.create(form, userDetails.getId());
 
             Long itemId = itemInquiry.getItem().getId();
 
@@ -96,11 +97,10 @@ public class ItemController {
             //redirect setting
             List<ReviewDto> reviews = reviewService.getAllReviews(itemId);
             List<ItemInquiryDto> itemInquirys = itemInquiryService.getByItemId(itemId);
-            UserDto user = userService.get(userId);
             ItemDto item = itemService.get(itemId);
             redirect.addFlashAttribute("reviews",reviews);
             redirect.addFlashAttribute("itemInquirys",itemInquirys);
-            redirect.addFlashAttribute("user", user);
+            redirect.addFlashAttribute("user", userDetails.getUser());
             redirect.addFlashAttribute("item",item);
 
             return "redirect:/item/"+itemInquiry.getItem().getId();

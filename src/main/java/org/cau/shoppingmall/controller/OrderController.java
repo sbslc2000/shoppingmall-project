@@ -9,6 +9,7 @@ import org.cau.shoppingmall.entity.order.Orders;
 import org.cau.shoppingmall.exception.NoAuthInfoFoundException;
 import org.cau.shoppingmall.service.LoginService;
 import org.cau.shoppingmall.service.OrderService;
+import org.cau.shoppingmall.user.UserDetails;
 import org.springframework.beans.factory.annotation.Required;import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,7 @@ public class OrderController {
                                 HttpSession session, RedirectAttributes redirect) {
 
         try {
-            Long userId = loginService.getUserId(session);
+            UserDetails userDetails = loginService.getLoginedUserData(session);
         } catch (NoAuthInfoFoundException e) {
             List<String> errors = new ArrayList<>();
             errors.add("로그인이 필요한 서비스 입니다.");
