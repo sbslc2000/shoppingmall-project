@@ -17,10 +17,7 @@
 </head>
 
 <body class="container">
-<script type="text/javascript" th:src="@{/itempage/item_js.js}"></script>
-<script type="text/javascript" th:src="@{/itempage/fetchTest.js}"></script>
-<script type="text/javascript" th:src="@{/itempage/bootstrap.js}"></script>
-<script type="text/javascript" th:src="@{/itempage/ColorConverter.js}"></script>
+
 
 <header>
     <div class="container text-center">
@@ -109,8 +106,8 @@
 
                     </div>
                     <div class=" btns ">
-                        <button class="btn btn-outline-secondary " type="button " id="buy" onclick='goBuyPage()'>구매하기</button>
-                        <button class="btn btn-outline-secondary " type="button " id="bucket" onclick="getbucket()">장바구니 담기</button>
+                        <button class="btn btn-outline-secondary " type="button" id="buy" onclick='goBuyPage()'>구매하기</button>
+                        <button class="btn btn-outline-secondary " type="button" id="bucket" onclick="getbucket()">장바구니 담기</button>
                         <button class="btn btn-outline " type="button" id="likebutton" onclick="likebtn()">♡</button>
                     </div>
                     <div class="alert alert-warning alert-dismissible fade show" role="alert" id="bucketalert">
@@ -194,13 +191,18 @@
                         <div th:text="${itemInquiry.registerDate}"class="col-2 QnaData">22.02.22</div>
                     </div>
                 </div>
-                <a th:href="@{/item/ask/}+${item.id}" class="btn btn-outline-secondary" id='Qnabtn' type="button">문의하기</a>
+                <a th:href="@{/item/inquiry/}+${item.id}" class="btn btn-outline-secondary" id='Qnabtn' type="button">문의하기</a>
             </div>
 
         </div>
     </div>
 </itmemain>
 <br><br><br><br>
+
+<script type="text/javascript" th:src="@{/itempage/item_js.js}"></script>
+<script type="text/javascript" th:src="@{/itempage/fetchTest.js}"></script>
+<script type="text/javascript" th:src="@{/itempage/bootstrap.js}"></script>
+<script type="text/javascript" th:src="@{/itempage/ColorConverter.js}"></script>
 </body>
 
 

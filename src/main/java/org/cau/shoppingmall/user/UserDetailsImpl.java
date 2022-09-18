@@ -9,7 +9,7 @@ public class UserDetailsImpl implements UserDetails{
     private User user;
 
     public UserDetailsImpl(User user){
-        user = user;
+        this.user = user;
     }
 
     @Override

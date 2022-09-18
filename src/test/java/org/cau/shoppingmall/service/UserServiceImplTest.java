@@ -40,7 +40,7 @@ class UserServiceImplTest {
 
 
         //then
-        assertThat(result).isEqualTo("sbslc****");
+        assertThat(result).isEqualTo("onlyForTest****");
     }
 
     @Test

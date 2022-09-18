@@ -151,6 +151,6 @@ public class UserServiceImpl implements UserService{
     }
 
     private String filterUserId(String userId) {
-        return userId.substring(userId.length()-4,userId.length()) + "****";
+        return userId.substring(0,userId.length()-4) + "****";
     }
 }

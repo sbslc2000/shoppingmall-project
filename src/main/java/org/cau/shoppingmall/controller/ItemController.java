@@ -68,8 +68,8 @@ public class ItemController {
                               Model model,HttpSession session) {
 
         try {
-            Long userId = loginService.getUserId(session);
-            UserDto user = userService.get(userId);
+            UserDetails userDetails = loginService.getLoginedUserData(session);
+            UserDto user = userDetails.getUser();
             model.addAttribute("user",user);
         } catch (NoAuthInfoFoundException e) {
             e.printStackTrace();

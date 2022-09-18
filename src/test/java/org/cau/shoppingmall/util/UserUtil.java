@@ -44,7 +44,7 @@ public class UserUtil {
 
 
         User user = new User().builder()
-                .userId("sbslc2000")
+                .userId("onlyForTest2000")
                 .phoneNumber("01042645540")
                 .userName("서범석")
                 .authority(authorityRepository.findById(2L).get())

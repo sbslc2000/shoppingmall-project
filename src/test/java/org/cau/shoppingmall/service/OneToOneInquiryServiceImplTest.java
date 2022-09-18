@@ -37,6 +37,8 @@ class OneToOneInquiryServiceImplTest {
         User user = userUtil.createUser();
         Long userId = user.getId();
         OneToOneInquiryForm form = new OneToOneInquiryForm();
+        form.setContent("1대1 질문 내용입니다.");
+        form.setType(1L);
 
         List<MultipartFile> fileList = new ArrayList<>();
         OneToOneInquiry oneToOneInquiry = inquiryService.create(form, userId, fileList);
