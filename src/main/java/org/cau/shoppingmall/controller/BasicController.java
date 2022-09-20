@@ -5,6 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/*
+*  "/" 을 핸들링 하기 위한 controller
+* */
 @Controller
 @RequiredArgsConstructor
 public class BasicController {
@@ -14,7 +17,6 @@ public class BasicController {
     @GetMapping("/")
     public String goHome(Model model) {
         String view = homeController.homeController(model, null);
-
         return view;
     }
 }

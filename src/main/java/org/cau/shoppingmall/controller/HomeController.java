@@ -50,7 +50,7 @@ public class HomeController {
     public String clothesController(Model model,
                                     @PathVariable String categoryName) {
 
-        log.info("categoryName = {}",categoryName);
+        //log.info("categoryName = {}",categoryName);
         Long categoryId = 0L;
         switch(categoryName) {
             case "clothes":
@@ -66,8 +66,6 @@ public class HomeController {
             default:
                 categoryId = 1L;
         }
-
-        log.info("someone accessed in clothes!");
 
         List<ItemDto> hotItems = itemService.getHot8Items(categoryId);
 

@@ -54,6 +54,9 @@ public class UserRestController {
     }
 
     // 유저 삭제
+    /*
+    * fixme : 굉장히 위험함. session에서 유효성 검사를 한번 해서 진행
+    * */
     @DeleteMapping("/user/{id}")
     @ApiOperation(value = "유저 회원탈퇴", notes = "UserId를 전송하면 유저 정보가 삭제됩니다.")
     public void deleteUser(@PathVariable("userId") Long userId){
