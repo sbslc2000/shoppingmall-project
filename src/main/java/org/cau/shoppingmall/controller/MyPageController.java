@@ -3,16 +3,19 @@ package org.cau.shoppingmall.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.cau.shoppingmall.dto.Users.UserDto;
+import org.cau.shoppingmall.entity.user.ShoppingBasket;
 import org.cau.shoppingmall.exception.NoAuthInfoFoundException;
+import org.cau.shoppingmall.repository.ShoppingBasketRepository;
 import org.cau.shoppingmall.service.LoginService;
 import org.cau.shoppingmall.service.UserService;
+import org.cau.shoppingmall.user.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
-import java.util.NoSuchElementException;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -22,6 +25,7 @@ public class MyPageController {
 
     private final LoginService loginService;
     private final UserService userService;
+    private final ShoppingBasketRepository shoppingBasketRepository;
 
 
     /*
@@ -29,18 +33,14 @@ public class MyPageController {
    * */
     @GetMapping
     public String myPage(HttpSession session , Model model) {
-        Long userId = null;
+        UserDetails userDetails = null;
+        UserDto userDto = null;
         try {
-            userId = loginService.getUserId(session);
-        } catch (NoAuthInfoFoundException e) {
-            e.printStackTrace();
-        }
+            userDetails = loginService.getLoginedUserData(session);
+            //회원 리포지토리에서 회원 정보 DTO 가져오기
+            userDto = userDetails.getUser();
 
-        //회원 리포지토리에서 회원 정보 DTO 가져오기
-        UserDto userDto = new UserDto();
-        try {
-            userDto = userService.get(userId);
-        } catch(NoSuchElementException e) {
+        } catch (NoAuthInfoFoundException e) {
             e.printStackTrace();
         }
 
@@ -57,6 +57,15 @@ public class MyPageController {
      * */
     @GetMapping("/baskets")
     public String baskets(HttpSession session, Model model ) {
+
+        UserDto user = null;
+        try {
+            UserDetails userDetails = loginService.getLoginedUserData(session);
+            user = userDetails.getUser();
+        } catch (NoAuthInfoFoundException e) {
+        }
+
+        List<ShoppingBasket> basketList = shoppingBasketRepository.findByUserId(user.getUserId());
 
         return "mypage/basets";
     }
@@ -77,9 +86,9 @@ public class MyPageController {
     @GetMapping("/userUpdate")
     public String userUpdateForm(HttpSession session, Model model ) {
         //유저 정보 유효성 검사
-        Long userId;
         try {
-            userId = loginService.getUserId(session);
+            UserDetails userDetails = loginService.getLoginedUserData(session);
+
         } catch (NoAuthInfoFoundException e) {
             e.printStackTrace();
         }
