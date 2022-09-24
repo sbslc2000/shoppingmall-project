@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.cau.shoppingmall.dto.item.ItemDto;
 import org.cau.shoppingmall.dto.item.ItemRequest;
 import org.cau.shoppingmall.service.ItemService;
+import org.cau.shoppingmall.service.RecommendedItemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -24,13 +25,16 @@ import java.util.List;
 @RequestMapping("/home")
 public class HomeController {
     private final ItemService itemService;
-
+    private final RecommendedItemService recommendedItemService;
     @GetMapping
     public String homeController(Model model,
                                  @RequestParam(required = false,value="search") String searchWord) {
         if(searchWord == null) {
             List<ItemDto> hotItems = itemService.getHot4Items();
+            List<ItemDto> recommendedItems = recommendedItemService.get4RecommendedItems(0L);
             model.addAttribute("hotItems", hotItems);
+            model.addAttribute("recommendedItems",recommendedItems);
+
             return "home/home";
         } else {
             ItemRequest itemRequest = new ItemRequest();

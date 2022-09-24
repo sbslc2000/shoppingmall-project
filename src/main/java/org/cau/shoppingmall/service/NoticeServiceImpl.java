@@ -36,12 +36,9 @@ public class NoticeServiceImpl implements NoticeService {
     @Override
     public List<NoticeDto> get() {
         List<Notice> findNotices = noticeRepository.findAll();
-
-        List<NoticeDto> noticeDtoList = findNotices.stream()
+        return findNotices.stream()
                 .map(m -> NoticeDto.of(m))
                 .sorted(Comparator.comparing(NoticeDto::getId).reversed())
                 .collect(Collectors.toList());
-
-        return noticeDtoList;
     }
 }

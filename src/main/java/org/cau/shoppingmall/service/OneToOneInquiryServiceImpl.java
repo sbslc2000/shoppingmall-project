@@ -54,28 +54,23 @@ public class OneToOneInquiryServiceImpl implements OneToOneInquiryService{
                 () -> new NoSuchElementException("해당 질의내역이 없습니다.")
         );
 
-        OneToOneInquiryDto result = OneToOneInquiryDto.of(findInquiry);
-
-        return result;
+        return OneToOneInquiryDto.of(findInquiry);
     }
 
     @Override
     public List<OneToOneInquiryDto> getAllInquiries() {
         List<OneToOneInquiry> findInquiries = oneToOneInquiryRepository.findAll();
-        List<OneToOneInquiryDto> result = findInquiries.stream().map(m -> OneToOneInquiryDto.of(m)).collect(Collectors.toList());
-        result.sort(Comparator.comparing(OneToOneInquiryDto::getId).reversed());
-
-        return result;
+        return findInquiries.stream()
+                .map(m -> OneToOneInquiryDto.of(m))
+                .sorted(Comparator.comparing(OneToOneInquiryDto::getId).reversed())
+                .collect(Collectors.toList());
     }
 
     public List<OneToOneInquiryDto> getByUserId(Long userId) {
         List<OneToOneInquiry> inquiryList = oneToOneInquiryRepository.findByUserId(userId);
-
-        List<OneToOneInquiryDto> dtoList = inquiryList.stream().map((m) -> OneToOneInquiryDto.of(m)).collect(Collectors.toList());
-
-        dtoList.sort(Comparator.comparing(OneToOneInquiryDto::getId).reversed());
-
-        return dtoList;
-
+        return inquiryList.stream()
+                .map((m) -> OneToOneInquiryDto.of(m))
+                .sorted(Comparator.comparing(OneToOneInquiryDto::getId).reversed())
+                .collect(Collectors.toList());
     }
 }

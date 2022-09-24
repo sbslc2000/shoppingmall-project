@@ -36,7 +36,10 @@ public class LoginServiceImpl implements LoginService {
                     .build();
 
 
+            //최근 접속 일자를 최신화
             user.getAccountData().setLateDateToNow();
+
+
             session.setAttribute("authInfo",authInfo);
 
             return authInfo;

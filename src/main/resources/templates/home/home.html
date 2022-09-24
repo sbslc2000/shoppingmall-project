@@ -63,46 +63,16 @@
     <!--추천상품-->
     <div class="recomItems">
         <h3>추천상품</h3>
-        <div class="item">
-            <img src="/img/item/037dfb41-8a3a-4cb0-bc2c-973d253cd6fc.jpg">
-            <div class="des">
-                <h4>#쇼핑몰 이름입니다#</h4>
-                <h4>#상품 이름입니다#</h4>
-                <h4>#상품 가격입니다#</h4>
-                <p>#종아요 n개 리뷰 m개</p>
-            </div>
-
-        </div>
-        <div class="item">
-            <img src="/img/item/03a56811-c580-49cf-bc24-40be7f661558.jpg">
-            <div class="des">
-                <h4>#쇼핑몰 이름입니다#</h4>
-                <h4>#상품 이름입니다#</h4>
-                <h4>#상품 가격입니다#</h4>
-                <p>#종아요 n개 리뷰 m개</p>
-            </div>
-
-        </div>
-        <div class="item">
-            <img src="/img/item/04451283-1e0d-47e4-89e1-64914ba289c0.jpg">
-            <div class="des">
-                <h4>#쇼핑몰 이름입니다#</h4>
-                <h4>#상품 이름입니다#</h4>
-                <h4>#상품 가격입니다#</h4>
-                <p>#종아요 n개 리뷰 m개</p>
-            </div>
-
-        </div>
-        <div class="item">
-            <img src="/img/item/12b129c4-f8f2-4f96-9d87-9506bdba4e03.jpg">
-            <div class="des">
-                <h4>#쇼핑몰 이름입니다#</h4>
-                <h4>#상품 이름입니다#</h4>
-                <h4>#상품 가격입니다#</h4>
-                <p>#종아요 n개 리뷰 m개</p>
-            </div>
-
-        </div>
+        <div th:each="item : ${recommendedItems}" class="item">
+            <a th:href="@{/item/}+${item.id}">
+                <img th:src="@{/img/item/}+${item.img[0]}+'.jpg'">
+                <div class="des">
+                    <h4 th:text="${item.seller.name}">#쇼핑몰 이름입니다#</h4>
+                    <h4 th:text="${item.name}">#상품 이름입니다#</h4>
+                    <h4 th:text="${item.price}+'원'">#상품 가격입니다#</h4>
+                    <p th:text="|좋아요 ${item.likes}개 리뷰 ${item.reviews}개|">#좋아요 n개 리뷰m개</p>
+                </div>
+            </a>
     </div>
 </div>
 <footer>
@@ -111,7 +81,7 @@
             <h3>문의</h3>
             <ul>
                 <li><a href="">공지사항</a></li>
-                <li><a th:href="@{/inquiry}">1:1문의</a></li>
+                <li><a th:href="@{/inquiries}">1:1문의</a></li>
             </ul>
         </div>
         <div class="cs">
