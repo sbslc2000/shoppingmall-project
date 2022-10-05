@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="yunju_style.css">
+    </head>
+    <body>
+        <header>
+            <div class="banner">
+                <h1>우당탕탕 개발자</h1>
+                <a href="home.html"></a>
+            </div>
+        </header>
+
+        <div class="inquiryBox">
+            <h2>1:1 문의하기</h2>
+            <div class="inquiryBox1">
+                <h3>문의 유형</h3>
+                <div class="inquiry_wrap">
+                    
+                    <select id="inquiry_type1" name="inquiry_type1" onchange="categoryChange(this)">
+                        <option value="0">선택해주세요</option>
+                        <option value="a">배송</option>
+                        <option value="b">주문/결제</option>
+                        <option value="c">교환/반품</option>
+                        <option value="d">회원</option>
+                        <option value="e">기타</option>
+                    </select>
+                    
+                </div>
+                <div class="inquiry_wrap">
+                    
+                    <select id="inquiry_type2">
+                        <option>선택해주세요</option>
+                        </select>
+                </div>
+
+            <div class="inquiryBox2">
+                <h3>문의 내용</h3>
+                <input class="inquiry_contents" size="2000" placeholder="내용을 입력해주세요(2,000자 이내)" onfocus="this.placeholder=''" onblur="this.placeholder='내용을 입력해주세요(2,000자 이내)'" name="inquiry_contents">
+                <br>
+                <input type="file" id="pic_upload" class="pic_upload" accept="img/*" required multiple style="margin:0px 0px 30px 30px">
+            </div>
+            <button onclick="location.href='inquiry.html'" type="button" class="btn_black_inquiry_write">문의 등록하기</button>
+
+        </div>
+        
+
+        <footer>
+            <div class="footerBox">
+                <div class="inquiry">
+                    <h3>문의</h3>
+                    <ul>
+                        <li><a href="">공지사항</a></li>
+                        <li><a href="inquiry.html">1:1문의</a></li>
+                    </ul>
+                </div>
+                <div class="cs">
+                    <h3>고객센터</h3>
+                    <ul>
+                        <li>전화: 0000_0000</li>
+                        <li>메일: 0000@gmail.com</li>
+                        <li>평일 10:00 ~ 17:00</li>
+                    </ul>
+                </div>
+                <div class="box">
+                    
+                </div>
+            </div>
+        </footer>
+
+        <script scr="script.js">
+
+        function categoryChange(s) {
+
+
+            var a = ["배송일정","누락/사고","기타"];
+            var b = ["결제수단", "영수증", "주문 변경", "환불","기타"];
+            var c = ["교환","반품", "기타"];
+            var d=["회원정보 수정","탈퇴","기타"];
+            var e=["포인트","기타"];
+            var target = document.getElementById("inquiry_type2");
+ 
+            if(s.value == "a") var s = a;
+            else if(s.value == "b") var s = b;
+            else if(s.value == "c") var s = c;
+            else if(s.value == "d") var s = d;
+            else if(s.value == "e") var s = e;
+ 
+            target.options.length = 0;
+ 
+            for (x in s) {
+            var opt = document.createElement("option");
+            opt.value = s[x];
+            opt.innerHTML = s[x];
+            target.appendChild(opt);
+            }    
+        }
+         
+        
+
+        </script>
+    </body>
+
+</html>
+
+        
