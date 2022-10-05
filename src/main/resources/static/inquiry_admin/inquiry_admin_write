@@ -19,7 +19,7 @@
                 <h3>문의 유형</h3>
                 <div class="inquiry_wrap">
                     
-                    <select id="inquiry_type1" name="inquiry_type1" onchange="categoryChange(this)">
+                    <select id="inquiry_type1" name="inquiry_type1" onchange="categoryChange(this)" style="width=300px">
                         <option value="0">선택해주세요</option>
                         <option value="a">배송</option>
                         <option value="b">주문/결제</option>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="inquiry_wrap">
                     
-                    <select id="inquiry_type2">
+                    <select id="inquiry_type2" style="width=300px">
                         <option>선택해주세요</option>
                         </select>
                 </div>
