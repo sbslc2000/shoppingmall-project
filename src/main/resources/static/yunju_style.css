@@ -220,11 +220,11 @@ nav ul li a:hover::after{
     text-align: center;
 }
 
-.inquiryBox2{
+.inquiryBox{
     display: inline-block;
 }
 
-.inquiryBox2 p{
+.inquiryBox p{
     margin-left: 30px;
 }
 
@@ -236,10 +236,14 @@ nav ul li a:hover::after{
     margin:0px 0px 10px 30px
 }
 
-.inquiry_type1_wrap{
+.inquiry_wrap{
     margin-left: 30px;
 }
 
+.inquiryBox select{
+    width: 300px;
+    margin-bottom: 10px;
+}
 
 /********************주문하기(order_form.html)********************/
 
