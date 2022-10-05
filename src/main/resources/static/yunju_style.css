@@ -240,6 +240,10 @@ nav ul li a:hover::after{
     margin-left: 30px;
 }
 
+.inquiryBox select{
+    width: 300px;
+    margin-bottom: 10px;
+}
 
 /********************주문하기(order_form.html)********************/
 
