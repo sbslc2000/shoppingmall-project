@@ -5,9 +5,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
 public interface EmailService {
+    void sendMail(String mailTo,String from, String text);
 
-    @Autowired
 
-    public interface sendMail();
-
+    void sendWelcomeEmail(String mailTo, String from);
 }

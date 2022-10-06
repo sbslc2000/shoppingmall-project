@@ -5,38 +5,48 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 @RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService{
-    JavaMailSender javaMailSender;
 
-    public void sendMail(){
+    private final JavaMailSender javaMailSender;
+
+    public void sendMail(String mailTo, String from, String text){
 
         // 수신 대상을 담을 ArrayList 생성
-        //ArrayList<String> toUserList = new ArrayList<>();
+        ArrayList<String> toUserList = new ArrayList<>();
 
         // 수신 대상 추가
         //toUserList.add("수신대상1@gmail.com");
         //toUserList.add("수신대상2@naver.com");
 
+        toUserList.add(mailTo);
+
         // 수신 대상 개수
-        //int toUserSize = toUserList.size();
+        int toUserSize = toUserList.size();
 
         // SimpleMailMessage (단순 텍스트 구성 메일 메시지 생성할 때 이용)
         SimpleMailMessage simpleMessage = new SimpleMailMessage();
 
         // 수신자 설정
-        //simpleMessage.setTo((String[]) toUserList.toArray(new String[toUserSize]));
-        simpleMessage.setFrom("dayeon620@kakao.com"); //우선 내 메일로......
+        simpleMessage.setTo((String[]) toUserList.toArray(new String[toUserSize]));
+        simpleMessage.setFrom(from); //우선 내 메일로......
 
         // 메일 제목
         simpleMessage.setSubject("Subject Sample");
 
         // 메일 내용
-        simpleMessage.setText("Text Sample");
+        simpleMessage.setText(text);
 
         // 메일 발송
         javaMailSender.send(simpleMessage);
 
+    }
+
+    @Override
+    public void sendWelcomeEmail(String mailTo, String from) {
+        sendMail(mailTo,from,"회원가입을 환영합니다.");
     }
 }
