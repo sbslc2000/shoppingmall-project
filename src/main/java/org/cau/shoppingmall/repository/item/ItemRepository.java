@@ -3,7 +3,6 @@ package org.cau.shoppingmall.repository.item;
 import org.cau.shoppingmall.entity.item.Item;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -16,7 +15,7 @@ public interface ItemRepository extends JpaRepository<Item,Long>, JpaSpecificati
 
     Page<Item> findAll(Specification<Item> specification, Pageable pageable);
 
-    List<Item> find8(Specification<Item> specification);
+    //List<Item> find8(Specification<Item> specification);
 
 
     List<Item> findTop8ByCategory_IdOrderBySalesDesc(Long categoryId);
