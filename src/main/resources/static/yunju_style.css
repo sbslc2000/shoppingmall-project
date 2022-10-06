@@ -220,10 +220,6 @@ nav ul li a:hover::after{
     text-align: center;
 }
 
-.inquiryBox{
-    display: inline-block;
-}
-
 .inquiryBox p{
     margin-left: 30px;
 }
