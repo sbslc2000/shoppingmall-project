@@ -186,7 +186,8 @@ nav ul li a:hover::after{
 
 .inquiryBox h3{
     text-align: left;
-    margin: 20px;
+    margin-bottom: 20px;
+    margin-top:20px;
 }
 
 .inquiryBox2 p{
