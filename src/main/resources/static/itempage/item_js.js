@@ -1,6 +1,9 @@
 var selectedItemNum = 0;
 var price = parseInt(document.getElementById("price").innerHTML);
 
+
+
+
 function min(idNum) {
     let elem = document.getElementById(idNum);
     var countnum = elem.getElementsByClassName('count')[0].innerHTML;
@@ -157,3 +160,19 @@ function likebtn() {
         document.getElementById('likebutton').style.color = 'white';
     }
 }
+
+
+function findlinkandstoreId() {
+    var link = document.location.href;
+    console.log(link);
+    var para = link.split("/");
+    var recentitemid = para[para.length - 1];
+    var array = localStorage.getItem("recentitem");
+    if (array == null) {
+        array = new Array();
+    }
+    array.add(recentitemid);
+    localStorage.setItem("recentitem", recentitemid);
+}
+
+findlinkandstoreId();

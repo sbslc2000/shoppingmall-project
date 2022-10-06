@@ -63,3 +63,10 @@ function likebtn6() {
         document.getElementById('likebutton6').style.color = 'white';
     }
 }
+
+function loadrecentitem() {
+    var array = localStorage.getItem("recentitem");
+    request()
+
+}
+loadrecentitem();
