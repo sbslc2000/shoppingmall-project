@@ -186,7 +186,8 @@ nav ul li a:hover::after{
 
 .inquiryBox h3{
     text-align: left;
-    margin: 20px;
+    margin-bottom: 20px;
+    margin-top:20px;
 }
 
 .inquiryBox2 p{
@@ -195,26 +196,45 @@ nav ul li a:hover::after{
 }
 
 .btn_black_inquiry_btn1,
-.btn_black_inquiry_write{
-    display: flex;
-    width: 800px;
+.btn_black_inquiry_write,
+.short_black_btn,
+.short_gray_btn{ /*버튼 공통 요소*/
+    
     height: 40px;
-    background: black;
     border-radius: 5px;
     color: white;
     text-align: center;
-    padding: 0px 350px;
     cursor: pointer;
 
+}
+
+.btn_black_inquiry_btn1,
+.btn_black_inquiry_write{ /*긴 버튼*/
+    display: flex;
+    width: 800px;
+    background: black;
+    padding: 0px 350px;
+}
+
+.short_black_btn,
+.short_gray_btn{ /*짧은 버튼*/
+    display: inline-block;
+    width: 300px;
+}
+
+.short_black_btn{
+    
+    background: black;
+}
+
+.short_gray_btn{
+    background: gray;
+    border: 5px gray;
 }
 
 
 /********************1:1 문의하기(inquiry_form.html)********************/
 
-
-.inquiry_type1{
-    
-}
 
 .inquiryBox h2{
     text-align: center;
