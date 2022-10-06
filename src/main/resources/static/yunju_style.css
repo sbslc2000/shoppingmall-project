@@ -228,7 +228,7 @@ nav ul li a:hover::after{
 
 .short_gray_btn{
     background: gray;
-    border-color: gray;
+    border: 5px gray;
 }
 
 
