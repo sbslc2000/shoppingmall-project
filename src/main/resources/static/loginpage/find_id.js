@@ -20,8 +20,8 @@ function showid() {
     document.getElementById('idname').style.display = 'none';
     document.getElementById('idnum').style.display = 'none ';
     document.getElementById('idbtn').style.display = 'none ';
-    if () {
-        document.getElementById('idresult').style.display = 'block ';
+    if (true) {
+        document.getElsementById('idresult').style.display = 'block ';
         document.getElementById('userid').style.display = 'block ';
     } else {
         document.getElementById('idwarn').style.display = 'block ';
@@ -40,7 +40,7 @@ function showpw() {
     document.getElementById('pwnum').style.display = 'none ';
     document.getElementById('pwbtn').style.display = 'none ';
     document.getElementById('emailinput').style.display = 'none ';
-    if () {
+    if (true) {
         document.getElementById('pwresult').style.display = 'block ';
     } else {
         document.getElementById('pwwarn').style.display = 'block ';

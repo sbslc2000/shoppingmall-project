@@ -3,7 +3,7 @@
 
     <head>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="yunju_style.css">
+        <link rel="stylesheet" type="text/css" href="../yunju_style.css">
     </head>
     <body>
         <header>
@@ -13,36 +13,24 @@
             </div>
         </header>
 
-        <div class="inquiryBox">
-            <h2>1:1 문의하기</h2>
+                <div class="inquiryBox">
             <div class="inquiryBox1">
-                <h3>문의 유형</h3>
-                <div class="inquiry_wrap">
-                    
-                    <select id="inquiry_type1" name="inquiry_type1" onchange="categoryChange(this)">
-                        <option value="0">선택해주세요</option>
-                        <option value="a">배송</option>
-                        <option value="b">주문/결제</option>
-                        <option value="c">교환/반품</option>
-                        <option value="d">회원</option>
-                        <option value="e">기타</option>
-                    </select>
-                    
-                </div>
-                <div class="inquiry_wrap">
-                    
-                    <select id="inquiry_type2">
-                        <option>선택해주세요</option>
-                        </select>
-                </div>
+                <h3 style="display:inline">문의 내역</h3>
+	    #creationTime
+	    <span style="float:right">답변 전 or 완료</span>
+                <hr>
+		    <p>#content</p>
+                <hr>
+            </div>
+	//여기에 사진
 
             <div class="inquiryBox2">
-                <h3>문의 내용</h3>
+                <h3>답변 내용</h3>
                 <input class="inquiry_contents" size="2000" placeholder="내용을 입력해주세요(2,000자 이내)" onfocus="this.placeholder=''" onblur="this.placeholder='내용을 입력해주세요(2,000자 이내)'" name="inquiry_contents">
                 <br>
                 <input type="file" id="pic_upload" class="pic_upload" accept="img/*" required multiple style="margin:0px 0px 30px 30px">
             </div>
-            <button onclick="location.href='inquiry.html'" type="button" class="btn_black_inquiry_write">문의 등록하기</button>
+            <button onclick="location.href='inquiry.html'" type="button" class="btn_black_inquiry_write"> 등록하기</button>
 
         </div>
         
