@@ -10,7 +10,6 @@ import org.cau.shoppingmall.dto.item.ItemDto;
 import org.cau.shoppingmall.entity.user.User;
 import org.cau.shoppingmall.exception.LoginFailedException;
 import org.cau.shoppingmall.repository.UserRepository;
-import org.cau.shoppingmall.service.EmailService;
 import org.cau.shoppingmall.service.ItemService;
 import org.cau.shoppingmall.service.LoginService;
 import org.cau.shoppingmall.service.UserService;
@@ -41,7 +40,6 @@ public class AccountController {
     private final ItemService itemService;
     private final UserService userService;
 
-    private final EmailService emailService;
 
     /*
     * 로그인 페이지를 반환한다.
@@ -112,7 +110,6 @@ public class AccountController {
 
         try {
             User user = userService.create(userForm);
-            emailService.sendWelcomeEmail(user.getEmail(),"sbscl");
         } catch (IllegalArgumentException e) {
             List<String> bindingErrors = new ArrayList<>();
             bindingErrors.add(e.getMessage());
