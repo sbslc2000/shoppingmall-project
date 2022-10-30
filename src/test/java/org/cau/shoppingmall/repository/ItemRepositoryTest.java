@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
 
-@SpringBootTest
-@Transactional
+//@SpringBootTest
+//@Transactional
 class ItemRepositoryTest {
 
     @Autowired

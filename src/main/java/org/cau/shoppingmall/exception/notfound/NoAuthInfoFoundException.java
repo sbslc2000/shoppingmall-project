@@ -1,4 +1,4 @@
-package org.cau.shoppingmall.exception;
+package org.cau.shoppingmall.exception.notfound;
 
 public class NoAuthInfoFoundException extends Exception {
 

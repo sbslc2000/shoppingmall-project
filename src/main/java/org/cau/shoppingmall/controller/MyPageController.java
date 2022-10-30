@@ -3,8 +3,7 @@ package org.cau.shoppingmall.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.cau.shoppingmall.dto.Users.UserDto;
-import org.cau.shoppingmall.entity.user.ShoppingBasket;
-import org.cau.shoppingmall.exception.NoAuthInfoFoundException;
+import org.cau.shoppingmall.exception.notfound.NoAuthInfoFoundException;
 import org.cau.shoppingmall.repository.ShoppingBasketRepository;
 import org.cau.shoppingmall.service.LoginService;
 import org.cau.shoppingmall.service.UserService;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @Slf4j

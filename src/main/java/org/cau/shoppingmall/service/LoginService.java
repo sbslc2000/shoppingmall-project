@@ -3,7 +3,7 @@ package org.cau.shoppingmall.service;
 import org.cau.shoppingmall.dto.Users.AuthInfo;
 import org.cau.shoppingmall.dto.Users.LoginForm;
 import org.cau.shoppingmall.exception.LoginFailedException;
-import org.cau.shoppingmall.exception.NoAuthInfoFoundException;
+import org.cau.shoppingmall.exception.notfound.NoAuthInfoFoundException;
 import org.cau.shoppingmall.user.UserDetails;
 
 import javax.servlet.http.HttpSession;

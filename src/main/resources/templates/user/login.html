@@ -41,7 +41,7 @@
     <div id="all">
         <div></div>
         <div class="login">
-            <input th:field="*{userId}" type="text" id='id' placeholder="ID">
+            <input th:text="${loginForm.userId}" th:field="*{userId}" type="text" id='id' placeholder="ID">
             <input th:field="*{password}" type="password" id="pw" placeholder="PW">
 
 

@@ -6,6 +6,7 @@ import org.cau.shoppingmall.entity.user.AccountData;
 import org.cau.shoppingmall.entity.user.Authority;
 import org.cau.shoppingmall.entity.user.ShoppingData;
 import org.cau.shoppingmall.entity.user.User;
+import org.cau.shoppingmall.exception.DuplicateUserIdException;
 import org.cau.shoppingmall.repository.AccountDataRepository;
 import org.cau.shoppingmall.repository.AuthorityRepository;
 import org.cau.shoppingmall.repository.ShoppingDataRepository;
@@ -31,32 +32,42 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public User create(UserForm userForm) throws IllegalStateException{
+    public User create(UserForm userForm) throws DuplicateUserIdException{
         /*중복회원처리*/
-        userRepository.findByUserId(userForm.getUserId())
-                .ifPresent(u -> {
-                    throw new IllegalArgumentException("이미 존재하는 아이디입니다.");
-                });
+        Optional<User> findUser = userRepository.findByUserId(userForm.getUserId());
+
+        //중복 발생시 throw
+        if(findUser.isPresent()) {
+            throw new DuplicateUserIdException("이미 존재하는 사용자 아이디 입니다.");
+        }
 
         //user 정보 저장
-        ShoppingData buildedShoppingData = new ShoppingData().builder()
+
+        //shopping data 생성 및 저장
+        ShoppingData buildShoppingData = new ShoppingData().builder()
                 .count(0)
                 .point(0)
                 .baskets(0)
                 .likes(0)
                 .reviews(0)
                 .build();
+        ShoppingData savedShoppingData = shoppingDataRepository.save(buildShoppingData);
 
-        ShoppingData savedShoppingData = shoppingDataRepository.save(buildedShoppingData);
 
-        AccountData buildedAccountData = new AccountData().builder()
+        //account data 생성 및 저장
+        AccountData buildAccountData = new AccountData().builder()
                 .smsAgreement(userForm.isSmsAgreement())
                 .lateDate(LocalDateTime.now())
                 .registerDate(LocalDateTime.now())
                 .build();
-        AccountData savedAccountData = accountDataRepository.save(buildedAccountData);
 
+        AccountData savedAccountData = accountDataRepository.save(buildAccountData);
+
+
+        //일반 회원 권한
         Authority authority = authorityRepository.findById(1L).get();
+
+        //유저 생성
         User createUser = new User().builder()
                 .userId(userForm.getUserId())
                 .password(BCrypt.hashpw(userForm.getPassword(),BCrypt.gensalt()))

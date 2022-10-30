@@ -2,18 +2,19 @@ package org.cau.shoppingmall.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.cau.shoppingmall.common.dto.MessageDto;
+import org.cau.shoppingmall.common.handler.MessageHandler;
 import org.cau.shoppingmall.dto.Users.LoginForm;
-import org.cau.shoppingmall.dto.Users.UserDto;
 import org.cau.shoppingmall.dto.inquiry.OneToOneInquiryDto;
 import org.cau.shoppingmall.dto.inquiry.OneToOneInquiryForm;
-import org.cau.shoppingmall.dto.review.ReviewForm;
-import org.cau.shoppingmall.exception.NoAuthInfoFoundException;
+import org.cau.shoppingmall.exception.notfound.NoAuthInfoFoundException;
+import org.cau.shoppingmall.exception.notfound.NoInquiryTypeFoundException;
+import org.cau.shoppingmall.exception.notfound.UserNotFoundException;
 import org.cau.shoppingmall.service.ImageService;
 import org.cau.shoppingmall.service.LoginService;
 import org.cau.shoppingmall.service.OneToOneInquiryService;
 import org.cau.shoppingmall.service.UserService;
 import org.cau.shoppingmall.user.UserDetails;
-import org.hibernate.mapping.OneToOne;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,12 +22,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpSession;
 
@@ -43,20 +44,20 @@ public class InquiryController {
     @GetMapping("/inquiry-form")
     public String inquiryForm(Model model, HttpSession session) {
 
-
         model.addAttribute("oneToOneInquiryform", new OneToOneInquiryForm());
-
         return "inquiry/inquiry_form";
     }
 
     @PostMapping("/inquiry")
-    public String createInquiry(RedirectAttributes redirect, HttpSession session,
+    public String createInquiry(Model model,RedirectAttributes redirect, HttpSession session,
                                 List<MultipartFile> imgList, @Validated OneToOneInquiryForm form,
-                                BindingResult bindingResult) {
+                                BindingResult bindingResult) throws UserNotFoundException, NoInquiryTypeFoundException {
 
         //유효성 검사
         if(bindingResult.hasErrors()) {
             List<String> errors = bindingResult.getAllErrors().stream().map(e -> e.getDefaultMessage()).collect(Collectors.toList());
+            MessageDto message = new MessageDto("로그인이 필요한 서비스입니다.", "/login", RequestMethod.GET, null);
+            return MessageHandler.showMessageAndRedirect(message,model);
         }
         try{
             UserDetails userDetails = loginService.getLoginedUserData(session);
@@ -90,7 +91,7 @@ public class InquiryController {
             return "inquiry/inquiries";
         } catch (NoAuthInfoFoundException e) {
             e.printStackTrace();
-            redirect.addFlashAttribute("loginForm",new LoginForm());
+            redirect.addFlashAttribute("loginForm",new LoginForm(null,null));
             return "redirect:/login?error=true&msg=";
         }
     }

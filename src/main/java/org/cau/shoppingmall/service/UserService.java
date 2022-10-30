@@ -2,6 +2,7 @@ package org.cau.shoppingmall.service;
 
 import org.cau.shoppingmall.dto.Users.*;
 import org.cau.shoppingmall.entity.user.User;
+import org.cau.shoppingmall.exception.DuplicateUserIdException;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface UserService {
@@ -16,7 +17,7 @@ public interface UserService {
     */
 
     @Transactional
-    User create(UserForm userForm) throws IllegalArgumentException;
+    User create(UserForm userForm) throws IllegalArgumentException, DuplicateUserIdException;
 
     /*
             User get : Id에 해당하는 user 정보를 반환한다

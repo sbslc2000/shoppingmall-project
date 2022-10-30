@@ -6,6 +6,8 @@ import org.cau.shoppingmall.dto.inquiry.OneToOneInquiryForm;
 import org.cau.shoppingmall.entity.inquiry.InquiryType;
 import org.cau.shoppingmall.entity.inquiry.OneToOneInquiry;
 import org.cau.shoppingmall.entity.user.User;
+import org.cau.shoppingmall.exception.notfound.NoInquiryTypeFoundException;
+import org.cau.shoppingmall.exception.notfound.UserNotFoundException;
 import org.cau.shoppingmall.repository.InquiryTypeRepository;
 import org.cau.shoppingmall.repository.OneToOneInquiryRepository;
 import org.cau.shoppingmall.repository.UserRepository;
@@ -26,26 +28,33 @@ public class OneToOneInquiryServiceImpl implements OneToOneInquiryService{
     private final InquiryTypeRepository inquiryTypeRepository;
     private final ImageService imageService;
     private final OneToOneInquiryRepository oneToOneInquiryRepository;
+
+    /**
+     *
+     * @param form
+     * @param userId
+     * @param multipartFileList
+     * @return
+     * @throws IOException
+     */
     @Override
-    public OneToOneInquiry create(OneToOneInquiryForm form, Long userId, List<MultipartFile> multipartFileList) throws IOException {
+    public OneToOneInquiry create(OneToOneInquiryForm form, Long userId, List<MultipartFile> multipartFileList) throws UserNotFoundException, NoInquiryTypeFoundException, IOException {
 
         User user = userRepository.findById(userId).orElseThrow(
-                () -> new NoSuchElementException("사용자를 찾을 수 없습니다.")
+                () -> new UserNotFoundException("사용자를 찾을 수 없습니다.")
         );
 
         InquiryType inquiryType = inquiryTypeRepository.findById(form.getType()).orElseThrow(
-                () -> new NoSuchElementException("문의 유형을 찾을 수 없습니다.")
+                () -> new NoInquiryTypeFoundException("문의 유형을 찾을 수 없습니다.")
         );
 
         List<String> imgs = imageService.storeOneToOneInquiryImages(multipartFileList);
 
 
         OneToOneInquiry oneToOneInquiry = form.toEntity(user, inquiryType, imgs.toString());
-
         OneToOneInquiry savedOneToOneInquiry = oneToOneInquiryRepository.save(oneToOneInquiry);
 
         return savedOneToOneInquiry;
-
     }
 
     @Override

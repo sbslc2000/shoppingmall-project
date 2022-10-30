@@ -5,15 +5,13 @@ import org.cau.shoppingmall.dto.Users.LoginForm;
 import org.cau.shoppingmall.dto.orders.OrderDto;
 import org.cau.shoppingmall.dto.orders.OrderForm;
 import org.cau.shoppingmall.dto.orders.OrderItem;
-import org.cau.shoppingmall.entity.order.Orders;
-import org.cau.shoppingmall.exception.NoAuthInfoFoundException;
+import org.cau.shoppingmall.exception.notfound.NoAuthInfoFoundException;
 import org.cau.shoppingmall.service.LoginService;
 import org.cau.shoppingmall.service.OrderService;
 import org.cau.shoppingmall.user.UserDetails;
-import org.springframework.beans.factory.annotation.Required;import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -40,7 +38,7 @@ public class OrderController {
             List<String> errors = new ArrayList<>();
             errors.add("로그인이 필요한 서비스 입니다.");
             redirect.addFlashAttribute("errors", errors);
-            redirect.addFlashAttribute("loginForm",new LoginForm());
+            redirect.addFlashAttribute("loginForm",new LoginForm(null,null));
             return "redirect:/login";
 
         }
