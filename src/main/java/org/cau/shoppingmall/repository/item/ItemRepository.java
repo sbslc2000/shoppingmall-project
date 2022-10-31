@@ -14,9 +14,7 @@ import java.util.List;
 public interface ItemRepository extends JpaRepository<Item,Long>, JpaSpecificationExecutor<Item> {
 
     Page<Item> findAll(Specification<Item> specification, Pageable pageable);
-
     List<Item> findTop8ByCategory_IdOrderBySalesDesc(Long categoryId);
-
     List<Item> findTop4ByOrderBySalesDesc();
 }
  

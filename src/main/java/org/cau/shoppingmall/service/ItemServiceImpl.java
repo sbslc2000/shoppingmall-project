@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,24 +26,22 @@ public class ItemServiceImpl implements ItemService {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final ItemRepository itemRepository;
 
-    private final int BASIC_ITEM_VIEWS_IN_PAGE = 16;
+    private final int BASIC_ITEM_VIEWS_IN_PAGE = 30;
 
     @Override
     public List<ItemDto> getHot8Items(Long categoryId) {
 
-        List<Item> items = itemRepository.findTop8ByCategory_IdOrderBySalesDesc(categoryId);
-        List<ItemDto> result = new ArrayList<>();
-        toDtoList(items,result);
-
+        List<ItemDto> result = itemRepository.findTop8ByCategory_IdOrderBySalesDesc(categoryId).stream()
+                .map(m -> ItemDto.of(m))
+                .collect(Collectors.toList());
         return result;
     }
 
     @Override
     public List<ItemDto> getHot4Items() {
-        List<Item> items = itemRepository.findTop4ByOrderBySalesDesc();
-        List<ItemDto> result = new ArrayList<>();
-        toDtoList(items,result);
-
+        List<ItemDto> result = itemRepository.findTop4ByOrderBySalesDesc().stream()
+                .map(m -> ItemDto.of(m))
+                .collect(Collectors.toList());
         return result;
     }
 
@@ -116,24 +115,11 @@ public class ItemServiceImpl implements ItemService {
             }
         }
 
-
-
         Pageable pageable = PageRequest.of(request.getPage(),BASIC_ITEM_VIEWS_IN_PAGE,sort);
-
         Page<Item> result = itemRepository.findAll(spec, pageable);
-
-
         Page<ItemDto> itemDtoList = result.map(m ->
                 ItemDto.of(m));
 
-
         return itemDtoList;
-    }
-
-
-    private void toDtoList(List<Item> itemList, List<ItemDto> targetList)  {
-        for(Item i : itemList) {
-            targetList.add(ItemDto.of(i));
-        }
     }
 }

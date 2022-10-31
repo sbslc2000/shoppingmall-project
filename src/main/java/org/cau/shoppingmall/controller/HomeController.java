@@ -54,7 +54,6 @@ public class HomeController {
     public String clothesController(Model model,
                                     @PathVariable String categoryName) {
 
-        //log.info("categoryName = {}",categoryName);
         Long categoryId = 0L;
         switch(categoryName) {
             case "clothes":
@@ -79,7 +78,8 @@ public class HomeController {
         itemRequest.setCategory(category);
         Page<ItemDto> itempage = itemService.getItemsByConditions(itemRequest);
         List<ItemDto> items = itempage.getContent();
-        log.info("items.size()={}",items.size());
+
+
         model.addAttribute("items",items);
         model.addAttribute("hotItems",hotItems);
 
