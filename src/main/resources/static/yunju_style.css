@@ -232,6 +232,33 @@ nav ul li a:hover::after{
     border: 5px gray;
 }
 
+#inquiryTableNum{
+    width: 100px;
+}
+
+#inquiryTableContents{
+    width: 700px;
+}
+
+#inquiryTableState{
+    width: 150px;
+}
+
+#inquiryTableDate{
+    width: 150px;
+}
+
+table{
+    border-width: 1px 0px 1px 0px;
+    border-style: solid;
+    border-collapse : collapse
+    
+}
+
+th{
+   border-bottom: 1px solid; 
+}
+
 
 /********************1:1 문의하기(inquiry_form.html)********************/
 
