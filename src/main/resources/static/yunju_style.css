@@ -305,7 +305,6 @@ th{
 .form_wrap{
     margin: 0px 0px 50px 20px;
     min-height: auto;
-    background: pink;
 
 }
 
@@ -328,6 +327,12 @@ th{
     width: 400px;
     right: 200px;
     display: inline-block;
+}
+
+.btn_black_pay_btn{
+    width: 100%;
+    background: black;
+    margin-top: 30px;
 }
 
 
