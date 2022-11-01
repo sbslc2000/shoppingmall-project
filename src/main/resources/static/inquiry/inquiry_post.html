@@ -32,7 +32,12 @@
       </div>
 	
 	<button onclick="delete(this)" type="button" class="short_gray_btn" style="float: left">삭제하기</button>
-	<button onclick="update(this)" type="button" class="short_black_btn" style="float: right">수정하기</button>
+	<script>
+        if(document.getElementById("answer")){ //답변이 있으면
+            <button onclick="update(this)" type="button" class="short_black_btn" style="float: right">수정하기</button>
+        }
+        else ;
+    	</script>
 
 
         </div>
