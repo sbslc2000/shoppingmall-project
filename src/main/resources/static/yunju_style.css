@@ -198,7 +198,8 @@ nav ul li a:hover::after{
 .btn_black_inquiry_btn1,
 .btn_black_inquiry_write,
 .short_black_btn,
-.short_gray_btn{ /*버튼 공통 요소*/
+.short_gray_btn,
+.btn_black_pay_btn{ /*버튼 공통 요소*/
     
     height: 40px;
     border-radius: 5px;
