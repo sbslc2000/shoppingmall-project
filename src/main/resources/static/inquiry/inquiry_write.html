@@ -20,7 +20,7 @@
                 <div class="inquiry_wrap">
                     
                     <select id="inquiry_type1" name="inquiry_type1" onchange="categoryChange(this)">
-                        <option value="0">선택해주세요</option>
+                        <option value="n">선택해주세요</option>
                         <option value="a">배송</option>
                         <option value="b">주문/결제</option>
                         <option value="c">교환/반품</option>
@@ -73,7 +73,7 @@
         <script scr="script.js">
         function categoryChange(s) {
 
-
+            var n = ["선택해주세요"];
             var a = ["배송일정","누락/사고","기타"];
             var b = ["결제수단", "영수증", "주문 변경", "환불","기타"];
             var c = ["교환","반품", "기타"];
@@ -81,7 +81,8 @@
             var e=["포인트","기타"];
             var target = document.getElementById("inquiry_type2");
  
-            if(s.value == "a") var s = a;
+            if(s.value == "n") var s = n;
+            else if(s.value == "a") var s = a;
             else if(s.value == "b") var s = b;
             else if(s.value == "c") var s = c;
             else if(s.value == "d") var s = d;
