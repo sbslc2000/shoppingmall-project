@@ -4,12 +4,15 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
+import org.cau.shoppingmall.dto.Users.FindUserIdForm;
 import org.cau.shoppingmall.dto.Users.UserDto;
 import org.cau.shoppingmall.dto.Users.UserForm;
 import org.cau.shoppingmall.dto.Users.UserUpdateForm;
 import org.cau.shoppingmall.dto.orders.OrderDto;
 import org.cau.shoppingmall.entity.user.User;
+import org.cau.shoppingmall.exception.notfound.UserNotFoundException;
 import org.cau.shoppingmall.repository.UserRepository;
+import org.cau.shoppingmall.service.FindAccountService;
 import org.cau.shoppingmall.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,12 +30,13 @@ public class UserRestController {
 
     private final UserService userService;
     private final UserRepository userRepository;
+    private final FindAccountService findAccountService;
 
     // 유저 정보 추가
 
 
     // 유저 수정
-    @PutMapping("/user/{id}")
+    @PutMapping("/{id}")
     @ApiOperation(value = "유저 정보 업데이트", notes = "UserId와 UserForm 형태를 전송하면 유저 정보가 변경됩니다..")
     public void updateUser(
             HttpSession session,
@@ -46,7 +50,7 @@ public class UserRestController {
     }
 
     // 유저 상세
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     @ApiOperation(value = "유저정보 반환", notes = "UserId를 전송하면 등록된 User의 정보가 반환됩니다.")
     public UserDto getUser(@PathVariable("userId") Long userId){
 
@@ -57,7 +61,7 @@ public class UserRestController {
     /*
     * fixme : 굉장히 위험함. session에서 유효성 검사를 한번 해서 진행
     * */
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/{id}")
     @ApiOperation(value = "유저 회원탈퇴", notes = "UserId를 전송하면 유저 정보가 삭제됩니다.")
     public void deleteUser(@PathVariable("userId") Long userId){
         userService.delete(userId);
@@ -79,5 +83,22 @@ public class UserRestController {
         } else {
             return false;
         }
+    }
+
+    @PostMapping("/findID")
+    @ApiOperation(value = "회원 아이디 찾기", notes = "회원 이름과 전화번호를 입력하면 아이디를 반환한다.")
+    public String findIdHandler(@ApiParam(value = "사용자 입력 정보")
+                                    @ModelAttribute FindUserIdForm form) {
+        try {
+            return findAccountService.validateAndGetFilteredUserId(form);
+        } catch (UserNotFoundException e) {
+            return e.getMessage();
+        }
+    }
+
+    @PostMapping("/findPW")
+    @ApiOperation(value = "회원 비밀번호 찾기")
+    public void findPWHandler() {
+
     }
 }

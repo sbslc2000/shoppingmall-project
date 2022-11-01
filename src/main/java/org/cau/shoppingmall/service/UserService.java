@@ -47,9 +47,7 @@ public interface UserService {
     */
     void delete(Long userId);
 
-    String validateAndGetUserId(FindUserIdForm form);
 
-    void validateAndSendEmailContainsUserPassword(FindUserPasswordForm form);
 
 
 

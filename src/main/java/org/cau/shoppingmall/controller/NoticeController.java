@@ -34,7 +34,6 @@ public class NoticeController {
     @GetMapping("/notices")
     public String showNoticePage(Model model) {
 
-
         List<NoticeDto> noticeList = noticeService.get();
         model.addAttribute("noticeList",noticeList);
         return "notice/notice";
@@ -62,27 +61,21 @@ public class NoticeController {
 
     @PostMapping("/notice")
     public String createNotice(@ModelAttribute NoticeForm form,
-                               HttpSession session, RedirectAttributes redirect) {
+                               HttpSession session, RedirectAttributes redirect,Model model) {
 
         try {
             UserDetails userDetails = loginService.getLoginedUserData(session);
 
             if(userDetails.getAuthority().getId().equals(1L)) {
-                String message = "공지 작성 권한이 없습니다.";
-                List<NoticeDto> noticeList = noticeService.get();
-                redirect.addFlashAttribute("noticeList",noticeList);
-                try {
-                    return "redirect:/notices?error=true&msg="+URLEncoder.encode(message,"UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    throw new RuntimeException(e);
-                }
+
+                MessageDto message = new MessageDto("공지 작성 권한이 없습니다.", "/notices", RequestMethod.GET, null);
+                return MessageHandler.showMessageAndRedirect(message,model);
             }
 
-
             //정상적인 권한일시
-            Long noticeId = noticeService.createNotice(form, userDetails.getId());
-
+            noticeService.createNotice(form, userDetails.getId());
             List<NoticeDto> noticeList = noticeService.get();
+
             redirect.addFlashAttribute("noticeList",noticeList);
             return "redirect:/notices";
         } catch (NoAuthInfoFoundException e) {

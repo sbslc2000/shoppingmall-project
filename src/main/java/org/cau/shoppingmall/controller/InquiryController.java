@@ -1,5 +1,8 @@
 package org.cau.shoppingmall.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.cau.shoppingmall.common.dto.MessageDto;
@@ -34,24 +37,37 @@ import javax.servlet.http.HttpSession;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
+@Api(tags = {"문의 페이지 정보"})
 public class InquiryController {
 
     private final OneToOneInquiryService inquiryService;
-    private final ImageService imageService;
-    private final UserService userService;
     private final LoginService loginService;
 
     @GetMapping("/inquiry-form")
+    @ApiOperation(value = "1대1 문의 작성 페이지를 반환합니다. parameter 필요 없음!")
     public String inquiryForm(Model model, HttpSession session) {
 
-        model.addAttribute("oneToOneInquiryform", new OneToOneInquiryForm());
-        return "inquiry/inquiry_form";
+        try {
+            loginService.getLoginedUserData(session);
+        } catch (NoAuthInfoFoundException e) {
+            MessageDto message = new MessageDto("로그인이 필요한 서비스입니다.", "/login", RequestMethod.GET, null);
+            return MessageHandler.showMessageAndRedirect(message,model);
+        }
+
+        model.addAttribute("oneToOneInquiryForm", new OneToOneInquiryForm());
+        return "onetooneinquiry/inquiry_write";
     }
 
     @PostMapping("/inquiry")
-    public String createInquiry(Model model,RedirectAttributes redirect, HttpSession session,
-                                List<MultipartFile> imgList, @Validated OneToOneInquiryForm form,
+    @ApiOperation(value = "1대1 문의를 생성합니다.")
+    public String createInquiry(Model model, RedirectAttributes redirect, HttpSession session,
+                                @ApiParam(value="1대1 문의 첨부 파일") List<MultipartFile> imgList,
+                                @ApiParam(value="1대1 문의 form")
+                                    @Validated OneToOneInquiryForm form,
                                 BindingResult bindingResult) throws UserNotFoundException, NoInquiryTypeFoundException {
+
+
+        System.out.println(imgList.size());
 
         //유효성 검사
         if(bindingResult.hasErrors()) {
@@ -74,7 +90,7 @@ public class InquiryController {
     }
 
     @GetMapping("/inquiries")
-    public String inquiryHandler(Model model,HttpSession session,RedirectAttributes redirect) {
+    public String inquiryHandler(Model model,HttpSession session) {
 
         try {
             UserDetails userDetails =  loginService.getLoginedUserData(session);
@@ -88,11 +104,11 @@ public class InquiryController {
                 model.addAttribute("inquiryList", inquiryList);
             }
 
-            return "inquiry/inquiries";
+            return "onetooneinquiry/inquiry";
         } catch (NoAuthInfoFoundException e) {
             e.printStackTrace();
-            redirect.addFlashAttribute("loginForm",new LoginForm(null,null));
-            return "redirect:/login?error=true&msg=";
+            MessageDto message = new MessageDto("로그인이 필요한 서비스입니다.", "/login", RequestMethod.GET, null);
+            return MessageHandler.showMessageAndRedirect(message,model);
         }
     }
 

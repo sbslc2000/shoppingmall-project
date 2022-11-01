@@ -11,11 +11,8 @@ import java.time.LocalDateTime;
 @Data
 public class OneToOneInquiryForm {
 
-
     private Long type;
-
     private String typeDetail;
-
     @Size(min = 0, max = 2000 ,message="문의 내용은 2000자 이하로 작성해야 합니다.")
     private String content;
 
