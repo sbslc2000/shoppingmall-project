@@ -324,10 +324,9 @@ th{
 }
 
 .total_pay{
-    float: right;
+    position: fixed;
     width: 400px;
-    min-height: 1000px;
-    background: skyblue;
+    right: 200px;
     display: inline-block;
 }
 
