@@ -89,6 +89,14 @@ public class InquiryController {
         return "redirect:/inquiries";
     }
 
+    @GetMapping("/inquiry/imgTest/{inquiryId}")
+    public String inquiryTest(Model model, @PathVariable Long inquiryId) {
+        OneToOneInquiryDto inquiry = inquiryService.get(inquiryId);
+        model.addAttribute("inquiry",inquiry);
+
+        return "onetooneinquiry/inquiry_post";
+    }
+
     @GetMapping("/inquiries")
     public String inquiryHandler(Model model,HttpSession session) {
 
