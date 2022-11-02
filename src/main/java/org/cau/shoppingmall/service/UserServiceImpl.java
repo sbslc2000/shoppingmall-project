@@ -7,6 +7,7 @@ import org.cau.shoppingmall.entity.user.Authority;
 import org.cau.shoppingmall.entity.user.ShoppingData;
 import org.cau.shoppingmall.entity.user.User;
 import org.cau.shoppingmall.exception.DuplicateUserIdException;
+import org.cau.shoppingmall.exception.notfound.UserNotFoundException;
 import org.cau.shoppingmall.repository.AccountDataRepository;
 import org.cau.shoppingmall.repository.AuthorityRepository;
 import org.cau.shoppingmall.repository.ShoppingDataRepository;
@@ -87,18 +88,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserDto get(Long userId) {
+    public UserDto get(Long userId) throws UserNotFoundException {
         //user repository에서 userId에 해당하는 user를 가져옴
-
-        Optional<User> findUser = userRepository.findById(userId);
-
-        if(findUser.isPresent()) {
-            UserDto userDto = UserDto.of(findUser.get());
-            return userDto;
-        } else {
-            throw new NoSuchElementException("해당하는 사용자가 없습니다.");
-        }
-
+        return UserDto.of(userRepository.findById(userId).orElseThrow(
+                () -> new UserNotFoundException("해당하는 사용자가 없습니다.")
+        ));
     }
 
     @Override

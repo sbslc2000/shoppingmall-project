@@ -3,6 +3,7 @@ package org.cau.shoppingmall.service;
 import org.cau.shoppingmall.dto.Users.*;
 import org.cau.shoppingmall.entity.user.User;
 import org.cau.shoppingmall.exception.DuplicateUserIdException;
+import org.cau.shoppingmall.exception.notfound.UserNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface UserService {
@@ -25,7 +26,7 @@ public interface UserService {
             -session에서 ID 확인 후 반환
 
             */
-    UserDto get(Long userId);
+    UserDto get(Long userId) throws UserNotFoundException;
 
     /*
     User update : 사용자가 수정한 유저 정보를 반영한다

@@ -7,16 +7,10 @@ import org.cau.shoppingmall.entity.user.User;
 public class FindUserPasswordForm {
 
     private String userId;
-
     private String userName;
-
     private String phoneNumber;
-
     private String email;
-
     private String emailAfterAt;
-
-
     public boolean validate(User user) {
 
         if(!userName.equals(user.getUserName()))

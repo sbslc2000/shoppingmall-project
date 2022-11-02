@@ -52,7 +52,7 @@ public class UserRestController {
     // 유저 상세
     @GetMapping("/{id}")
     @ApiOperation(value = "유저정보 반환", notes = "UserId를 전송하면 등록된 User의 정보가 반환됩니다.")
-    public UserDto getUser(@PathVariable("userId") Long userId){
+    public UserDto getUser(@PathVariable("userId") Long userId) throws UserNotFoundException {
 
         return userService.get(userId);
     }
