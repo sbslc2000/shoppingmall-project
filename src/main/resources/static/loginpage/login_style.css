@@ -72,6 +72,10 @@ nav ul li {
     margin-top: 150px;
 }
 
+.login {
+    display: inline-block;
+}
+
 input {
     display: grid;
     grid-template-columns: 200px;
@@ -87,11 +91,12 @@ button {
     height: 55px;
     font-size: 25px;
     margin: 5px;
+    display: inline-block;
 }
 
 #loginalret {
     color: red;
-    margin-left: 490px;
+    margin-left: 40%;
 }
 
 a {
