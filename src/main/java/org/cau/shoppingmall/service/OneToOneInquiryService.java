@@ -13,11 +13,11 @@ public interface OneToOneInquiryService {
 
     List<OneToOneInquiryDto> getByUserId(Long userId);
     OneToOneInquiry create(OneToOneInquiryForm form, Long userId, List<MultipartFile> multipartFileList) throws IOException, UserNotFoundException, NoInquiryTypeFoundException;
-
     OneToOneInquiryDto get(Long inquiryId);
-
     /*
     * 관리자 전용
     * */
     List<OneToOneInquiryDto> getAllInquiries();
+
+    void delete(Long inquiryId);
 }

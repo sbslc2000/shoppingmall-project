@@ -22,10 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -135,7 +132,7 @@ public class InquiryController {
                 //관리자일때 || 질의자 본인일때
 
                 model.addAttribute("inquiry",oneToOneInquiryDto);
-                return "inquiry/inquiry";
+                return "onetooneinquiry/inquiry_post";
             } else {
                 //권한이 없음
 
@@ -146,6 +143,28 @@ public class InquiryController {
 
         } catch (NoAuthInfoFoundException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @DeleteMapping("/inquiry/{inquiryId}")
+    public String deleteInquiry(Model model ,HttpSession session,
+                                @PathVariable Long inquiryId) {
+        try {
+            UserDetails userData = loginService.getLoginedUserData(session);
+            OneToOneInquiryDto inquiry = inquiryService.get(inquiryId);
+
+            // 삭제 요청한 사용자와 작성한 사용자가 같은 경우 || 관리자인 경우
+            if(userData.getId().equals(inquiry.getUser().getId()) || !userData.getAuthority().getId().equals(1L)) {
+                inquiryService.delete(inquiryId);
+                MessageDto message = new MessageDto("삭제했다!", "/inquiries", RequestMethod.GET, null);
+                return MessageHandler.showMessageAndRedirect(message,model);
+            } else {
+                MessageDto message = new MessageDto("권한이 없다!", "/inquiry/"+inquiryId, RequestMethod.GET, null);
+                return MessageHandler.showMessageAndRedirect(message,model);
+            }
+        } catch (NoAuthInfoFoundException e) {
+            MessageDto message = new MessageDto("로그인이 필요한 서비스입니다.", "/login", RequestMethod.GET, null);
+            return MessageHandler.showMessageAndRedirect(message,model);
         }
     }
 }

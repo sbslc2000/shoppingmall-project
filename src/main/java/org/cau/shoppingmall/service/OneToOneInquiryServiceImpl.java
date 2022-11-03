@@ -75,6 +75,11 @@ public class OneToOneInquiryServiceImpl implements OneToOneInquiryService{
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void delete(Long inquiryId) {
+        oneToOneInquiryRepository.deleteById(inquiryId);
+    }
+
     public List<OneToOneInquiryDto> getByUserId(Long userId) {
         List<OneToOneInquiry> inquiryList = oneToOneInquiryRepository.findByUserId(userId);
         return inquiryList.stream()
