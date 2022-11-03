@@ -130,7 +130,7 @@ public class AccountController {
     @GetMapping("/users/find")
     public String findIdOrPassword() {
 
-        return "user/find";
+        return "user/findid";
     }
 
 
