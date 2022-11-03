@@ -35,15 +35,15 @@
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="id-tab-pane" role="tabpanel" aria-labelledby="id-tab" tabindex="0">
-                        <form action="" accept-charset="utf-8" method="post">
-                            <div><input type="text" id="idname" placeholder="이름">
-                            </div>
-                            <div><input type="text" id="idnum" placeholder="전화번호 (-없이 입력)">
-                            </div>
-                            <div id="idwarn">입력된 회원정보가 존재하지 않습니다.<br>비회원일 경우 회원가입 후 이용해주세요.</div>
-                            <div><button class="btn btn-outline-secondary" id="idbtn" onclick="showid()">확인</button></div>
 
-                        </form>
+                        <div><input type="text" id="idname" placeholder="이름" name="userName">
+                        </div>
+                        <div><input type="text" id="idnum" placeholder="전화번호 (-없이 입력)" name="phoneNumber">
+                        </div>
+                        <div id="idwarn">입력된 회원정보가 존재하지 않습니다.<br>비회원일 경우 회원가입 후 이용해주세요.</div>
+                        <div><button class="btn btn-outline-secondary" id="idbtn" onclick="showid()">확인</button></div>
+
+
                         <span id="result">
                                 <div id="idresult">아이디 찾기 결과</div>
                                 <div id="userid">@@dfs@@@****</div>

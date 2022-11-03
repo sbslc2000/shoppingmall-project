@@ -10,18 +10,21 @@ function changebannerID() {
 }
 
 function showid() {
-    var form = document.createElement('form');
-    form.setAttribute("method", "post");
-    form.setAttribute("action", "http://shoppingmall.ddnsking.com/");
-    document.characterSet = "utf-8";
+    var idname = document.getElementById('idname').value;
+    var idnum = document.getElementById('idnum').value;
 
+    fetch('http://peteworld.shop/api/users/findID?userName=' + idname + '&phoneNumber=' + idnum)
+        .then((response) => response.text())
+        .then((data) =>
 
+            document.getElementById('userid').innerHTML = data
+        );
 
     document.getElementById('idname').style.display = 'none';
     document.getElementById('idnum').style.display = 'none ';
     document.getElementById('idbtn').style.display = 'none ';
     if (true) {
-        document.getElsementById('idresult').style.display = 'block ';
+        document.getElementById('idresult').style.display = 'block ';
         document.getElementById('userid').style.display = 'block ';
     } else {
         document.getElementById('idwarn').style.display = 'block ';
@@ -30,8 +33,8 @@ function showid() {
 
 function showpw() {
     var form = document.createElement('form');
-    form.setAttribute("method", "post");
-    form.setAttribute("action", "http://shoppingmall.ddnsking.com/");
+    form.setAttribute("method", "get");
+    form.setAttribute("action", "http://peteworld.shop/api/users/findpw");
     document.characterSet = "utf-8";
 
 
