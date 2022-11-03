@@ -297,11 +297,22 @@ th{
 
 .order_form{
     float: left;
-    width: 900px;
+    width: 60%;
+    margin-right: 100px;
+    min-width: 400px;
     min-height: 1000px;
-    background: orange;
     display: inline-block;
 }
+
+
+.order_form span{
+    display : inline-block;
+    width : 90px;
+    text-align : left;
+    padding : 10px;
+}
+
+
 
 .form_wrap{
     margin: 0px 0px 50px 20px;
@@ -325,8 +336,7 @@ th{
 
 .total_pay{
     position: fixed;
-    width: 400px;
-    right: 200px;
+    width: 300px;
     display: inline-block;
 }
 
@@ -334,6 +344,11 @@ th{
     width: 100%;
     background: black;
     margin-top: 30px;
+}
+
+.pay_with_btn{
+    background: orange;
+    justify-content: space-between;
 }
 
 
