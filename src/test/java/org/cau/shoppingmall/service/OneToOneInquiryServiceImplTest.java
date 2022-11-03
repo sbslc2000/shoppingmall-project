@@ -5,6 +5,8 @@ import org.cau.shoppingmall.dto.inquiry.OneToOneInquiryDto;
 import org.cau.shoppingmall.dto.inquiry.OneToOneInquiryForm;
 import org.cau.shoppingmall.entity.inquiry.OneToOneInquiry;
 import org.cau.shoppingmall.entity.user.User;
+import org.cau.shoppingmall.exception.notfound.NoInquiryTypeFoundException;
+import org.cau.shoppingmall.exception.notfound.UserNotFoundException;
 import org.cau.shoppingmall.util.UserUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,7 +35,7 @@ class OneToOneInquiryServiceImplTest {
 
     @Test
     @DisplayName("1대1 질문 정상 등록 확인")
-    void createInquiry() throws IOException {
+    void createInquiry() throws IOException, UserNotFoundException, NoInquiryTypeFoundException {
         User user = userUtil.createUser();
         Long userId = user.getId();
         OneToOneInquiryForm form = new OneToOneInquiryForm();

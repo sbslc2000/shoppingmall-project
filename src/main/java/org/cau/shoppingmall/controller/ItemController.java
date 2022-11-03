@@ -2,13 +2,15 @@ package org.cau.shoppingmall.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.cau.shoppingmall.common.dto.MessageDto;
+import org.cau.shoppingmall.common.handler.MessageHandler;
 import org.cau.shoppingmall.dto.Users.UserDto;
 import org.cau.shoppingmall.dto.inquiry.ItemInquiryDto;
 import org.cau.shoppingmall.dto.inquiry.ItemInquiryForm;
 import org.cau.shoppingmall.dto.item.ItemDto;
 import org.cau.shoppingmall.dto.review.ReviewDto;
 import org.cau.shoppingmall.entity.inquiry.ItemInquiry;
-import org.cau.shoppingmall.exception.NoAuthInfoFoundException;
+import org.cau.shoppingmall.exception.notfound.NoAuthInfoFoundException;
 import org.cau.shoppingmall.service.*;
 import org.cau.shoppingmall.user.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -63,6 +65,8 @@ public class ItemController {
         return "item/item";
     }
 
+
+    //아이템 문의 작성 폼
     @GetMapping("/inquiry/{itemId}")
     public String itemAskForm(@PathVariable Long itemId,
                               Model model,HttpSession session) {
@@ -71,13 +75,26 @@ public class ItemController {
             UserDetails userDetails = loginService.getLoginedUserData(session);
             UserDto user = userDetails.getUser();
             model.addAttribute("user",user);
+
         } catch (NoAuthInfoFoundException e) {
-            e.printStackTrace();
+            MessageDto message = new MessageDto("로그인이 필요한 서비스입니다.", "/login", RequestMethod.GET, null);
+            return MessageHandler.showMessageAndRedirect(message,model);
         }
+
+
         model.addAttribute("itemInquiryForm",new ItemInquiryForm());
         model.addAttribute("itemId",itemId);
 
         return "item/item_ask";
+    }
+
+    //아이템 개별 문의 확인
+    /*
+    * todo : 아이템 개별 문의 확인 컨트롤러 작성
+    * */
+    @GetMapping("/inquiry/{itemId}/{inquiryId}")
+    public String showItemInquiry() {
+        return null;
     }
 
     @PostMapping("/inquiry")

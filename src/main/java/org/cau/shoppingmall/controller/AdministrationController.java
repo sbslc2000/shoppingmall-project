@@ -3,7 +3,7 @@ package org.cau.shoppingmall.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.cau.shoppingmall.dto.orders.OrderDto;
-import org.cau.shoppingmall.exception.NoAuthInfoFoundException;
+import org.cau.shoppingmall.exception.notfound.NoAuthInfoFoundException;
 import org.cau.shoppingmall.service.LoginService;
 import org.cau.shoppingmall.service.OrderService;
 import org.cau.shoppingmall.user.UserDetails;

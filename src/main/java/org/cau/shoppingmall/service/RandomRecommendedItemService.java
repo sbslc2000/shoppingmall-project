@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class RandomRecommenedItemService implements RecommendedItemService {
+public class RandomRecommendedItemService implements RecommendedItemService {
 
     private final ItemRepository itemRepository;
     private final CategoryRepository categoryRepository;

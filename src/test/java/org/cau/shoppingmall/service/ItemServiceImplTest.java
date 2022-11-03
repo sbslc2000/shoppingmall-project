@@ -37,8 +37,8 @@ class ItemServiceImplTest {
             System.out.println("item.iamge"+item.getImg());
         }
     }
-*/
 
+   */
     /*
 
     @Test

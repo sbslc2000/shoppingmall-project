@@ -1,6 +1,8 @@
 package org.cau.shoppingmall.repository;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.cau.shoppingmall.dto.item.ItemDto;
 import org.cau.shoppingmall.entity.item.*;
 import org.cau.shoppingmall.repository.item.*;
 import org.junit.jupiter.api.Test;
@@ -14,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -21,6 +24,29 @@ import static org.assertj.core.api.Assertions.*;
 //@Transactional
 class ItemRepositoryTest {
 
+    @Autowired
+    private ItemRepository itemRepository;
+
+
+    @Test
+    void imcrying() throws JsonProcessingException {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+
+        List<Item> items = itemRepository.findAll();
+        List<ItemDto> list = items.stream().map(m -> ItemDto.of(m)).collect(Collectors.toList());
+
+        for(ItemDto dto : list) {
+            System.out.println("this.map.set("+dto.getId()+","+mapper.writeValueAsString(dto)+");");
+        }
+
+    }
+
+
+
+
+    /*
 
     @Autowired
     private SellerRepository sellerRepository;
@@ -263,5 +289,7 @@ class ItemRepositoryTest {
 
 
     }
+
+    */
 
 }

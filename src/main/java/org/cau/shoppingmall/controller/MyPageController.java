@@ -3,8 +3,7 @@ package org.cau.shoppingmall.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.cau.shoppingmall.dto.Users.UserDto;
-import org.cau.shoppingmall.entity.user.ShoppingBasket;
-import org.cau.shoppingmall.exception.NoAuthInfoFoundException;
+import org.cau.shoppingmall.exception.notfound.NoAuthInfoFoundException;
 import org.cau.shoppingmall.repository.ShoppingBasketRepository;
 import org.cau.shoppingmall.service.LoginService;
 import org.cau.shoppingmall.service.UserService;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @Slf4j
@@ -28,9 +26,11 @@ public class MyPageController {
     private final ShoppingBasketRepository shoppingBasketRepository;
 
 
-    /*
+
+/*
     * 마이페이지 출력. 내용은 피그마 "마이페이지" 참조
    * */
+
     @GetMapping
     public String myPage(HttpSession session , Model model) {
         UserDetails userDetails = null;
@@ -52,9 +52,10 @@ public class MyPageController {
     }
 
 
-    /*
+/*
      * 마이페이지-장바구니. 내용은 피그마 "장바구니 클릭시" 참조
      * */
+
     @GetMapping("/baskets")
     public String baskets(HttpSession session, Model model ) {
 
@@ -65,14 +66,15 @@ public class MyPageController {
         } catch (NoAuthInfoFoundException e) {
         }
 
-        List<ShoppingBasket> basketList = shoppingBasketRepository.findByUserId(user.getUserId());
+        //List<ShoppingBasket> basketList = shoppingBasketRepository.findByUserId(user.getUserId());
 
         return "mypage/basets";
     }
 
-    /*
+/*
      * 마이페이지-좋아요. 내용은 피그마 "좋아요 목록" 참조
      * */
+
     @GetMapping("/likes")
     public String likes(HttpSession session, Model model ) {
 
@@ -80,9 +82,10 @@ public class MyPageController {
         return "mypage/likes";
     }
 
-    /*
+/*
      * 마이페이지-내 정보 수정. 내용은 피그마 "내 정보 수정 클릭 시" 참조
-     * */
+     * *//*
+
     @GetMapping("/userUpdate")
     public String userUpdateForm(HttpSession session, Model model ) {
         //유저 정보 유효성 검사
@@ -96,9 +99,11 @@ public class MyPageController {
         return "mypage/userUpdate";
     }
 
-    /*
+    */
+/*
     * 마이페이지 - 리뷰 보기. 내용은 피그마 "내가 쓴 리뷰 목록" 참조
     * */
+
     @GetMapping("/reviews")
     public String myReviews(HttpSession session, Model model) {
 
@@ -106,9 +111,11 @@ public class MyPageController {
         return "mypage/myReview";
     }
 
-    /*
+
+/*
      * 마이페이지 - 주문 내역 보기. 내용은 피그마 "내가 쓴 주문 목록" 참조
      * */
+
     @GetMapping("/orders")
     public String myOrders(HttpSession session, Model model) {
 
@@ -116,12 +123,11 @@ public class MyPageController {
         return "mypage/myOrder";
     }
 
-    /*
+/*
             User Update 부분 post 컨트롤러는 AccountController에 있음
     */
 
 
 
-
-
 }
+

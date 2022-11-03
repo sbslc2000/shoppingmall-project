@@ -13,101 +13,102 @@
             </div>
         </header>
 
-        <div class="order_wrap">
-            <div class="order_form">
-                <div class="form_wrap">
-                    <h4>주문자</h4>
-                    <div class="info">
-                        <div class="name">
-                            <span>이름 <span id="orderer_name"> </span></span>
-                            <input type="text" class="form-control" id="nameinput">
+        <form action="" onSubmit="return is_checked(this)">
+            <div class="order_wrap">
+                <div class="order_form">
+                    <div class="form_wrap">
+                        <h4 style="display: inline-block;">주문자</h4>
+                        <button type="button" class="btn btn-outline-primary" id="findnum" onclick="location.href='home.html'" style="display:inline-block; float: right;">새로운 주문자 입력하기</button></a>
+                        <div class="info">
+                            <div class="name">
+                                <span>이름</span>
+                                <input type="text" class="form-control" id="nameinput">
+                            </div>
+                            <div class="phone">
+                                <span>연락처</span>
+                                <input type="text" class="form-control" name="phone" id="phoneinput" placeholder="(-없이 입력)">
+                            </div>
                         </div>
-                        <div class="phone">
-                            <span>연락처 <span id="orderder_phone"></span></span>
-                            <input type="text" class="form-control" name="phone" id="phoneinput" placeholder="(-없이 입력)">
+                    </div>
+                    <div class="form_wrap">
+                        <h4>수령인</h4>
+                        <div class="info">
+                            <div class="name">
+                                <span>이름</span>
+                                <input type="text" class="form-control" id="nameinput">
+                            </div>
+                            <div class="phone">
+                                <span>연락처</span>
+                                <input type="text" class="form-control" name="phone" id="phoneinput" placeholder="(-없이 입력)">
+                            </div>
+                            <div class="form-check">
+                                <span></span>
+                                <input class="form-check-input" type="checkbox" value="" id="agreeform">
+                                <label class="form-check-label" for="agreeform">
+                                <span style="width: 200px;">주문자 정보와 동일</span>
+                                 </label>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form_wrap">
+                        <h4>배송지</h4>
+                        <div class="info">
+                            <div class="zipcode">
+                                <span>우편번호</span>
+                                <button type="button" class="btn btn-outline-primary" id="findnum" onclick="location.href='home.html'">우편번호 찾기</button></a>
+                            </div>
+                            <div class="address">
+                                <span>주소</span>
+                                <input type="text" class="form-control" placeholder="" id="address"><br>
+                            </div>
+                            <div class="address_detail">
+                                <span>상세주소</span>
+                                <input type="text" class="form-control" placeholder="상세주소를 입력해주세요" id="detailaddress">
+                            </div>
+                            <div class="request">
+                                <span>요청사항</span>
+                                <input type="text" class="form-control" placeholder="요청사항을 입력해주세요" id="request">
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="form_wrap">
+                        <h4>주문 상품 내역</h4>
+                        <table border="1">
+                            <th></th>
+                            <th>주문 상품</th>
+                            <th>수량</th>
+                            <th>주문 금액</th>
+                            <tr>
+                                <td>#상품 이미지</td>
+                                <td>#상품명이랑 옵션</td>
+                                <td>#수량</td>
+                                <td>#가격</td>
+                            </tr>
+                    </div>
+                    -->
+                    <div class="form_wrap">
+                        <h4>결제정보</h4>
+                        <div class="info">
+                            <div class="point">
+                                <span>포인트 사용</span>
+                                <input type="text" class="form-control" id="point">
+                                <span style="margin: 0px 20px">내 포인트 : #</span> 
+                                <button type="button">적용</button>
+                            </div>
+                            <div class="pay_with">
+                                <span>결제수단 <span id="pay_with"></span></span>
+                                <div class="pay_with_btn">
+                                    <div class="div2">무통장입금</div>
+                                    <div class="div2">신용/체크카드</div>
+                                    <div class="div2">간편결제</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="form_wrap">
-                    <h4>수령인</h4>
-                    <div class="info">
-                        <div class="name">
-                            <span>이름 <span id="recipient_name"> </span></span>
-                            <input type="text" class="form-control" id="nameinput">
-                        </div>
-                        <div class="phone">
-                            <span>연락처 <span id="recipient_phone"></span></span>
-                            <input type="text" class="form-control" name="phone" id="phoneinput" placeholder="(-없이 입력)">
-                        </div>
-                        <div class="form-check">
-
-                            <input class="form-check-input" type="checkbox" value="" id="agreeform">
-                            <label class="form-check-label" for="agreeform">
-                            주문자 정보와 동일
-                             </label>
-                            <br>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form_wrap">
-                    <h4>배송지</h4>
-                    <div class="info">
-                        <div class="zipcode">
-                            <span>우편번호</span> <span id="zipcode"> </span></span>
-                            <button type="button" class="btn btn-outline-primary" id="findnum" onclick="location.href='home.html'">우편번호 찾기</button></a>
-                        </div>
-                        <div class="address">
-                            <span>주소</span>
-                            <input type="text" class="form-control" placeholder="" id="address"><br>
-                        </div>
-                        <div class="address_detail">
-                            <span>상세주소</span>
-                            <input type="text" class="form-control" placeholder="상세주소를 입력해주세요" id="detailaddress">
-                        </div>
-                        <div class="request">
-                            <span>요청사항</span>
-                            <input type="text" class="form-control" placeholder="요청사항을 입력해주세요" id="request">
-                        </div>
-                    </div>
-                </div>
-
-                <!--
-                <div class="form_wrap">
-                    <h4>주문 상품 내역</h4>
-                    <table border="1">
-                        <th></th>
-                        <th>주문 상품</th>
-                        <th>수량</th>
-                        <th>주문 금액</th>
-                        <tr>
-                            <td>#상품 이미지</td>
-                            <td>#상품명이랑 옵션</td>
-                            <td>#수량</td>
-                            <td>#가격</td>
-                        </tr>
-                </div>
-                -->
-
-                <div class="form_wrap">
-                    <h4>결제정보</h4>
-                    <div class="info">
-                        <div class="point">
-                            <span>포인트 사용 <span id="point"> </span></span>
-                            <input type="text" class="form-control" id="point">
-                        </div>
-                        <div class="pay_with">
-                            <span>결제수단 <span id="pay_with"></span></span>
-                            <div class="pay_with_btn">
-                                <div class="div2">무통장입금</div>
-                                <div class="div2">신용/체크카드</div>
-                                <div class="div2">간편결제</div>
-                              </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </form>
     
             <div class="total_pay">
                 <div class="total_pay">
@@ -136,7 +137,7 @@
                         필수 약관 전체 동의
                          </label>
                          <br>
-                         <button onclick="location.href='#.html'" type="button" class="btn_black_pay">결제하기</button>
+                         <button onclick="location.href='#.html'" type="submit" class="btn_black_pay_btn">결제하기</button>
                     </div>
 
                 </div>
@@ -168,7 +169,14 @@
             </div>
         </footer>
 
-        <script scr="script.js"></script>
+        <script scr="script.js">
+            function is_checked(){//작동 x
+                const checkbox=document.getElementById('agreeform');
+                const is_checked=checkbox.checked;
+                if(is_checked==true) return true;
+                else return false;
+            }
+        </script>
     </body>
 
 </html>

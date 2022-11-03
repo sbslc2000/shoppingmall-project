@@ -7,7 +7,6 @@ import javax.persistence.*;
 @Entity
 @Getter
 public class ReturnReason {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

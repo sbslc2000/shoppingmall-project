@@ -198,7 +198,8 @@ nav ul li a:hover::after{
 .btn_black_inquiry_btn1,
 .btn_black_inquiry_write,
 .short_black_btn,
-.short_gray_btn{ /*버튼 공통 요소*/
+.short_gray_btn,
+.btn_black_pay_btn{ /*버튼 공통 요소*/
     
     height: 40px;
     border-radius: 5px;
@@ -230,6 +231,33 @@ nav ul li a:hover::after{
 .short_gray_btn{
     background: gray;
     border: 5px gray;
+}
+
+#inquiryTableNum{
+    width: 100px;
+}
+
+#inquiryTableContents{
+    width: 700px;
+}
+
+#inquiryTableState{
+    width: 150px;
+}
+
+#inquiryTableDate{
+    width: 150px;
+}
+
+table{
+    border-width: 1px 0px 1px 0px;
+    border-style: solid;
+    border-collapse : collapse
+    
+}
+
+th{
+   border-bottom: 1px solid; 
 }
 
 
@@ -269,16 +297,26 @@ nav ul li a:hover::after{
 
 .order_form{
     float: left;
-    width: 900px;
+    width: 60%;
+    margin-right: 100px;
+    min-width: 400px;
     min-height: 1000px;
-    background: orange;
     display: inline-block;
 }
+
+
+.order_form span{
+    display : inline-block;
+    width : 90px;
+    text-align : left;
+    padding : 10px;
+}
+
+
 
 .form_wrap{
     margin: 0px 0px 50px 20px;
     min-height: auto;
-    background: pink;
 
 }
 
@@ -297,11 +335,20 @@ nav ul li a:hover::after{
 }
 
 .total_pay{
-    float: right;
-    width: 400px;
-    min-height: 1000px;
-    background: skyblue;
+    position: fixed;
+    width: 300px;
     display: inline-block;
+}
+
+.btn_black_pay_btn{
+    width: 100%;
+    background: black;
+    margin-top: 30px;
+}
+
+.pay_with_btn{
+    background: orange;
+    justify-content: space-between;
 }
 
 

@@ -1,39 +1,45 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://thymeleaf.org">
 
     <head>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="../yunju_style.css">
+        <link rel="stylesheet" type="text/css" th:href="@{/yunju_style.css}">
     </head>
     <body>
         <header>
             <div class="banner">
-                <a href="home.html"><h1>우당탕탕 개발자</h1></a>
+                <a th:href="@{/home}"><h1>우당탕탕 개발자</h1></a>
             </div>
         </header>
 
         <div class="inquiryBox">
             <div class="inquiryBox1">
                 <h3 style="display:inline">문의 내역</h3>
-	    //날짜
+                <span th:text="${inquiry.registerDate}"></span>
 	    <span style="float:right">답변 전 or 완료</span>
                 <hr>
-	    <p>주문한 것과 다른 제품이 왔습니다... //문의 내용
+		    <p th:text="${inquiry.content}">#content</p>
                 <hr>
             </div>
-		
-	<div class="inquiryBox1" id="answer">
-        <h3 style="display:inline">답변</h3>
-	#creationTime
-	<hr>
-	<p>안녕하세요 000 고객님! //답변 내용
-	<hr>
-	</div>
+	
+	<div class="inquiryBox1" id="answer"> 
+                <h3 style="display:inline">답변</h3>
 
+      <hr>
+	    <p>안녕하세요 000 고객님! //답변 내용
+      <hr>
+      </div>
+	
 	<button onclick="delete(this)" type="button" class="short_gray_btn" style="float: left">삭제하기</button>
-	<button onclick="update(this)" type="button" class="short_black_btn" style="float: right">수정하기</button>
+	<script>
+        if(document.getElementById("answer")){ //답변이 있으면
+            <button onclick="update(this)" type="button" class="short_black_btn" style="float: right">수정하기</button>
+        }
+        else ;
+    	</script>
 
-	</div>
+
+        </div>
         
 
         <footer>
@@ -42,7 +48,7 @@
                     <h3>문의</h3>
                     <ul>
                         <li><a href="">공지사항</a></li>
-                        <li><a href="inquiry.html">1:1문의</a></li>
+                        <li><a href="@{/inquiry}">1:1문의</a></li>
                     </ul>
                 </div>
                 <div class="cs">

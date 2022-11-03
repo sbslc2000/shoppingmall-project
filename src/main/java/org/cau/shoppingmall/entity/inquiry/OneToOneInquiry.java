@@ -30,10 +30,12 @@ public class OneToOneInquiry {
     @JoinColumn(name = "type_id")
     private InquiryType type;
 
+    @Column(name = "type_detail")
+    private String typeDetail;
+
     /*
      * TODO: User Entity와 연관관계 매핑
      * */
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -42,5 +44,6 @@ public class OneToOneInquiry {
 
     private String content;
 
+    @Column(length = 1000)
     private String img;
 }

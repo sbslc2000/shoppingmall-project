@@ -2,6 +2,8 @@ package org.cau.shoppingmall.service;
 
 import org.cau.shoppingmall.dto.Users.*;
 import org.cau.shoppingmall.entity.user.User;
+import org.cau.shoppingmall.exception.DuplicateUserIdException;
+import org.cau.shoppingmall.exception.notfound.UserNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface UserService {
@@ -16,7 +18,7 @@ public interface UserService {
     */
 
     @Transactional
-    User create(UserForm userForm) throws IllegalArgumentException;
+    User create(UserForm userForm) throws IllegalArgumentException, DuplicateUserIdException;
 
     /*
             User get : Id에 해당하는 user 정보를 반환한다
@@ -24,7 +26,7 @@ public interface UserService {
             -session에서 ID 확인 후 반환
 
             */
-    UserDto get(Long userId);
+    UserDto get(Long userId) throws UserNotFoundException;
 
     /*
     User update : 사용자가 수정한 유저 정보를 반영한다
@@ -46,9 +48,7 @@ public interface UserService {
     */
     void delete(Long userId);
 
-    String validateAndGetUserId(FindUserIdForm form);
 
-    void validateAndSendEmailContainsUserPassword(FindUserPasswordForm form);
 
 
 

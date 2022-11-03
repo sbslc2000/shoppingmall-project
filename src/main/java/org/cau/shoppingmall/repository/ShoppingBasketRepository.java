@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface ShoppingBasketRepository extends JpaRepository<ShoppingBasket, Long> {
 
-    List<ShoppingBasket> findByUserId(String userId);
+    List<ShoppingBasket> findByUserId(Long userId);
+    List<ShoppingBasket> findByUserUserId(String userId);
 
 }
