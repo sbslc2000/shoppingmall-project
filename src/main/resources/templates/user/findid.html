@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/loginpage/findid_style.css}">
+    <title>findId</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
+    </script>
+</head>
+
+<body>
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-xxl-4">
+
+            </div>
+
+            <div class="col-xxl-4">
+                <div id="banner">아이디 찾기</div>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="id-tab" data-bs-toggle="tab" data-bs-target="#id-tab-pane" type="button" role="tab" aria-controls="id-tab-pane" aria-selected="true" onclick="changebannerID()">아이디 찾기</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pw-tab" data-bs-toggle="tab" data-bs-target="#pw-tab-pane" type="button" role="tab" aria-controls="pw-tab-pane" aria-selected="false" onclick="changebannerPW()">비밀번호 찾기</button>
+                    </li>
+
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="id-tab-pane" role="tabpanel" aria-labelledby="id-tab" tabindex="0">
+                        <form action="" accept-charset="utf-8" method="post">
+                            <div><input type="text" id="idname" placeholder="이름">
+                            </div>
+                            <div><input type="text" id="idnum" placeholder="전화번호 (-없이 입력)">
+                            </div>
+                            <div id="idwarn">입력된 회원정보가 존재하지 않습니다.<br>비회원일 경우 회원가입 후 이용해주세요.</div>
+                            <div><button class="btn btn-outline-secondary" id="idbtn" onclick="showid()">확인</button></div>
+
+                        </form>
+                        <span id="result">
+                                <div id="idresult">아이디 찾기 결과</div>
+                                <div id="userid">@@dfs@@@****</div>
+                        </span>
+                    </div>
+                    <div class="tab-pane fade" id="pw-tab-pane" role="tabpanel" aria-labelledby="pw-tab" tabindex="0">
+                        <form action="" accept-charset="utf-8" method="post">
+                            <div><input type="text" id="pwid" placeholder="아이디">
+                            </div>
+                            <div><input type="text" id="pwname" placeholder="이름">
+                            </div>
+                            <div><input type="text" id="pwnum" placeholder="전화번호 (-없이 입력)">
+                            </div>
+                            <div class="row" id="emailinput">
+                                <div class="col-1"></div>
+                                <div class="col-5"><input type="text" id="pwemail" name="email" class="form-control" placeholder="이메일"></div>
+                                <div class="col-5">
+                                    <select name class="form-select">
+                                        <option selected>직접입력</option>
+                                        <option value="@naver.com">@naver.com</option>
+                                        <option value="@gmail.com">@gmail.com</option>
+                                        <option value="@daum.net">@daum.net</option>
+                                        <option value="@hanmail.net">@hanmail.net</option>
+                                        <option value="@kakao.com">@kakao.com</option>
+                                        <option value="@nate.com">@nate.com</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div id="pwwarn">입력된 회원정보가 존재하지 않습니다.<br>비회원일 경우 회원가입 후 이용해주세요.</div>
+                            <div class="pwresult">비밀번호가 가입시 입력한 이메일로 전송되었습니다.</div>
+
+                            <button class="btn btn-outline-secondary" id="idbtn" onclick="showpw()">확인</button></div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-4">
+
+    </div>
+    </div>
+
+
+    <script type="text/javascript" th:src="@{/bootstrap.js}"></script>
+    <script type="text/javascript" th:src="@{/find_id.js}"></script>
+
+</body>
+
+</html>

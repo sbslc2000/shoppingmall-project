@@ -12,7 +12,7 @@ import org.cau.shoppingmall.dto.item.ItemDto;
 import org.cau.shoppingmall.entity.user.User;
 import org.cau.shoppingmall.exception.DuplicateUserIdException;
 import org.cau.shoppingmall.exception.LoginFailedException;
-import org.cau.shoppingmall.repository.UserRepository;
+import org.cau.shoppingmall.service.EmailService;
 import org.cau.shoppingmall.service.ItemService;
 import org.cau.shoppingmall.service.LoginService;
 import org.cau.shoppingmall.service.UserService;
@@ -20,16 +20,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -41,6 +39,7 @@ public class AccountController {
     private final LoginService loginService;
     private final ItemService itemService;
     private final UserService userService;
+    private final EmailService emailService;
 
 
     /*
@@ -111,12 +110,13 @@ public class AccountController {
         // 회원 가입 진행
         try {
             User user = userService.create(userForm);
+            //회원가입 성공 시 회원가입 성공 이메일 전송
+            emailService.sendWelcomeEmail(user.getEmail(),"dayeon662052@gmail.com");
         } catch (DuplicateUserIdException e) {
 
             MessageDto message = new MessageDto(e.getMessage(), "/user/join", RequestMethod.GET, null);
             return MessageHandler.showMessageAndRedirect(message,model);
         }
-
 
         //회원가입 성공시 로그인 페이지 반환
         MessageDto message = new MessageDto("회원가입에 성공했습니다.","/login",RequestMethod.GET, null);
@@ -130,7 +130,7 @@ public class AccountController {
     @GetMapping("/users/find")
     public String findIdOrPassword() {
 
-        return "user/find";
+        return "user/findid";
     }
 
 

@@ -23,7 +23,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping("api/users")
+@RequestMapping("/api/users")
 @Api(tags = {"유저 관련 API"})
 @RequiredArgsConstructor
 public class UserRestController {
@@ -85,10 +85,13 @@ public class UserRestController {
         }
     }
 
-    @PostMapping("/findID")
+    @GetMapping("/findID")
     @ApiOperation(value = "회원 아이디 찾기", notes = "회원 이름과 전화번호를 입력하면 아이디를 반환한다.")
-    public String findIdHandler(@ApiParam(value = "사용자 입력 정보")
-                                    @ModelAttribute FindUserIdForm form) {
+    public String findIdHandler(String userName,
+                                String phoneNumber) {
+
+        FindUserIdForm form = new FindUserIdForm(userName, phoneNumber);
+
         try {
             return findAccountService.validateAndGetFilteredUserId(form);
         } catch (UserNotFoundException e) {
