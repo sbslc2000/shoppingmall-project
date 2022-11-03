@@ -17,7 +17,7 @@ class EmailServiceTest {
 
     @Test
     void emailService()  throws MessagingException, IOException {
-        emailService.sendMail("dayeon620@kakao.com", "dayeon662052@gmail.com", "text");
+        emailService.sendWelcomeEmail("dayeon620@kakao.com", "dayeon662052@gmail.com");
     }
 
 }

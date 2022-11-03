@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class EmailServiceImpl implements EmailService {
 
     private final JavaMailSender javaMailSender;
-    public void sendMail(String mailTo, String from, String text){
+    public void sendMail(String mailTo, String from, String title, String text){
 
         // 수신 대상을 담을 ArrayList 생성
         ArrayList<String> toUserList = new ArrayList<>();
@@ -31,7 +31,7 @@ public class EmailServiceImpl implements EmailService {
         simpleMessage.setFrom(from);
 
         // 메일 제목
-        simpleMessage.setSubject("Subject Sample");
+        simpleMessage.setSubject(title);
 
         // 메일 내용
         simpleMessage.setText(text);
@@ -43,6 +43,11 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendWelcomeEmail(String mailTo, String from) {
-        sendMail(mailTo,from,"회원가입을 환영합니다.");
+        sendMail(mailTo,from, "[우당탕탕]회원가입 축하메일", "회원가입을 환영합니다.");
+    }
+
+    @Override
+    public void passwordResetEmail(String mailTo, String from){
+        sendMail(mailTo, from, "[우당탕탕]임시 비밀번호 발급","비밀번호 재설정");
     }
 }
