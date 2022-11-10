@@ -169,6 +169,8 @@
             </div>
         </footer>
 
+
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         <script scr="script.js">
             function is_checked(){//작동 x
                 const checkbox=document.getElementById('agreeform');
@@ -176,6 +178,17 @@
                 if(is_checked==true) return true;
                 else return false;
             }
+            
+            function execDaumPostcode() { //우편번호 찾기
+                daum.postcode.load(function(){
+                    new daum.Postcode({
+                        oncomplete: function(data) {
+                            document.getElementById("address").value = roadAddr;
+                        }
+                    }).open();
+                });
+            }
+            
         </script>
     </body>
 
