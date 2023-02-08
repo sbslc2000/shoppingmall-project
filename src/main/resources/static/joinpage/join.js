@@ -10,7 +10,7 @@ function checkpw() {
     var check_num = 0;
 
 
-    if (pw11.length < 8) {
+     if (pw11.length < 8) {
         document.getElementById('pw1warn').innerHTML = "숫자, 영문, 특수문자(!@#$%)포함 8자리 이상";
         document.getElementById('pw1warn').style.color = 'red';
     }
@@ -22,20 +22,16 @@ function checkpw() {
 
         }
     }
-    if (check_char != 0) {
-        for (var i = 0; i < eng.length; i++) {
-            if (pw11.indexOf(eng[i]) != -1) {
-                check_eng = 1;
-                break;
-            }
+    for (var i = 0; i < eng.length; i++) {
+        if (pw11.indexOf(eng[i]) != -1) {
+            check_eng = 1;
+            break;
         }
     }
-    if ((check_char != 0) && (check_eng != 0)) {
-        for (var i = 0; i < eng.length; i++) {
-            if (pw11.indexOf(num[i]) != -1) {
-                check_num = 1;
-                break;
-            }
+    for (var i = 0; i < eng.length; i++) {
+        if (pw11.indexOf(num[i]) != -1) {
+            check_num = 1;
+            break;
         }
     }
 
